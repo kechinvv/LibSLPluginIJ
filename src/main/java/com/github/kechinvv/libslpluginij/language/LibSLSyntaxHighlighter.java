@@ -20,15 +20,16 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
     public static final TextAttributesKey ID =
-            createTextAttributesKey("SAMPLE_ID", DefaultLanguageHighlighterColors.IDENTIFIER);
+            createTextAttributesKey("LIBSL_ID", DefaultLanguageHighlighterColors.IDENTIFIER);
     public static final TextAttributesKey KEYWORD =
-            createTextAttributesKey("SAMPLE_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
+            createTextAttributesKey("LIBSL_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
     public static final TextAttributesKey STRING =
-            createTextAttributesKey("SAMPLE_STRING", DefaultLanguageHighlighterColors.STRING);
+            createTextAttributesKey("LIBSL_STRING", DefaultLanguageHighlighterColors.STRING);
     public static final TextAttributesKey LINE_COMMENT =
-            createTextAttributesKey("SAMPLE_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
+            createTextAttributesKey("LIBSL_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
     public static final TextAttributesKey BLOCK_COMMENT =
-            createTextAttributesKey("SAMPLE_BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
+            createTextAttributesKey("LIBSL_BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
+
 
     static {
         PSIElementTypeFactory.defineLanguageIElementTypes(LibSL.INSTANCE,

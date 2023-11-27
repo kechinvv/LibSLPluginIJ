@@ -5,6 +5,7 @@
     <vendor>kechinvv</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
     <!--    <depends>com.intellij.modules.java-capable</depends>-->
 
     <resource-bundle>messages.MyBundle</resource-bundle>
@@ -24,6 +25,12 @@
                 implementationClass="com.github.kechinvv.libslpluginij.language.LibSLSyntaxHighlighterFactory"/>
         <colorSettingsPage
                 implementation="com.github.kechinvv.libslpluginij.language.LibSLColorSettingsPage"/>
+        <annotator
+                language="LibSL"
+                implementationClass="com.github.kechinvv.libslpluginij.language.LibSLAnnotator"/>
+        <lang.braceMatcher
+                language="LibSL"
+                implementationClass="com.github.kechinvv.libslpluginij.language.LibSLBraceMatcher"/>
     </extensions>
 
     <applicationListeners>

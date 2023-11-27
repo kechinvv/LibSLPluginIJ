@@ -32,13 +32,14 @@ public class LibSLParserDefinition implements ParserDefinition {
 
     public static final IFileElementType FILE = new IFileElementType(LibSL.INSTANCE);
 
-    List<TokenIElementType> tokens =  PSIElementTypeFactory.getTokenIElementTypes(LibSL.INSTANCE);;
+    public static List<TokenIElementType> tokens;
     List<RuleIElementType> rules = PSIElementTypeFactory.getRuleIElementTypes(LibSL.INSTANCE);
 
 
     static {
         PSIElementTypeFactory.defineLanguageIElementTypes(LibSL.INSTANCE,
-                LibSLLexer.tokenNames, LibSLParser.ruleNames);
+                LibSLParser.tokenNames, LibSLParser.ruleNames);
+        tokens = PSIElementTypeFactory.getTokenIElementTypes(LibSL.INSTANCE);
     }
 
     public static final TokenSet COMMENTS =
