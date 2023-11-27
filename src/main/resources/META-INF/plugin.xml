@@ -19,6 +19,11 @@
                 extensions="lsl"/>
         <lang.parserDefinition language="LibSL"
                                implementationClass="com.github.kechinvv.libslpluginij.language.LibSLParserDefinition"/>
+        <lang.syntaxHighlighterFactory
+                language="LibSL"
+                implementationClass="com.github.kechinvv.libslpluginij.language.LibSLSyntaxHighlighterFactory"/>
+        <colorSettingsPage
+                implementation="com.github.kechinvv.libslpluginij.language.LibSLColorSettingsPage"/>
     </extensions>
 
     <applicationListeners>
