@@ -56,13 +56,33 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
                 attrKey = ID;
                 break;
             case LibSLLexer.VAR:
+            case LibSLLexer.VAL:
             case LibSLLexer.DEFINE:
             case LibSLLexer.IF:
             case LibSLLexer.ELSE:
             case LibSLLexer.FUN:
+            case LibSLLexer.PROC:
             case LibSLLexer.TYPE:
             case LibSLLexer.TRUE:
             case LibSLLexer.FALSE:
+            case LibSLLexer.IMPORT:
+            case LibSLLexer.ACTION:
+            case LibSLLexer.NEW:
+            case LibSLLexer.AUTOMATON:
+            case LibSLLexer.ENUM:
+            case LibSLLexer.HAS:
+            case LibSLLexer.LIBRARY:
+            case LibSLLexer.VERSION:
+            case LibSLLexer.LANGUAGE:
+            case LibSLLexer.URL:
+            case LibSLLexer.LIBSL:
+            case LibSLLexer.SHIFT:
+            case LibSLLexer.STATE:
+            case LibSLLexer.INITSTATE:
+            case LibSLLexer.FINISHSTATE:
+            case LibSLLexer.CONSTRUCTOR:
+            case LibSLLexer.DESTRUCTOR:
+            case LibSLLexer.BY:
                 attrKey = KEYWORD;
                 break;
             case LibSLLexer.DoubleQuotedString:
