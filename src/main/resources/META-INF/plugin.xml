@@ -22,12 +22,12 @@
                                implementationClass="com.github.kechinvv.libslpluginij.language.LibSLParserDefinition"/>
         <lang.syntaxHighlighterFactory
                 language="LibSL"
-                implementationClass="com.github.kechinvv.libslpluginij.language.LibSLSyntaxHighlighterFactory"/>
+                implementationClass="com.github.kechinvv.libslpluginij.language.highlight.LibSLSyntaxHighlighterFactory"/>
         <colorSettingsPage
-                implementation="com.github.kechinvv.libslpluginij.language.LibSLColorSettingsPage"/>
+                implementation="com.github.kechinvv.libslpluginij.language.highlight.LibSLColorSettingsPage"/>
         <annotator
                 language="LibSL"
-                implementationClass="com.github.kechinvv.libslpluginij.language.LibSLAnnotator"/>
+                implementationClass="com.github.kechinvv.libslpluginij.language.highlight.LibSLAnnotator"/>
         <lang.braceMatcher
                 language="LibSL"
                 implementationClass="com.github.kechinvv.libslpluginij.language.LibSLBraceMatcher"/>

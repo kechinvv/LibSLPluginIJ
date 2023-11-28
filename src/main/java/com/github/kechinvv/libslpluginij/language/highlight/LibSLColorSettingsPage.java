@@ -1,6 +1,7 @@
-package com.github.kechinvv.libslpluginij.language;
+package com.github.kechinvv.libslpluginij.language.highlight;
 
 
+import com.github.kechinvv.libslpluginij.language.LibSLIcon;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;

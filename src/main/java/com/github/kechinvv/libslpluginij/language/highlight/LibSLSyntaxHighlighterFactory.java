@@ -1,4 +1,4 @@
-package com.github.kechinvv.libslpluginij.language;
+package com.github.kechinvv.libslpluginij.language.highlight;
 
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
