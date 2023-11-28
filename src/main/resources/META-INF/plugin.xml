@@ -3,13 +3,22 @@
     <id>com.github.kechinvv.libslpluginij</id>
     <name>LibSL Support</name>
     <vendor>kechinvv</vendor>
+    <version>0.0.4</version>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.java</depends>
     <!--    <depends>com.intellij.modules.java-capable</depends>-->
-    <description>
-        Plugin for highlighting LibSL (Library Specification language). More features coming soon.
-    </description>
+    <description><![CDATA[
+      This plugin is for LibSL supporting (Library Specification language).
+    ]]></description>
+
+    <change-notes><![CDATA[
+	<ul>
+	    <li>Highlighting of basic keywords</li>
+	    <li>Updated plugin logo, description and name</li>
+    </ul>
+      ]]>
+    </change-notes>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
