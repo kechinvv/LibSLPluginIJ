@@ -1,12 +1,15 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.kechinvv.libslpluginij</id>
-    <name>LibSLPluginIJ Template</name>
+    <name>LibSL Support</name>
     <vendor>kechinvv</vendor>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.java</depends>
     <!--    <depends>com.intellij.modules.java-capable</depends>-->
+    <description>
+        Plugin for highlighting LibSL (Library Specification language). More features coming soon.
+    </description>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
