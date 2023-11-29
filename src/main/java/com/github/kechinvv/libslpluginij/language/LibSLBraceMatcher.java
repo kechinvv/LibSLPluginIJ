@@ -15,7 +15,7 @@ public class LibSLBraceMatcher implements PairedBraceMatcher {
     BracePair[] PAIRS = {
             new BracePair(tokens.get(LibSLLexer.L_BRACE), tokens.get(LibSLLexer.R_BRACE), true),
             new BracePair(tokens.get(LibSLLexer.L_BRACKET), tokens.get(LibSLLexer.R_BRACKET), true),
-            new BracePair(tokens.get(LibSLLexer.L_SQUARE_BRACKET), tokens.get(LibSLLexer.L_SQUARE_BRACKET), true),
+            new BracePair(tokens.get(LibSLLexer.L_SQUARE_BRACKET), tokens.get(LibSLLexer.R_SQUARE_BRACKET), true),
     };
 
     @Override
