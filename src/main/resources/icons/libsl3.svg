@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill-rule: evenodd;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="8" y1="15" x2="8" y2="1" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7776ff"/>
+      <stop offset="1" stop-color="#ae2cf1"/>
+    </linearGradient>
+  </defs>
+  <image id="Слой_1" data-name="Слой 1" y="1" width="16" height="15" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAYAAADtc08vAAAARklEQVQokWP8//8/IwMDw38GMgETJZoZoAZQBEYNGCgDMjMzGeGc////k4QzMjLAiQ+mB8yguxeINoCRkZGgBQPsBQYGRgCiOTpfV6hifAAAAABJRU5ErkJggg=="/>
+  <circle id="Эллипс_1" data-name="Эллипс 1" class="cls-1" cx="8" cy="8" r="7"/>
+  <path id="Прямоугольник_5" data-name="Прямоугольник 5" class="cls-2" d="M9.125,4H11v8H9.125V4Zm-0.458.015H6.333S4,3.787,4,5.894V6.833S4,8.712,6.333,8.712c1.428,0,.828,1.409,0,1.409H4V12H6.333s2.333,0.213,2.333-1.879V8.712S8.66,7.016,6.333,6.833c-1.124-.089-1.008-0.844,0-0.939,0.327-.031,2.333,0,2.333,0"/>
+  <rect id="Прямоугольник_6" data-name="Прямоугольник 6" x="9" y="10" width="4" height="2"/>
+  <rect id="Прямоугольник_7" data-name="Прямоугольник 7" x="9" y="4" width="2" height="8"/>
+</svg>

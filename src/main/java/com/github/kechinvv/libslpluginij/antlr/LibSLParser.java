@@ -31,7 +31,7 @@ public class LibSLParser extends Parser {
 		STATE=63, FINISHSTATE=64, SHIFT=65, NEW=66, FUN=67, CONSTRUCTOR=68, DESTRUCTOR=69, 
 		PROC=70, AT=71, ACTION=72, REQUIRES=73, ENSURES=74, ASSIGNS=75, TRUE=76, 
 		FALSE=77, DEFINE=78, IF=79, ELSE=80, BY=81, HAS=82, IDENTIFIER=83, DoubleQuotedString=84, 
-		DIGIT=85, WS=86, BR=87, COMMENT=88, LINE_COMMENT=89;
+		DIGIT=85, WS=86, BR=87, COMMENT=88, LINE_COMMENT=89, BAD_CHARACTER=90;
 	public static final int
 		RULE_file = 0, RULE_globalStatement = 1, RULE_topLevelDecl = 2, RULE_header = 3, 
 		RULE_typealiasStatement = 4, RULE_typeDefBlock = 5, RULE_typeDefBlockStatement = 6, 
@@ -110,7 +110,7 @@ public class LibSLParser extends Parser {
 			"STATE", "FINISHSTATE", "SHIFT", "NEW", "FUN", "CONSTRUCTOR", "DESTRUCTOR", 
 			"PROC", "AT", "ACTION", "REQUIRES", "ENSURES", "ASSIGNS", "TRUE", "FALSE", 
 			"DEFINE", "IF", "ELSE", "BY", "HAS", "IDENTIFIER", "DoubleQuotedString", 
-			"DIGIT", "WS", "BR", "COMMENT", "LINE_COMMENT"
+			"DIGIT", "WS", "BR", "COMMENT", "LINE_COMMENT", "BAD_CHARACTER"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -6455,7 +6455,7 @@ public class LibSLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001Y\u03d4\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001Z\u03d4\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+

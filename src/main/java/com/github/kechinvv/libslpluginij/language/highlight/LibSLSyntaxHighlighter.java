@@ -5,6 +5,7 @@ import com.github.kechinvv.libslpluginij.antlr.LibSLParser;
 import com.github.kechinvv.libslpluginij.language.LibSL;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
+import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
@@ -29,6 +30,8 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
     public static final TextAttributesKey BLOCK_COMMENT =
             createTextAttributesKey("LIBSL_BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
 
+    public static final TextAttributesKey BAD_CHARACTER =
+            createTextAttributesKey("LSL_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
 
     static {
         PSIElementTypeFactory.defineLanguageIElementTypes(LibSL.INSTANCE,
@@ -92,6 +95,9 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
                 break;
             case LibSLLexer.LINE_COMMENT :
                 attrKey = BLOCK_COMMENT;
+                break;
+            case LibSLLexer.BAD_CHARACTER:
+                attrKey = BAD_CHARACTER;
                 break;
             default :
                 return EMPTY_KEYS;

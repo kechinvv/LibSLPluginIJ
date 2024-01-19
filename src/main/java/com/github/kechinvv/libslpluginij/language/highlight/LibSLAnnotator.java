@@ -39,19 +39,10 @@ final class LibSLAnnotator implements Annotator {
     }
 
     public void highlight(PsiElement element,  AnnotationHolder holder) {
-        TextRange elRange = TextRange.from(element.getTextRange().getStartOffset(), element.getTextLength());
+//        TextRange elRange = TextRange.from(element.getTextRange().getStartOffset(), element.getTextLength());
         holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
-                .range(elRange).textAttributes(DefaultLanguageHighlighterColors.METADATA).create();
+                .range(element).textAttributes(DefaultLanguageHighlighterColors.METADATA).create();
     }
 
-//    public void highlightTagName(PsiElement id, AnnotationHolder holder) {
-//        PsiElement tag = PsiTreeUtil.prevVisibleLeaf(id);
-//        if (tag != null && tag.getNode().getElementType() == tokens.get(LibSLLexer.AT)) {
-//            holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
-//                    .range(id)
-//                    .textAttributes(LibSLSyntaxHighlighter.KEYWORD)
-//                    .create();
-//        }
-//    }
 
 }

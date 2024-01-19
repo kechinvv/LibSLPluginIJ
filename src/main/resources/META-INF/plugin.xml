@@ -9,7 +9,12 @@
     <depends>com.intellij.java</depends>
     <!--    <depends>com.intellij.modules.java-capable</depends>-->
     <description><![CDATA[
-      This plugin is for LibSL supporting (Library Specification language).
+      This plugin is for LibSL supporting (Library Specification language). It is very easy to use:
+      <ul>
+	    <li>Install the plugin</li>
+	    <li>Enjoy LibSL support: highlighting and other features</li>
+    </ul>
+        More features in future releases.
     ]]></description>
 
     <change-notes><![CDATA[

@@ -276,3 +276,7 @@ COMMENT
 LINE_COMMENT
    :   ('//' ~[\r\n]*) -> channel(HIDDEN)
    ;
+
+BAD_CHARACTER
+   :   .
+   ;
