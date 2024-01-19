@@ -21,6 +21,7 @@ final class LibSLColorSettingsPage implements ColorSettingsPage {
             new AttributesDescriptor("String", LibSLSyntaxHighlighter.STRING),
             new AttributesDescriptor("Line comment", LibSLSyntaxHighlighter.LINE_COMMENT),
             new AttributesDescriptor("Block comment", LibSLSyntaxHighlighter.BLOCK_COMMENT),
+            new AttributesDescriptor("Bad character", LibSLSyntaxHighlighter.BAD_CHARACTER),
     };
 
 

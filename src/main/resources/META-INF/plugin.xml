@@ -48,8 +48,19 @@
         <lang.braceMatcher
                 language="LibSL"
                 implementationClass="com.github.kechinvv.libslpluginij.language.LibSLBraceMatcher"/>
+        <completion.contributor
+                language="LibSL"
+                implementationClass="com.github.kechinvv.libslpluginij.language.contributor.LibSLCompletionContributor"/>
     </extensions>
+    <actions>
+        <action id="Dropdown.LSL" class="com.github.kechinvv.libslpluginij.actions.GenerateTaintConfigAction"
+                text="GenerateTaintConfig" icon="/icons/libsl3.svg">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <!--<keyboard-shortcut keymap="$default" first-keystroke="control shift G"/> -->
+        </action>
 
+    </actions>
     <applicationListeners>
         <listener class="com.github.kechinvv.libslpluginij.listeners.MyApplicationActivationListener"
                   topic="com.intellij.openapi.application.ApplicationActivationListener"/>
