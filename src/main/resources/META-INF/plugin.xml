@@ -3,7 +3,7 @@
     <id>com.github.kechinvv.libslpluginij</id>
     <name>LibSL Support</name>
     <vendor>kechinvv</vendor>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.java</depends>
