@@ -14,7 +14,8 @@ public class GenerateTaintConfigAction extends AnAction {
 
     @Override
     public void update(AnActionEvent e) {
-        boolean isLsl = Objects.requireNonNull(e.getData(CommonDataKeys.PSI_FILE)).getFileType() == LibSLFileType.INSTANCE;
+        var psi = e.getData(CommonDataKeys.PSI_FILE);
+        boolean isLsl = (psi != null) && (psi.getFileType() == LibSLFileType.INSTANCE);
         e.getPresentation().setEnabledAndVisible(isLsl);
     }
 

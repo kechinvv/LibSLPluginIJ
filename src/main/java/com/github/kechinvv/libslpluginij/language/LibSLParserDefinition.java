@@ -8,6 +8,7 @@ import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
@@ -29,17 +30,19 @@ import java.util.List;
 
 
 public class LibSLParserDefinition implements ParserDefinition {
+    public static final Logger LOG = Logger.getInstance("ParserDef");
 
     public static final IFileElementType FILE = new IFileElementType(LibSL.INSTANCE);
 
     public static List<TokenIElementType> tokens;
-    List<RuleIElementType> rules = PSIElementTypeFactory.getRuleIElementTypes(LibSL.INSTANCE);
+    public static List<RuleIElementType> rules;
 
 
     static {
         PSIElementTypeFactory.defineLanguageIElementTypes(LibSL.INSTANCE,
                 LibSLParser.tokenNames, LibSLParser.ruleNames);
         tokens = PSIElementTypeFactory.getTokenIElementTypes(LibSL.INSTANCE);
+        rules = PSIElementTypeFactory.getRuleIElementTypes(LibSL.INSTANCE);
     }
 
     public static final TokenSet COMMENTS =
