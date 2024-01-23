@@ -156,27 +156,5 @@ public class LibSLParserDefinition implements ParserDefinition {
     @NotNull
     public PsiElement createElement(ASTNode node) {
         return PsiElementFactory.INSTANCE.createElement(node);
-//        IElementType elType = node.getElementType();
-//        if ( elType instanceof TokenIElementType ) {
-//            return new ANTLRPsiNode(node);
-//        }
-//        if ( !(elType instanceof RuleIElementType) ) {
-//            return new ANTLRPsiNode(node);
-//        }
-//        RuleIElementType ruleElType = (RuleIElementType) elType;
-//        switch ( ruleElType.getRuleIndex() ) {
-//            case LibSLParser.RULE_function :
-//                return new FunctionSubtree(node, elType);
-//            case LibSLParser.RULE_vardef :
-//                return new VardefSubtree(node, elType);
-//            case LibSLParser.RULE_formal_arg :
-//                return new ArgdefSubtree(node, elType);
-//            case LibSLParser.RULE_block :
-//                return new BlockSubtree(node);
-//            case LibSLParser.RULE_call_expr :
-//                return new CallSubtree(node);
-//            default :
-//                return new ANTLRPsiNode(node);
-//        }
     }
 }
