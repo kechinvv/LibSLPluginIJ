@@ -28,10 +28,15 @@ public class PsiElementFactory {
         }
         switch (ruleElType.getRuleIndex()) {
             case LibSLParser.RULE_variableAssignment -> {
+                LOG.info("ASS DECL " + node);
                 return new VariableAssignment(node);
             }
             case LibSLParser.RULE_procDecl -> {
                 LOG.info("PROC DECL " + node);
+                return new ProcDecl(node, elType);
+            }
+            case LibSLParser.RULE_functionDecl -> {
+                LOG.info("FUN DECL " + node);
                 return new ProcDecl(node, elType);
             }
 //            case SampleLanguageParser.RULE_vardef -> new VardefSubtree(node, elType);
