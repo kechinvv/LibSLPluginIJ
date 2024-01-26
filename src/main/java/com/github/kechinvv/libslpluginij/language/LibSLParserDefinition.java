@@ -25,6 +25,7 @@ import org.antlr.intellij.adaptor.psi.ANTLRPsiNode;
 import org.jetbrains.annotations.NotNull;
 import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.tree.ParseTree;
+import com.github.kechinvv.libslpluginij.antlr.*;
 
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class LibSLParserDefinition implements ParserDefinition {
     public static final TokenSet WHITESPACE =
             PSIElementTypeFactory.createTokenSet(
                     LibSL.INSTANCE,
-                    LibSLLexer.WS);
+                    LibSLLexer.WS, LibSLLexer.BR);
 
     public static final TokenSet STRING =
             PSIElementTypeFactory.createTokenSet(

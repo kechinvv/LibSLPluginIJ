@@ -1,4 +1,4 @@
-package com.github.kechinvv.libslpluginij.language;
+package com.github.kechinvv.libslpluginij.language.highlight;
 
 import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
 import com.intellij.lang.BracePair;

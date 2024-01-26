@@ -16,7 +16,7 @@ import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.t
 final class LibSLCompletionContributor extends CompletionContributor {
     public static final Logger LOG = Logger.getInstance("ConfigureANTLRCompletion");
     LibSLCompletionContributor() {
-        extend(CompletionType.BASIC, PlatformPatterns.psiElement(),
+        extend(CompletionType.BASIC, PlatformPatterns.psiElement(tokens.get(LibSLLexer.Identifier)),
                 new CompletionProvider<>() {
                     public void addCompletions(@NotNull CompletionParameters parameters,
                                                @NotNull ProcessingContext context,

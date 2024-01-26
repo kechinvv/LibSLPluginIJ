@@ -188,19 +188,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_file; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterFile(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitFile(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitFile(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FileContext file() throws RecognitionException {
@@ -278,19 +265,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_globalStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterGlobalStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitGlobalStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitGlobalStatement(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final GlobalStatementContext globalStatement() throws RecognitionException {
@@ -391,19 +365,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_topLevelDecl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterTopLevelDecl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitTopLevelDecl(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitTopLevelDecl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TopLevelDeclContext topLevelDecl() throws RecognitionException {
@@ -473,19 +434,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_header; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterHeader(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitHeader(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitHeader(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final HeaderContext header() throws RecognitionException {
@@ -593,19 +541,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_typealiasStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterTypealiasStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitTypealiasStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitTypealiasStatement(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TypealiasStatementContext typealiasStatement() throws RecognitionException {
@@ -683,19 +618,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_typeDefBlock; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterTypeDefBlock(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitTypeDefBlock(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitTypeDefBlock(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TypeDefBlockContext typeDefBlock() throws RecognitionException {
@@ -797,19 +719,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_targetType; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterTargetType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitTargetType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitTargetType(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TargetTypeContext targetType() throws RecognitionException {
@@ -864,19 +773,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_typeList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterTypeList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitTypeList(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitTypeList(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TypeListContext typeList() throws RecognitionException {
@@ -929,19 +825,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_typeDefBlockStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterTypeDefBlockStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitTypeDefBlockStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitTypeDefBlockStatement(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TypeDefBlockStatementContext typeDefBlockStatement() throws RecognitionException {
@@ -1002,19 +885,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_enumBlock; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterEnumBlock(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitEnumBlock(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitEnumBlock(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final EnumBlockContext enumBlock() throws RecognitionException {
@@ -1085,19 +955,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_enumBlockStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterEnumBlockStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitEnumBlockStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitEnumBlockStatement(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final EnumBlockStatementContext enumBlockStatement() throws RecognitionException {
@@ -1142,19 +999,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_typesSection; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterTypesSection(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitTypesSection(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitTypesSection(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TypesSectionContext typesSection() throws RecognitionException {
@@ -1209,19 +1053,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_semanticTypeDecl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterSemanticTypeDecl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitSemanticTypeDecl(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitSemanticTypeDecl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final SemanticTypeDeclContext semanticTypeDecl() throws RecognitionException {
@@ -1281,19 +1112,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_simpleSemanticType; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterSimpleSemanticType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitSimpleSemanticType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitSimpleSemanticType(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final SimpleSemanticTypeContext simpleSemanticType() throws RecognitionException {
@@ -1368,19 +1186,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_enumSemanticType; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterEnumSemanticType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitEnumSemanticType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitEnumSemanticType(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final EnumSemanticTypeContext enumSemanticType() throws RecognitionException {
@@ -1455,19 +1260,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_enumSemanticTypeEntry; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterEnumSemanticTypeEntry(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitEnumSemanticTypeEntry(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitEnumSemanticTypeEntry(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final EnumSemanticTypeEntryContext enumSemanticTypeEntry() throws RecognitionException {
@@ -1512,19 +1304,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_annotationDecl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterAnnotationDecl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitAnnotationDecl(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitAnnotationDecl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AnnotationDeclContext annotationDecl() throws RecognitionException {
@@ -1583,19 +1362,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_annotationDeclParams; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterAnnotationDeclParams(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitAnnotationDeclParams(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitAnnotationDeclParams(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AnnotationDeclParamsContext annotationDeclParams() throws RecognitionException {
@@ -1662,19 +1428,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_annotationDeclParamsPart; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterAnnotationDeclParamsPart(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitAnnotationDeclParamsPart(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitAnnotationDeclParamsPart(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AnnotationDeclParamsPartContext annotationDeclParamsPart() throws RecognitionException {
@@ -1738,19 +1491,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_actionDecl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterActionDecl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitActionDecl(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitActionDecl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ActionDeclContext actionDecl() throws RecognitionException {
@@ -1837,19 +1577,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_actionDeclParamList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterActionDeclParamList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitActionDeclParamList(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitActionDeclParamList(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ActionDeclParamListContext actionDeclParamList() throws RecognitionException {
@@ -1922,19 +1649,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_actionParameter; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterActionParameter(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitActionParameter(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitActionParameter(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ActionParameterContext actionParameter() throws RecognitionException {
@@ -2022,19 +1736,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_automatonDecl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterAutomatonDecl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitAutomatonDecl(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitAutomatonDecl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AutomatonDeclContext automatonDecl() throws RecognitionException {
@@ -2170,19 +1871,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_constructorVariables; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterConstructorVariables(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitConstructorVariables(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitConstructorVariables(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ConstructorVariablesContext constructorVariables() throws RecognitionException {
@@ -2321,19 +2009,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_automatonStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterAutomatonStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitAutomatonStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitAutomatonStatement(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AutomatonStatementContext automatonStatement() throws RecognitionException {
@@ -2423,19 +2098,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_implementedConcepts; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterImplementedConcepts(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitImplementedConcepts(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitImplementedConcepts(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ImplementedConceptsContext implementedConcepts() throws RecognitionException {
@@ -2486,19 +2148,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_concept; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterConcept(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitConcept(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitConcept(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ConceptContext concept() throws RecognitionException {
@@ -2536,19 +2185,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_automatonStateDecl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterAutomatonStateDecl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitAutomatonStateDecl(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitAutomatonStateDecl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AutomatonStateDeclContext automatonStateDecl() throws RecognitionException {
@@ -2615,19 +2251,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_automatonShiftDecl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterAutomatonShiftDecl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitAutomatonShiftDecl(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitAutomatonShiftDecl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AutomatonShiftDeclContext automatonShiftDecl() throws RecognitionException {
@@ -2775,19 +2398,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionsList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterFunctionsList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitFunctionsList(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitFunctionsList(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FunctionsListContext functionsList() throws RecognitionException {
@@ -2861,19 +2471,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionsListPart; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterFunctionsListPart(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitFunctionsListPart(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitFunctionsListPart(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FunctionsListPartContext functionsListPart() throws RecognitionException {
@@ -2959,19 +2556,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_variableDecl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterVariableDecl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitVariableDecl(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitVariableDecl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final VariableDeclContext variableDecl() throws RecognitionException {
@@ -3080,19 +2664,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_nameWithType; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterNameWithType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitNameWithType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitNameWithType(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final NameWithTypeContext nameWithType() throws RecognitionException {
@@ -3135,19 +2706,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_typeIdentifier; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterTypeIdentifier(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitTypeIdentifier(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitTypeIdentifier(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TypeIdentifierContext typeIdentifier() throws RecognitionException {
@@ -3210,19 +2768,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_generic; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterGeneric(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitGeneric(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitGeneric(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final GenericContext generic() throws RecognitionException {
@@ -3294,19 +2839,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_variableAssignment; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterVariableAssignment(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitVariableAssignment(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitVariableAssignment(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final VariableAssignmentContext variableAssignment() throws RecognitionException {
@@ -3421,19 +2953,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assignmentRight; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterAssignmentRight(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitAssignmentRight(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitAssignmentRight(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AssignmentRightContext assignmentRight() throws RecognitionException {
@@ -3486,19 +3005,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_callAutomatonConstructorWithNamedArgs; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterCallAutomatonConstructorWithNamedArgs(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitCallAutomatonConstructorWithNamedArgs(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitCallAutomatonConstructorWithNamedArgs(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final CallAutomatonConstructorWithNamedArgsContext callAutomatonConstructorWithNamedArgs() throws RecognitionException {
@@ -3555,19 +3061,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_namedArgs; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterNamedArgs(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitNamedArgs(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitNamedArgs(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final NamedArgsContext namedArgs() throws RecognitionException {
@@ -3637,19 +3130,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_argPair; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterArgPair(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitArgPair(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitArgPair(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ArgPairContext argPair() throws RecognitionException {
@@ -3704,19 +3184,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_headerWithAsterisk; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterHeaderWithAsterisk(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitHeaderWithAsterisk(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitHeaderWithAsterisk(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final HeaderWithAsteriskContext headerWithAsterisk() throws RecognitionException {
@@ -3757,19 +3224,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_constructorDecl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterConstructorDecl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitConstructorDecl(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitConstructorDecl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ConstructorDeclContext constructorDecl() throws RecognitionException {
@@ -3843,19 +3297,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_constructorHeader; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterConstructorHeader(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitConstructorHeader(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitConstructorHeader(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ConstructorHeaderContext constructorHeader() throws RecognitionException {
@@ -3955,19 +3396,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_destructorDecl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterDestructorDecl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitDestructorDecl(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitDestructorDecl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final DestructorDeclContext destructorDecl() throws RecognitionException {
@@ -4055,19 +3483,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_destructorHeader; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterDestructorHeader(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitDestructorHeader(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitDestructorHeader(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final DestructorHeaderContext destructorHeader() throws RecognitionException {
@@ -4167,19 +3582,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_procDecl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterProcDecl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitProcDecl(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitProcDecl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ProcDeclContext procDecl() throws RecognitionException {
@@ -4253,19 +3655,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_procHeader; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterProcHeader(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitProcHeader(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitProcHeader(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ProcHeaderContext procHeader() throws RecognitionException {
@@ -4357,19 +3746,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionDecl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterFunctionDecl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitFunctionDecl(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitFunctionDecl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FunctionDeclContext functionDecl() throws RecognitionException {
@@ -4484,19 +3860,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionHeader; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterFunctionHeader(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitFunctionHeader(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitFunctionHeader(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FunctionHeaderContext functionHeader() throws RecognitionException {
@@ -4611,19 +3974,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionDeclArgList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterFunctionDeclArgList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitFunctionDeclArgList(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitFunctionDeclArgList(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FunctionDeclArgListContext functionDeclArgList() throws RecognitionException {
@@ -4683,19 +4033,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parameter; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterParameter(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitParameter(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitParameter(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ParameterContext parameter() throws RecognitionException {
@@ -4754,19 +4091,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_annotationUsage; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterAnnotationUsage(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitAnnotationUsage(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitAnnotationUsage(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AnnotationUsageContext annotationUsage() throws RecognitionException {
@@ -4834,19 +4158,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionContract; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterFunctionContract(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitFunctionContract(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitFunctionContract(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FunctionContractContext functionContract() throws RecognitionException {
@@ -4910,19 +4221,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionBody; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterFunctionBody(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitFunctionBody(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitFunctionBody(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FunctionBodyContext functionBody() throws RecognitionException {
@@ -4992,19 +4290,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionBodyStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterFunctionBodyStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitFunctionBodyStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitFunctionBodyStatement(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FunctionBodyStatementContext functionBodyStatement() throws RecognitionException {
@@ -5078,19 +4363,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ifStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterIfStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitIfStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitIfStatement(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final IfStatementContext ifStatement() throws RecognitionException {
@@ -5187,19 +4459,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_elseStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterElseStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitElseStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitElseStatement(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ElseStatementContext elseStatement() throws RecognitionException {
@@ -5270,19 +4529,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_actionUsage; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterActionUsage(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitActionUsage(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitActionUsage(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ActionUsageContext actionUsage() throws RecognitionException {
@@ -5337,19 +4583,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_procUsage; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterProcUsage(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitProcUsage(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitProcUsage(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ProcUsageContext procUsage() throws RecognitionException {
@@ -5404,19 +4637,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expressionsList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterExpressionsList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitExpressionsList(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitExpressionsList(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExpressionsListContext expressionsList() throws RecognitionException {
@@ -5483,19 +4703,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_annotationArgs; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterAnnotationArgs(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitAnnotationArgs(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitAnnotationArgs(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AnnotationArgsContext annotationArgs() throws RecognitionException {
@@ -5549,19 +4756,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_argName; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterArgName(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitArgName(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitArgName(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ArgNameContext argName() throws RecognitionException {
@@ -5601,19 +4795,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_requiresContract; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterRequiresContract(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitRequiresContract(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitRequiresContract(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final RequiresContractContext requiresContract() throws RecognitionException {
@@ -5667,19 +4848,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ensuresContract; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterEnsuresContract(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitEnsuresContract(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitEnsuresContract(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final EnsuresContractContext ensuresContract() throws RecognitionException {
@@ -5733,19 +4901,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assignsContract; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterAssignsContract(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitAssignsContract(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitAssignsContract(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AssignsContractContext assignsContract() throws RecognitionException {
@@ -5850,19 +5005,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expression; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitExpression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitExpression(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExpressionContext expression() throws RecognitionException {
@@ -6183,19 +5325,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_hasAutomatonConcept; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterHasAutomatonConcept(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitHasAutomatonConcept(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitHasAutomatonConcept(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final HasAutomatonConceptContext hasAutomatonConcept() throws RecognitionException {
@@ -6241,19 +5370,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_bitShiftOp; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterBitShiftOp(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitBitShiftOp(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitBitShiftOp(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final BitShiftOpContext bitShiftOp() throws RecognitionException {
@@ -6314,19 +5430,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_lShift; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterLShift(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitLShift(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitLShift(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final LShiftContext lShift() throws RecognitionException {
@@ -6362,19 +5465,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_rShift; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterRShift(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitRShift(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitRShift(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final RShiftContext rShift() throws RecognitionException {
@@ -6410,19 +5500,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_uRShift; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterURShift(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitURShift(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitURShift(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final URShiftContext uRShift() throws RecognitionException {
@@ -6460,19 +5537,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_uLShift; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterULShift(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitULShift(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitULShift(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ULShiftContext uLShift() throws RecognitionException {
@@ -6515,19 +5579,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expressionAtomic; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterExpressionAtomic(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitExpressionAtomic(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitExpressionAtomic(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExpressionAtomicContext expressionAtomic() throws RecognitionException {
@@ -6599,19 +5650,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_primitiveLiteral; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterPrimitiveLiteral(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitPrimitiveLiteral(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitPrimitiveLiteral(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final PrimitiveLiteralContext primitiveLiteral() throws RecognitionException {
@@ -6713,19 +5751,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_qualifiedAccess; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterQualifiedAccess(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitQualifiedAccess(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitQualifiedAccess(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final QualifiedAccessContext qualifiedAccess() throws RecognitionException {
@@ -6837,19 +5862,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_simpleCall; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterSimpleCall(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitSimpleCall(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitSimpleCall(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final SimpleCallContext simpleCall() throws RecognitionException {
@@ -6893,19 +5905,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_identifierList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterIdentifierList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitIdentifierList(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitIdentifierList(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final IdentifierListContext identifierList() throws RecognitionException {
@@ -6957,19 +5956,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arrayLiteral; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterArrayLiteral(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitArrayLiteral(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitArrayLiteral(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ArrayLiteralContext arrayLiteral() throws RecognitionException {
@@ -7024,19 +6010,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_periodSeparatedFullName; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterPeriodSeparatedFullName(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitPeriodSeparatedFullName(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitPeriodSeparatedFullName(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final PeriodSeparatedFullNameContext periodSeparatedFullName() throws RecognitionException {
@@ -7134,19 +6107,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_integerNumber; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterIntegerNumber(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitIntegerNumber(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitIntegerNumber(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final IntegerNumberContext integerNumber() throws RecognitionException {
@@ -7248,19 +6208,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_floatNumber; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterFloatNumber(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitFloatNumber(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitFloatNumber(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FloatNumberContext floatNumber() throws RecognitionException {
@@ -7347,19 +6294,6 @@ public class LibSLParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_suffix; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).enterSuffix(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LibSLParserListener ) ((LibSLParserListener)listener).exitSuffix(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LibSLParserVisitor ) return ((LibSLParserVisitor<? extends T>)visitor).visitSuffix(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final SuffixContext suffix() throws RecognitionException {
