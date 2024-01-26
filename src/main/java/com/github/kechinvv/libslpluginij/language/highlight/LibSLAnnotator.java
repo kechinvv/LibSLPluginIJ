@@ -32,7 +32,7 @@ final class LibSLAnnotator implements Annotator {
 
         if (!(nextElementType instanceof TokenIElementType) || !(elementType instanceof TokenIElementType)) return;
         if (((TokenIElementType) elementType).getANTLRTokenType() != LibSLLexer.AT
-                || ((TokenIElementType) nextElementType).getANTLRTokenType() != LibSLLexer.IDENTIFIER) return;
+                || ((TokenIElementType) nextElementType).getANTLRTokenType() != LibSLLexer.Identifier) return;
 
         if (isId) highlight(id, holder);
         else highlight(at, holder);

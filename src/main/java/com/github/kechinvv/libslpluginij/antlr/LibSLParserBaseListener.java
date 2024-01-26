@@ -1,7 +1,6 @@
 // Generated from C:/Users/valer/IdeaProjects/LibSLPluginIJ/src/main/java/com/github/kechinvv/libslpluginij/antlr/LibSLParser.g4 by ANTLR 4.13.1
 package com.github.kechinvv.libslpluginij.antlr;
 
-
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -85,6 +84,30 @@ public class LibSLParserBaseListener implements LibSLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTypeDefBlock(LibSLParser.TypeDefBlockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTargetType(LibSLParser.TargetTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTargetType(LibSLParser.TargetTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTypeList(LibSLParser.TypeListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeList(LibSLParser.TypeListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -294,6 +317,30 @@ public class LibSLParserBaseListener implements LibSLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterImplementedConcepts(LibSLParser.ImplementedConceptsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitImplementedConcepts(LibSLParser.ImplementedConceptsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConcept(LibSLParser.ConceptContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConcept(LibSLParser.ConceptContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAutomatonStateDecl(LibSLParser.AutomatonStateDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -378,6 +425,18 @@ public class LibSLParserBaseListener implements LibSLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterGeneric(LibSLParser.GenericContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGeneric(LibSLParser.GenericContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterVariableAssignment(LibSLParser.VariableAssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -438,6 +497,18 @@ public class LibSLParserBaseListener implements LibSLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterHeaderWithAsterisk(LibSLParser.HeaderWithAsteriskContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitHeaderWithAsterisk(LibSLParser.HeaderWithAsteriskContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterConstructorDecl(LibSLParser.ConstructorDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -445,6 +516,18 @@ public class LibSLParserBaseListener implements LibSLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitConstructorDecl(LibSLParser.ConstructorDeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConstructorHeader(LibSLParser.ConstructorHeaderContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConstructorHeader(LibSLParser.ConstructorHeaderContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -462,6 +545,18 @@ public class LibSLParserBaseListener implements LibSLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDestructorHeader(LibSLParser.DestructorHeaderContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDestructorHeader(LibSLParser.DestructorHeaderContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterProcDecl(LibSLParser.ProcDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -474,6 +569,18 @@ public class LibSLParserBaseListener implements LibSLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterProcHeader(LibSLParser.ProcHeaderContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProcHeader(LibSLParser.ProcHeaderContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunctionDecl(LibSLParser.FunctionDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -481,6 +588,18 @@ public class LibSLParserBaseListener implements LibSLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunctionDecl(LibSLParser.FunctionDeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionHeader(LibSLParser.FunctionHeaderContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionHeader(LibSLParser.FunctionHeaderContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -690,13 +809,13 @@ public class LibSLParserBaseListener implements LibSLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterHasAutomaton(LibSLParser.HasAutomatonContext ctx) { }
+	@Override public void enterHasAutomatonConcept(LibSLParser.HasAutomatonConceptContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitHasAutomaton(LibSLParser.HasAutomatonContext ctx) { }
+	@Override public void exitHasAutomatonConcept(LibSLParser.HasAutomatonConceptContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -750,13 +869,13 @@ public class LibSLParserBaseListener implements LibSLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUnaryOp(LibSLParser.UnaryOpContext ctx) { }
+	@Override public void enterULShift(LibSLParser.ULShiftContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUnaryOp(LibSLParser.UnaryOpContext ctx) { }
+	@Override public void exitULShift(LibSLParser.ULShiftContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

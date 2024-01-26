@@ -54,7 +54,7 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
         int ttype = myType.getANTLRTokenType();
         TextAttributesKey attrKey;
         switch ( ttype ) {
-            case LibSLLexer.IDENTIFIER:
+            case LibSLLexer.Identifier:
                 attrKey = ID;
                 break;
             case LibSLLexer.VAR:
@@ -72,7 +72,7 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
             case LibSLLexer.NEW:
             case LibSLLexer.AUTOMATON:
             case LibSLLexer.ENUM:
-            case LibSLLexer.HAS:
+            case LibSLLexer.AS:
             case LibSLLexer.LIBRARY:
             case LibSLLexer.VERSION:
             case LibSLLexer.LANGUAGE:

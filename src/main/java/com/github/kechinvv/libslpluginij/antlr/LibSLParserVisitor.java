@@ -48,6 +48,18 @@ public interface LibSLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTypeDefBlock(LibSLParser.TypeDefBlockContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LibSLParser#targetType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTargetType(LibSLParser.TargetTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LibSLParser#typeList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeList(LibSLParser.TypeListContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LibSLParser#typeDefBlockStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -150,6 +162,18 @@ public interface LibSLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAutomatonStatement(LibSLParser.AutomatonStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LibSLParser#implementedConcepts}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImplementedConcepts(LibSLParser.ImplementedConceptsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LibSLParser#concept}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConcept(LibSLParser.ConceptContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LibSLParser#automatonStateDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -192,6 +216,12 @@ public interface LibSLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTypeIdentifier(LibSLParser.TypeIdentifierContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LibSLParser#generic}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGeneric(LibSLParser.GenericContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LibSLParser#variableAssignment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -222,11 +252,23 @@ public interface LibSLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArgPair(LibSLParser.ArgPairContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LibSLParser#headerWithAsterisk}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHeaderWithAsterisk(LibSLParser.HeaderWithAsteriskContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LibSLParser#constructorDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitConstructorDecl(LibSLParser.ConstructorDeclContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LibSLParser#constructorHeader}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConstructorHeader(LibSLParser.ConstructorHeaderContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LibSLParser#destructorDecl}.
 	 * @param ctx the parse tree
@@ -234,17 +276,35 @@ public interface LibSLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDestructorDecl(LibSLParser.DestructorDeclContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LibSLParser#destructorHeader}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDestructorHeader(LibSLParser.DestructorHeaderContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LibSLParser#procDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitProcDecl(LibSLParser.ProcDeclContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LibSLParser#procHeader}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProcHeader(LibSLParser.ProcHeaderContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LibSLParser#functionDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitFunctionDecl(LibSLParser.FunctionDeclContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LibSLParser#functionHeader}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionHeader(LibSLParser.FunctionHeaderContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LibSLParser#functionDeclArgList}.
 	 * @param ctx the parse tree
@@ -348,11 +408,11 @@ public interface LibSLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpression(LibSLParser.ExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LibSLParser#hasAutomaton}.
+	 * Visit a parse tree produced by {@link LibSLParser#hasAutomatonConcept}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitHasAutomaton(LibSLParser.HasAutomatonContext ctx);
+	T visitHasAutomatonConcept(LibSLParser.HasAutomatonConceptContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LibSLParser#bitShiftOp}.
 	 * @param ctx the parse tree
@@ -378,11 +438,11 @@ public interface LibSLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitURShift(LibSLParser.URShiftContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LibSLParser#unaryOp}.
+	 * Visit a parse tree produced by {@link LibSLParser#uLShift}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUnaryOp(LibSLParser.UnaryOpContext ctx);
+	T visitULShift(LibSLParser.ULShiftContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LibSLParser#expressionAtomic}.
 	 * @param ctx the parse tree

@@ -69,6 +69,26 @@ public interface LibSLParserListener extends ParseTreeListener {
 	 */
 	void exitTypeDefBlock(LibSLParser.TypeDefBlockContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LibSLParser#targetType}.
+	 * @param ctx the parse tree
+	 */
+	void enterTargetType(LibSLParser.TargetTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LibSLParser#targetType}.
+	 * @param ctx the parse tree
+	 */
+	void exitTargetType(LibSLParser.TargetTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LibSLParser#typeList}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeList(LibSLParser.TypeListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LibSLParser#typeList}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeList(LibSLParser.TypeListContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LibSLParser#typeDefBlockStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -239,6 +259,26 @@ public interface LibSLParserListener extends ParseTreeListener {
 	 */
 	void exitAutomatonStatement(LibSLParser.AutomatonStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LibSLParser#implementedConcepts}.
+	 * @param ctx the parse tree
+	 */
+	void enterImplementedConcepts(LibSLParser.ImplementedConceptsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LibSLParser#implementedConcepts}.
+	 * @param ctx the parse tree
+	 */
+	void exitImplementedConcepts(LibSLParser.ImplementedConceptsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LibSLParser#concept}.
+	 * @param ctx the parse tree
+	 */
+	void enterConcept(LibSLParser.ConceptContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LibSLParser#concept}.
+	 * @param ctx the parse tree
+	 */
+	void exitConcept(LibSLParser.ConceptContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LibSLParser#automatonStateDecl}.
 	 * @param ctx the parse tree
 	 */
@@ -309,6 +349,16 @@ public interface LibSLParserListener extends ParseTreeListener {
 	 */
 	void exitTypeIdentifier(LibSLParser.TypeIdentifierContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LibSLParser#generic}.
+	 * @param ctx the parse tree
+	 */
+	void enterGeneric(LibSLParser.GenericContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LibSLParser#generic}.
+	 * @param ctx the parse tree
+	 */
+	void exitGeneric(LibSLParser.GenericContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LibSLParser#variableAssignment}.
 	 * @param ctx the parse tree
 	 */
@@ -359,6 +409,16 @@ public interface LibSLParserListener extends ParseTreeListener {
 	 */
 	void exitArgPair(LibSLParser.ArgPairContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LibSLParser#headerWithAsterisk}.
+	 * @param ctx the parse tree
+	 */
+	void enterHeaderWithAsterisk(LibSLParser.HeaderWithAsteriskContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LibSLParser#headerWithAsterisk}.
+	 * @param ctx the parse tree
+	 */
+	void exitHeaderWithAsterisk(LibSLParser.HeaderWithAsteriskContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LibSLParser#constructorDecl}.
 	 * @param ctx the parse tree
 	 */
@@ -368,6 +428,16 @@ public interface LibSLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitConstructorDecl(LibSLParser.ConstructorDeclContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LibSLParser#constructorHeader}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstructorHeader(LibSLParser.ConstructorHeaderContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LibSLParser#constructorHeader}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstructorHeader(LibSLParser.ConstructorHeaderContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LibSLParser#destructorDecl}.
 	 * @param ctx the parse tree
@@ -379,6 +449,16 @@ public interface LibSLParserListener extends ParseTreeListener {
 	 */
 	void exitDestructorDecl(LibSLParser.DestructorDeclContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LibSLParser#destructorHeader}.
+	 * @param ctx the parse tree
+	 */
+	void enterDestructorHeader(LibSLParser.DestructorHeaderContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LibSLParser#destructorHeader}.
+	 * @param ctx the parse tree
+	 */
+	void exitDestructorHeader(LibSLParser.DestructorHeaderContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LibSLParser#procDecl}.
 	 * @param ctx the parse tree
 	 */
@@ -389,6 +469,16 @@ public interface LibSLParserListener extends ParseTreeListener {
 	 */
 	void exitProcDecl(LibSLParser.ProcDeclContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LibSLParser#procHeader}.
+	 * @param ctx the parse tree
+	 */
+	void enterProcHeader(LibSLParser.ProcHeaderContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LibSLParser#procHeader}.
+	 * @param ctx the parse tree
+	 */
+	void exitProcHeader(LibSLParser.ProcHeaderContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LibSLParser#functionDecl}.
 	 * @param ctx the parse tree
 	 */
@@ -398,6 +488,16 @@ public interface LibSLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionDecl(LibSLParser.FunctionDeclContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LibSLParser#functionHeader}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionHeader(LibSLParser.FunctionHeaderContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LibSLParser#functionHeader}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionHeader(LibSLParser.FunctionHeaderContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LibSLParser#functionDeclArgList}.
 	 * @param ctx the parse tree
@@ -569,15 +669,15 @@ public interface LibSLParserListener extends ParseTreeListener {
 	 */
 	void exitExpression(LibSLParser.ExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link LibSLParser#hasAutomaton}.
+	 * Enter a parse tree produced by {@link LibSLParser#hasAutomatonConcept}.
 	 * @param ctx the parse tree
 	 */
-	void enterHasAutomaton(LibSLParser.HasAutomatonContext ctx);
+	void enterHasAutomatonConcept(LibSLParser.HasAutomatonConceptContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link LibSLParser#hasAutomaton}.
+	 * Exit a parse tree produced by {@link LibSLParser#hasAutomatonConcept}.
 	 * @param ctx the parse tree
 	 */
-	void exitHasAutomaton(LibSLParser.HasAutomatonContext ctx);
+	void exitHasAutomatonConcept(LibSLParser.HasAutomatonConceptContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LibSLParser#bitShiftOp}.
 	 * @param ctx the parse tree
@@ -619,15 +719,15 @@ public interface LibSLParserListener extends ParseTreeListener {
 	 */
 	void exitURShift(LibSLParser.URShiftContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link LibSLParser#unaryOp}.
+	 * Enter a parse tree produced by {@link LibSLParser#uLShift}.
 	 * @param ctx the parse tree
 	 */
-	void enterUnaryOp(LibSLParser.UnaryOpContext ctx);
+	void enterULShift(LibSLParser.ULShiftContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link LibSLParser#unaryOp}.
+	 * Exit a parse tree produced by {@link LibSLParser#uLShift}.
 	 * @param ctx the parse tree
 	 */
-	void exitUnaryOp(LibSLParser.UnaryOpContext ctx);
+	void exitULShift(LibSLParser.ULShiftContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LibSLParser#expressionAtomic}.
 	 * @param ctx the parse tree

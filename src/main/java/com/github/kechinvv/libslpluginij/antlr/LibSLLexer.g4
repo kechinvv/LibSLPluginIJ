@@ -150,6 +150,10 @@ AUTOMATON
    :   'automaton'
    ;
 
+CONCEPT
+   :   'concept'
+   ;
+
 VAR
    :   'var'
    ;
@@ -238,20 +242,49 @@ BY
    :   'by'
    ;
 
-HAS
-   :   'has'
+IS
+   :   'is'
    ;
 
-IDENTIFIER
+AS
+   :   'as'
+   ;
+
+NULL
+   :   'null'
+   ;
+
+Identifier
    :   [a-zA-Z_$][a-zA-Z0-9_$]*
    |   '`' .*? '`'
    ;
 
-DoubleQuotedString
-   :   '"' .*? '"'
+fragment ESCAPED_QUOTE
+   : '\\"'
    ;
 
-DIGIT: ('0'..'9');
+DoubleQuotedString
+   :   '"' ( ESCAPED_QUOTE | ~('\n'|'\r') )*? '"'
+   ;
+
+CHARACTER
+   :   '\'' SingleCharacter '\''
+   |   '\'' EscapeSequence '\''
+   ;
+
+fragment
+SingleCharacter
+    :   ~['\\\r\n]
+    ;
+
+fragment
+EscapeSequence
+    :   '\\u' Hex Hex Hex Hex Hex Hex Hex Hex
+    ;
+
+Digit: ('0'..'9');
+
+Hex: Digit | ('A'..'F');
 
 fragment
 NEWLINE
