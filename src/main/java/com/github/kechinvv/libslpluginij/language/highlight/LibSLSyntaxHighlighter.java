@@ -91,10 +91,10 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
                 attrKey = STRING;
                 break;
             case LibSLLexer.COMMENT :
-                attrKey = LINE_COMMENT;
+                attrKey = BLOCK_COMMENT;
                 break;
             case LibSLLexer.LINE_COMMENT :
-                attrKey = BLOCK_COMMENT;
+                attrKey = LINE_COMMENT;
                 break;
             case LibSLLexer.BAD_CHARACTER:
                 attrKey = BAD_CHARACTER;
