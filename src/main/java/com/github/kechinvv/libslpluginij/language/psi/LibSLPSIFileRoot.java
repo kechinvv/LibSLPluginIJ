@@ -21,7 +21,7 @@ public class LibSLPSIFileRoot extends PsiFileBase {
 
     @Override
     public String toString() {
-        return "Simple File";
+        return "LibSL File";
     }
 
 }

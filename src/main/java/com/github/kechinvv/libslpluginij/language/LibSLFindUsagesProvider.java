@@ -23,12 +23,12 @@ public class LibSLFindUsagesProvider implements FindUsagesProvider {
     @Nullable
     @Override
     public WordsScanner getWordsScanner() {
- //       return null;
-        LibSLLexer lexer = new LibSLLexer(null);
+//        return null;
+        var lexer = new LibSLLexer(null);
         var adapter = new ANTLRLexerAdaptor(LibSL.INSTANCE, lexer);
         return new DefaultWordsScanner(adapter,
-                PSIElementTypeFactory.createTokenSet(LibSL.INSTANCE, LibSLLexer.Identifier),
-                COMMENTS,
+                TokenSet.create(tokens.get(LibSLLexer.Identifier)),
+                TokenSet.create(tokens.get(LibSLLexer.LINE_COMMENT), tokens.get(LibSLLexer.COMMENT)),
                 TokenSet.EMPTY);
     }
 
