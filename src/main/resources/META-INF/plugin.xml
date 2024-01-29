@@ -61,6 +61,9 @@
         <lang.commenter
                 language="LibSL"
                 implementationClass="com.github.kechinvv.libslpluginij.language.formatter.LibSLCommenter"/>
+        <lang.findUsagesProvider
+                language="LibSL"
+                implementationClass="com.github.kechinvv.libslpluginij.language.LibSLFindUsagesProvider"/>
     </extensions>
     <actions>
         <action id="Dropdown.LSL" class="com.github.kechinvv.libslpluginij.actions.GenerateTaintConfigAction"
