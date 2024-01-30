@@ -4,6 +4,7 @@ import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
 import com.github.kechinvv.libslpluginij.antlr.LibSLParser;
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
+import com.intellij.lang.findUsages.EmptyFindUsagesProvider;
 import com.intellij.lang.findUsages.FindUsagesProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
@@ -18,18 +19,24 @@ import javax.annotation.Nullable;
 import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.COMMENTS;
 import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.tokens;
 
-public class LibSLFindUsagesProvider implements FindUsagesProvider {
+public class LibSLFindUsagesProvider extends EmptyFindUsagesProvider {
 
     @Nullable
     @Override
     public WordsScanner getWordsScanner() {
-//        return null;
+        //      return null;
         var lexer = new LibSLLexer(null);
         var adapter = new ANTLRLexerAdaptor(LibSL.INSTANCE, lexer);
         return new DefaultWordsScanner(adapter,
                 TokenSet.create(tokens.get(LibSLLexer.Identifier)),
                 TokenSet.create(tokens.get(LibSLLexer.LINE_COMMENT), tokens.get(LibSLLexer.COMMENT)),
-                TokenSet.EMPTY);
+                TokenSet.create(tokens.get(LibSLLexer.TRUE),
+                                tokens.get(LibSLLexer.FALSE),
+                                tokens.get(LibSLLexer.NULL),
+                                tokens.get(LibSLLexer.CHARACTER),
+                                tokens.get(LibSLLexer.DoubleQuotedString),
+                                tokens.get(LibSLLexer.Digit),
+                                tokens.get(LibSLLexer.DOT)));
     }
 
     @Override
@@ -38,39 +45,5 @@ public class LibSLFindUsagesProvider implements FindUsagesProvider {
         return true;
     }
 
-    @Nullable
-    @Override
-    public String getHelpId(@NotNull PsiElement psiElement) {
-        return null;
-    }
-
-    @NotNull
-    @Override
-    public String getType(@NotNull PsiElement element) {
-//        if (element instanceof SimpleProperty) {
-//            return "simple property";
-//        }
-        return "";
-    }
-
-    @NotNull
-    @Override
-    public String getDescriptiveName(@NotNull PsiElement element) {
-//        if (element instanceof SimpleProperty) {
-//            return ((SimpleProperty) element).getKey();
-//        }
-        return "";
-    }
-
-    @NotNull
-    @Override
-    public String getNodeText(@NotNull PsiElement element, boolean useFullName) {
-//        if (element instanceof SimpleProperty) {
-//            return ((SimpleProperty) element).getKey() +
-//                    SimpleAnnotator.SIMPLE_SEPARATOR_STR +
-//                    ((SimpleProperty) element).getValue();
-//        }
-        return "";
-    }
 
 }

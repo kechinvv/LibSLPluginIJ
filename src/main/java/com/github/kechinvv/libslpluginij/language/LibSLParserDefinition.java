@@ -1,8 +1,9 @@
 package com.github.kechinvv.libslpluginij.language;
 
-import com.github.kechinvv.libslpluginij.antlr.*;
-import com.github.kechinvv.libslpluginij.language.psi.*;
-
+import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
+import com.github.kechinvv.libslpluginij.antlr.LibSLParser;
+import com.github.kechinvv.libslpluginij.language.psi.LibSLPSIFileRoot;
+import com.github.kechinvv.libslpluginij.language.psi.PsiElementFactory;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiBuilder;
@@ -22,10 +23,9 @@ import org.antlr.intellij.adaptor.lexer.RuleIElementType;
 import org.antlr.intellij.adaptor.lexer.TokenIElementType;
 import org.antlr.intellij.adaptor.parser.ANTLRParserAdaptor;
 import org.antlr.intellij.adaptor.psi.ANTLRPsiNode;
-import org.jetbrains.annotations.NotNull;
 import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.tree.ParseTree;
-import com.github.kechinvv.libslpluginij.antlr.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -103,16 +103,12 @@ public class LibSLParserDefinition implements ParserDefinition {
         return STRING;
     }
 
-    public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
-        return SpaceRequirements.MAY;
-    }
-
     /**
      * What is the IFileElementType of the root parse tree node? It
      * is called from {@link #createFile(FileViewProvider)} at least.
      */
     @Override
-    public IFileElementType getFileNodeType() {
+    public @NotNull IFileElementType getFileNodeType() {
         return FILE;
     }
 
@@ -129,7 +125,7 @@ public class LibSLParserDefinition implements ParserDefinition {
      * it back via: {@link PsiFile#getNode}.
      */
     @Override
-    public PsiFile createFile(FileViewProvider viewProvider) {
+    public @NotNull PsiFile createFile(@NotNull FileViewProvider viewProvider) {
         return new LibSLPSIFileRoot(viewProvider);
     }
 
