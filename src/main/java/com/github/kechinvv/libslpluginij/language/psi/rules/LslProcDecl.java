@@ -12,7 +12,7 @@ import org.antlr.intellij.adaptor.psi.ScopeNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class LslProcDecl extends ASTWrapperPsiElement {
+public class LslProcDecl extends LslIdentifierOwner {
     public LslProcDecl(@NotNull ASTNode node) {
         super(node);
     }

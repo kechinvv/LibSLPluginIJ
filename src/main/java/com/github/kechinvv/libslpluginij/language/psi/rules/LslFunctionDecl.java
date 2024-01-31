@@ -4,7 +4,7 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.NotNull;
 
-public class LslFunctionDecl extends ASTWrapperPsiElement {
+public class LslFunctionDecl extends LslIdentifierOwner {
     public LslFunctionDecl(@NotNull ASTNode node) {
         super(node);
     }

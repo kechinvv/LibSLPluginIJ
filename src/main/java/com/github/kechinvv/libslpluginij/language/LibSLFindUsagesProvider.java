@@ -6,6 +6,7 @@ import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.EmptyFindUsagesProvider;
 import com.intellij.lang.findUsages.FindUsagesProvider;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.tree.TokenSet;
@@ -20,6 +21,7 @@ import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.C
 import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.tokens;
 
 public class LibSLFindUsagesProvider extends EmptyFindUsagesProvider {
+    public static final Logger LOG = Logger.getInstance("FindUsage");
 
     @Nullable
     @Override
@@ -41,7 +43,9 @@ public class LibSLFindUsagesProvider extends EmptyFindUsagesProvider {
 
     @Override
     public boolean canFindUsagesFor(@NotNull PsiElement psiElement) {
-        //return psiElement instanceof ANTLRPsiNode;
+//        //return psiElement instanceof ANTLRPsiNode;
+        LOG.info("IDENTIFIER = " + psiElement.getNode().getElementType());
+        LOG.info("Text PSI = " + psiElement.getText());
         return true;
     }
 
