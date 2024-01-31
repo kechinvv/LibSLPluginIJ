@@ -41,7 +41,7 @@ topLevelDecl
 header:
    (LINE_COMMENT)?
    (LIBSL lslver=DoubleQuotedString SEMICOLON)
-   (LIBRARY libraryName=Identifier)
+   (LIBRARY libraryName=identifier)
    (VERSION ver = DoubleQuotedString)?
    (LANGUAGE lang=DoubleQuotedString)?
    (URL link=DoubleQuotedString)?
@@ -62,7 +62,7 @@ typeDefBlock
    ;
 
 targetType
-   :   (IS typeIdentifier)? for=Identifier typeList
+   :   (IS typeIdentifier)? for=identifier typeList
    ;
 
 
@@ -83,7 +83,7 @@ enumBlock
    ;
 
 enumBlockStatement
-   :   Identifier ASSIGN_OP integerNumber SEMICOLON
+   :   identifier ASSIGN_OP integerNumber SEMICOLON
    ;
 
 /* semantic types section
@@ -109,11 +109,11 @@ simpleSemanticType
  * syntax: semanticTypeName (realTypeName) {variant1: 0; variant2: 1; ...};
  */
 enumSemanticType
-   :   annotationUsage* semanticName=Identifier L_BRACKET realName=typeIdentifier R_BRACKET L_BRACE enumSemanticTypeEntry+ R_BRACE
+   :   annotationUsage* semanticName=identifier L_BRACKET realName=typeIdentifier R_BRACKET L_BRACE enumSemanticTypeEntry+ R_BRACE
    ;
 
 enumSemanticTypeEntry
-   :   Identifier COLON expressionAtomic SEMICOLON
+   :   identifier COLON expressionAtomic SEMICOLON
    ;
 
 /* annotation declaration
@@ -123,7 +123,7 @@ enumSemanticTypeEntry
  *         );
  */
 annotationDecl
-   :   ANNOTATION name=Identifier L_BRACKET annotationDeclParams? R_BRACKET SEMICOLON
+   :   ANNOTATION name=identifier L_BRACKET annotationDeclParams? R_BRACKET SEMICOLON
    ;
 
 annotationDeclParams
@@ -136,7 +136,7 @@ annotationDeclParamsPart
 
 actionDecl
    :   annotationUsage*
-   DEFINE ACTION actionName=Identifier L_BRACKET actionDeclParamList? R_BRACKET (COLON actionType=typeIdentifier)? SEMICOLON
+   DEFINE ACTION actionName=identifier L_BRACKET actionDeclParamList? R_BRACKET (COLON actionType=typeIdentifier)? SEMICOLON
    ;
 
 actionDeclParamList
@@ -144,7 +144,7 @@ actionDeclParamList
    ;
 
 actionParameter
-   :   annotationUsage* name=Identifier COLON type=typeIdentifier
+   :   annotationUsage* name=identifier COLON type=typeIdentifier
    ;
 
 /* automaton declaration
@@ -174,11 +174,11 @@ automatonStatement
    ;
 
 implementedConcepts
-   :   implements=Identifier concept (COMMA concept)*
+   :   implements=identifier concept (COMMA concept)*
    ;
 
 concept
-   :   name=Identifier
+   :   name=identifier
    ;
 
 /* state declaration
@@ -204,7 +204,7 @@ functionsList
    ;
 
 functionsListPart
-   :   name=Identifier (L_BRACKET typeIdentifier? (COMMA typeIdentifier)* R_BRACKET)?
+   :   name=identifier (L_BRACKET typeIdentifier? (COMMA typeIdentifier)* R_BRACKET)?
    ;
 
 /* variable declaration with optional initializers
@@ -216,7 +216,7 @@ variableDecl
    ;
 
 nameWithType
-   :  name=Identifier COLON type=typeIdentifier
+   :  name=identifier COLON type=typeIdentifier
    ;
 
 /*
@@ -264,7 +264,7 @@ constructorDecl
    ;
 
 constructorHeader
-   :   annotationUsage* CONSTRUCTOR headerWithAsterisk? functionName=Identifier? L_BRACKET functionDeclArgList? R_BRACKET
+   :   annotationUsage* CONSTRUCTOR headerWithAsterisk? functionName=identifier? L_BRACKET functionDeclArgList? R_BRACKET
    (COLON functionType=typeIdentifier)?
    ;
 
@@ -273,7 +273,7 @@ destructorDecl
    ;
 
 destructorHeader
-   :   annotationUsage* DESTRUCTOR headerWithAsterisk? functionName=Identifier? L_BRACKET functionDeclArgList? R_BRACKET
+   :   annotationUsage* DESTRUCTOR headerWithAsterisk? functionName=identifier? L_BRACKET functionDeclArgList? R_BRACKET
    (COLON functionType=typeIdentifier)?
    ;
 
@@ -282,7 +282,7 @@ procDecl
    ;
 
 procHeader
-   :   annotationUsage* PROC headerWithAsterisk? functionName=Identifier L_BRACKET functionDeclArgList? R_BRACKET
+   :   annotationUsage* PROC headerWithAsterisk? functionName=identifier L_BRACKET functionDeclArgList? R_BRACKET
    (COLON functionType=typeIdentifier)?
    ;
 /*
@@ -295,7 +295,7 @@ functionDecl
    ;
 
 functionHeader
-   :   annotationUsage* modifier=Identifier? FUN (automatonName=periodSeparatedFullName DOT)? headerWithAsterisk? functionName=Identifier
+   :   annotationUsage* modifier=identifier? FUN (automatonName=periodSeparatedFullName DOT)? headerWithAsterisk? functionName=identifier
    L_BRACKET functionDeclArgList? R_BRACKET (COLON functionType=typeIdentifier)?
    ;
 
@@ -304,14 +304,14 @@ functionDeclArgList
    ;
 
 parameter
-   :   annotationUsage* name=Identifier COLON type=typeIdentifier
+   :   annotationUsage* name=identifier COLON type=typeIdentifier
    ;
 
 /* annotation
  * syntax: @annotationName(args)
  */
 annotationUsage
-   :   AT Identifier (L_BRACKET annotationArgs* R_BRACKET)?
+   :   AT identifier (L_BRACKET annotationArgs* R_BRACKET)?
    ;
 
 functionContract
@@ -345,7 +345,7 @@ elseStatement
  * syntax: action ActionName(args)
  */
 actionUsage
-   :   ACTION Identifier L_BRACKET expressionsList? R_BRACKET
+   :   ACTION identifier L_BRACKET expressionsList? R_BRACKET
    ;
 
 procUsage
@@ -361,28 +361,28 @@ annotationArgs
    ;
 
 argName
-   :   name=Identifier ASSIGN_OP
+   :   name=identifier ASSIGN_OP
    ;
 
 /* requires contract
  * syntax: requires [name:] condition
  */
 requiresContract
-   :   REQUIRES (name=Identifier COLON)? expression SEMICOLON
+   :   REQUIRES (name=identifier COLON)? expression SEMICOLON
    ;
 
 /* ensures contract
  * syntax: ensures [name:] condition
  */
 ensuresContract
-   :   ENSURES (name=Identifier COLON)? expression SEMICOLON
+   :   ENSURES (name=identifier COLON)? expression SEMICOLON
    ;
 
 /* assigns contract
  * syntax: assigns [name:] condition
  */
 assignsContract
-   :   ASSIGNS (name=Identifier COLON)? expression SEMICOLON
+   :   ASSIGNS (name=identifier COLON)? expression SEMICOLON
    ;
 
 /*
@@ -435,7 +435,7 @@ expression
    ;
 
 hasAutomatonConcept
-   :   qualifiedAccess has=Identifier name=Identifier
+   :   qualifiedAccess has=identifier name=identifier
    ;
 
 bitShiftOp
@@ -484,11 +484,11 @@ qualifiedAccess
    ;
 
 simpleCall
-   :   Identifier L_BRACKET qualifiedAccess R_BRACKET
+   :   identifier L_BRACKET qualifiedAccess R_BRACKET
    ;
 
 identifierList
-   :   Identifier (COMMA Identifier)*
+   :   identifier (COMMA identifier)*
    ;
 
 arrayLiteral
@@ -496,20 +496,20 @@ arrayLiteral
    ;
 
 periodSeparatedFullName
-   :   Identifier
-   |   Identifier (DOT Identifier)*
-   |   BACK_QOUTE Identifier (DOT Identifier)* BACK_QOUTE
+   :   identifier
+   |   identifier (DOT identifier)*
+   |   BACK_QOUTE identifier (DOT identifier)* BACK_QOUTE
    ;
 
 integerNumber
-   :   MINUS? Digit+ suffix?
-   |   Digit suffix?
+   :   MINUS? Digit+ identifier?
+   |   Digit identifier?
    ;
 
 floatNumber
-   :   MINUS? Digit+ DOT Digit+ suffix?
+   :   MINUS? Digit+ DOT Digit+ identifier?
    ;
 
-suffix
+identifier
    :   Identifier
    ;

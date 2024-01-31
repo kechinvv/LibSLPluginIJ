@@ -111,7 +111,7 @@ public class PsiElementFactory {
             case LibSLParser.RULE_periodSeparatedFullName -> new LslPeriodSeparatedFullName(node);
             case LibSLParser.RULE_integerNumber -> new LslIntegerNumber(node);
             case LibSLParser.RULE_floatNumber -> new LslFloatNumber(node);
-            case LibSLParser.RULE_suffix -> new LslSuffix(node);
+            case LibSLParser.RULE_identifier -> new LslIdentifier(node);
             default -> {
                 LOG.info("default node " + node);
                 yield new ASTWrapperPsiElement(node);

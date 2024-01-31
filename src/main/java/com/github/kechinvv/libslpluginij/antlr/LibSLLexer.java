@@ -1,6 +1,5 @@
-// Generated from C:/Users/valer/IdeaProjects/LibSLPluginIJ/src/main/java/com/github/kechinvv/libslpluginij/antlr/LibSLLexer.g4 by ANTLR 4.13.1
+// Generated from /home/valera/IdeaProjects/LibSLPluginIJ/src/main/java/com/github/kechinvv/libslpluginij/antlr/LibSLLexer.g4 by ANTLR 4.13.1
 package com.github.kechinvv.libslpluginij.antlr;
-
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
