@@ -48,12 +48,12 @@
         <lang.braceMatcher
                 language="LibSL"
                 implementationClass="com.github.kechinvv.libslpluginij.language.highlight.LibSLBraceMatcher"/>
-        <completion.contributor
-                language="LibSL"
-                implementationClass="com.github.kechinvv.libslpluginij.language.contributor.LibSLCompletionContributor"/>
-        <lang.formatter
-                language="LibSL"
-                implementationClass="com.github.kechinvv.libslpluginij.language.formatter.LibSLFormatter"/>
+<!--        <completion.contributor-->
+<!--                language="LibSL"-->
+<!--                implementationClass="com.github.kechinvv.libslpluginij.language.contributor.LibSLCompletionContributor"/>-->
+<!--        <lang.formatter-->
+<!--                language="LibSL"-->
+<!--                implementationClass="com.github.kechinvv.libslpluginij.language.formatter.LibSLFormatter"/>-->
         <codeStyleSettingsProvider
                 implementation="com.github.kechinvv.libslpluginij.language.formatter.LibSLCodeStyleSettingsProvider"/>
         <langCodeStyleSettingsProvider

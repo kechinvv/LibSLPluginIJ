@@ -2,7 +2,6 @@ package com.github.kechinvv.libslpluginij.language;
 
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
@@ -32,7 +31,6 @@ public final class LibSLFileType extends LanguageFileType {
         return "lsl";
     }
 
-    @Nullable
     @Override
     public Icon getIcon() {
         return LibSLIcon.FILE;

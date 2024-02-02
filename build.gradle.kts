@@ -29,6 +29,7 @@ dependencies {
     implementation("org.antlr:antlr4-intellij-adaptor:0.1")
 }
 
+
 // Set the JVM language level used to build the project. Use Java 11 for 2020.3+, and Java 17 for 2022.2+.
 kotlin {
     @Suppress("UnstableApiUsage")
@@ -38,19 +39,19 @@ kotlin {
     }
 }
 
+
 // Configure Gradle IntelliJ Plugin - read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-//    pluginName = properties("pluginName")
-//    version = properties("platformVersion")
-//    type = properties("platformType")
+    pluginName = properties("pluginName")
+    version = properties("platformVersion")
+    type = properties("platformType")
 
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
-//    plugins = properties("platformPlugins").map { it.split(',').map(String::trim).filter(String::isNotEmpty) }
-    version.set("2022.3.3")
-    plugins.set(listOf("com.intellij.java"))
+    plugins = properties("platformPlugins").map { it.split(',').map(String::trim).filter(String::isNotEmpty) }
+    // plugins.set(listOf("com.intellij.java"))
 }
 
-// Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
+//Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
 changelog {
     groups.empty()
     repositoryUrl = properties("pluginRepositoryUrl")
@@ -78,7 +79,18 @@ sourceSets.configureEach {
     java.srcDir(generateGrammarSource.map { files() })
 }
 
+
+
 tasks {
+
+    withType<JavaCompile> {
+        options.compilerArgs.add("--enable-preview")
+    }
+
+    withType<JavaExec> {
+        jvmArgs("--enable-preview")
+    }
+
     wrapper {
         gradleVersion = properties("gradleVersion").get()
     }
@@ -124,18 +136,18 @@ tasks {
         systemProperty("jb.consents.confirmation.enabled", "false")
     }
 
-    signPlugin {
-        certificateChain = environment("CERTIFICATE_CHAIN")
-        privateKey = environment("PRIVATE_KEY")
-        password = environment("PRIVATE_KEY_PASSWORD")
-    }
-
-    publishPlugin {
-        dependsOn("patchChangelog")
-        token = environment("PUBLISH_TOKEN")
-        // The pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
-        // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
-        // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
-        channels = properties("pluginVersion").map { listOf(it.split('-').getOrElse(1) { "default" }.split('.').first()) }
-    }
+//    signPlugin {
+//        certificateChain = environment("CERTIFICATE_CHAIN")
+//        privateKey = environment("PRIVATE_KEY")
+//        password = environment("PRIVATE_KEY_PASSWORD")
+//    }
+//
+//    publishPlugin {
+//        dependsOn("patchChangelog")
+//        token = environment("PUBLISH_TOKEN")
+//        // The pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
+//        // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
+//        // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
+//        channels = properties("pluginVersion").map { listOf(it.split('-').getOrElse(1) { "default" }.split('.').first()) }
+//    }
 }
