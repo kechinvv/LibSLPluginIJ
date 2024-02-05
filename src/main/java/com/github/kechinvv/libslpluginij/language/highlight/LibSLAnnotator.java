@@ -1,6 +1,7 @@
 package com.github.kechinvv.libslpluginij.language.highlight;
 
 import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
+import com.github.kechinvv.libslpluginij.language.psi.rules.LslAnnotationUsage;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.HighlightSeverity;
@@ -15,31 +16,11 @@ final class LibSLAnnotator implements Annotator {
 
     @Override
     public void annotate(PsiElement element, AnnotationHolder holder) {
-        PsiElement nextElement = element.getNextSibling();
-        PsiElement prevElement = element.getPrevSibling();
-        if (nextElement == null && prevElement == null) return;
-        else if (nextElement == null) annotateNode(prevElement, element, holder, true);
-        else if (prevElement == null) annotateNode(element, nextElement, holder, false);
-        else {
-            annotateNode(prevElement, element, holder, true);
-            annotateNode(element, nextElement, holder, false);
-        }
+        if (element instanceof LslAnnotationUsage) highlight(element, holder);
     }
 
-    public void annotateNode(PsiElement at, PsiElement id, AnnotationHolder holder, Boolean isId) {
-        IElementType nextElementType = id.getNode().getElementType();
-        IElementType elementType = at.getNode().getElementType();
 
-        if (!(nextElementType instanceof TokenIElementType) || !(elementType instanceof TokenIElementType)) return;
-        if (((TokenIElementType) elementType).getANTLRTokenType() != LibSLLexer.AT
-                || ((TokenIElementType) nextElementType).getANTLRTokenType() != LibSLLexer.Identifier) return;
-
-        if (isId) highlight(id, holder);
-        else highlight(at, holder);
-    }
-
-    public void highlight(PsiElement element,  AnnotationHolder holder) {
-//        TextRange elRange = TextRange.from(element.getTextRange().getStartOffset(), element.getTextLength());
+    public void highlight(PsiElement element, AnnotationHolder holder) {
         holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
                 .range(element).textAttributes(DefaultLanguageHighlighterColors.METADATA).create();
     }
