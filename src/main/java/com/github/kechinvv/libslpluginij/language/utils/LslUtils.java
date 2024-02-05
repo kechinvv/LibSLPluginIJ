@@ -10,6 +10,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.util.PsiTreeUtil;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.function.Predicate;
+
 import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.tokens;
 
 public class LslUtils {
@@ -34,5 +38,25 @@ public class LslUtils {
     public static LibSLPSIFileRoot createFileFromText(Project project, String text)  {
         return (LibSLPSIFileRoot) PsiFileFactory.getInstance(project)
                 .createFileFromText("stub.lsl", LibSLFileType.INSTANCE, text);
+    }
+
+    public static Collection<PsiElement> getAllSiblings(PsiElement element) {
+        var siblings = new ArrayList<PsiElement>();
+        var temp = element;
+        while (temp != null) {
+            siblings.add(temp);
+            temp = temp.getNextSibling();
+        }
+        return siblings;
+    }
+
+    public static Collection<PsiElement> getFilteredSiblings(PsiElement element, Predicate<PsiElement> predicate) {
+        var siblings = new ArrayList<PsiElement>();
+        var temp = element;
+        while (temp != null) {
+            if (predicate.test(temp)) siblings.add(temp);
+            temp = temp.getNextSibling();
+        }
+        return siblings;
     }
 }
