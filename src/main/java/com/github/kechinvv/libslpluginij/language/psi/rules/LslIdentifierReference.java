@@ -1,5 +1,6 @@
 package com.github.kechinvv.libslpluginij.language.psi.rules;
 
+import com.github.kechinvv.libslpluginij.language.psi.LibSLPSIFileRoot;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
@@ -59,16 +60,16 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
 
 
     private void processDeclarations(Consumer<PsiNamedElement> callback) {
-        //PsiElement prev = myElement;
+        PsiElement prev = myElement;
         var current = myElement.getParent();
 
-        while (current != null) {
+        while (current != null && !(prev instanceof LibSLPSIFileRoot)) {
             //processDeclarationsIteration(current, callback);
-            //prev = current;
+            prev = current;
             current = current.getParent();
-            if (current instanceof LslAutomatonDecl) break;
+            //if (current instanceof LslAutomatonDecl) break;
+            processDeclarationsIteration(current, callback);
         }
-        processDeclarationsIteration(current, callback);
     }
 
     private void processDeclarationsIteration(PsiElement current, Consumer<PsiNamedElement> callback) {
@@ -77,7 +78,7 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
 //            case LslFunctionDecl functionDecl -> processDeclarationsInHeader(functionDecl, callback);
 //            case LslProcDecl procDecl -> processDeclarationsInHeader(procDecl, callback);
             case LslAutomatonDecl automatonDecl -> processDeclarationsInAutomaton(automatonDecl, callback);
-//            case LslFunction -> processDeclarationsInParameters(current, callback)
+//            case LslFunctionDecl functionDecl -> processDeclarationsInParameters(functionDecl, callback);
 //            is JavaScriptCatch -> {
 //                val assignable = current.assignable
 //                if (assignable != null) processDeclarationsInAssignable(assignable, callback)
@@ -101,8 +102,7 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
         if (header == null) return;
         var func = header.methodName();
         if (func == null) return;
-//        LOG.info("func name " + func.getName());
-        func.forEach(callback::consume);
+        callback.consume(func);
     }
 
     private void processDeclarationsInHeader(LslProcDecl procDecl, Consumer<PsiNamedElement> callback) {
@@ -110,17 +110,12 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
         if (header == null) return;
         var proc = header.methodName();
         if (proc == null) return;
-//        LOG.info("proc name " + proc.getName());
-        proc.forEach(callback::consume);
+       callback.consume(proc);
     }
 
     private void processDeclarationsInAutomaton(LslAutomatonDecl automatonDecl, Consumer<PsiNamedElement> callback) {
-//        LOG.info("SIZE func " + automatonDecl.functionDeclsList().size());
-//        LOG.info("SIZE proc " + automatonDecl.procDeclsList().size());
-
         automatonDecl.functionDeclsList().forEach(functionDecl -> processDeclarationsInHeader(functionDecl, callback));
         automatonDecl.procDeclsList().forEach(procDecl -> processDeclarationsInHeader(procDecl, callback));
-
     }
 
 }

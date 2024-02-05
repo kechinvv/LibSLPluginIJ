@@ -85,6 +85,7 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
             case LibSLLexer.CONSTRUCTOR:
             case LibSLLexer.DESTRUCTOR:
             case LibSLLexer.BY:
+            case LibSLLexer.ANNOTATION:
                 attrKey = KEYWORD;
                 break;
             case LibSLLexer.DoubleQuotedString:
