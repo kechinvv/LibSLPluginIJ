@@ -5,6 +5,7 @@ import com.github.kechinvv.libslpluginij.language.LibSLFileType;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.*;
 
 public class LibSLPSIFileRoot extends PsiFileBase {

@@ -11,6 +11,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Consumer;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.SmartHashSet;
@@ -66,8 +67,9 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
 
         if (prev != null && prev.getText().equals(".") && prev.getPrevSibling().getText().equals("this"))
             processFieldDeclarationsInAutomaton(requireNonNull(getParentOfType(myElement, LslAutomatonDecl.class)), callback);
-        else if (getParentOfType(myElement, LslTypeIdentifier.class) != null)
-            findFiles(myElement.getProject(), callback);
+        else if (getParentOfType(myElement, LslTypeIdentifier.class) != null) {
+        }
+//            findFiles(myElement.getProject(), callback);
         else if (myElement.getParent() instanceof LslFunctionHeader || myElement.getParent() instanceof LslProcHeader) {
         } else if ((varParent = getParentOfType(myElement, LslVariableDecl.class)) != null && varParent.getParent() instanceof LslAutomatonStatement) {
         } else {
@@ -108,16 +110,16 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
         Collection<VirtualFile> virtualFiles =
                 FileTypeIndex.getFiles(LibSLFileType.INSTANCE, GlobalSearchScope.allScope(project));
         for (VirtualFile virtualFile : virtualFiles) {
-
             LibSLPSIFileRoot file = (LibSLPSIFileRoot) PsiManager.getInstance(project).findFile(virtualFile);
+            // WANT FIX: DONT WORK, NOT ROOT PSI ELEMENT
             if (file != null) {
-                LOG.info("FILE = " + LslUtils.getAllSiblings(file));
+                //var node = file.getNode().getFirstChildNode().getPsi();
+                var test = file.getTreeElement();
                 var typeDefs = getChildrenOfType(file, LslTypeDefBlock.class);
                 if (typeDefs != null) {
                     LOG.info("type = " + Arrays.stream(typeDefs).map(LslTypeDefBlock::getText).toList());
                     typeNameResolver(typeDefs, LslTypeDefBlock.class, callback);
-                }
-                else {
+                } else {
                     var automatons = getChildrenOfType(file, LslAutomatonDecl.class);
                     if (automatons != null) typeNameResolver(automatons, LslAutomatonDecl.class, callback);
                 }
@@ -131,7 +133,8 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
             if (typeName != null) return getChildOfType(typeName, LslIdentifier.class);
             else return null;
         };
-        Arrays.stream(elements).map(mapper).filter(Objects::nonNull).forEach(it -> {callback.consume(it);
+        Arrays.stream(elements).map(mapper).filter(Objects::nonNull).forEach(it -> {
+            callback.consume(it);
             LOG.info("type = " + it.getName());
         });
     }

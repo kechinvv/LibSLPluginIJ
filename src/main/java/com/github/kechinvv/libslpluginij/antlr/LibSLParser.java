@@ -174,6 +174,7 @@ public class LibSLParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class FileContext extends ParserRuleContext {
 		public TerminalNode EOF() { return getToken(LibSLParser.EOF, 0); }
+		public TerminalNode LINE_COMMENT() { return getToken(LibSLParser.LINE_COMMENT, 0); }
 		public HeaderContext header() {
 			return getRuleContext(HeaderContext.class,0);
 		}
@@ -199,28 +200,38 @@ public class LibSLParser extends Parser {
 			setState(165);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==LIBSL || _la==LINE_COMMENT) {
+			if (_la==LINE_COMMENT) {
 				{
 				setState(164);
+				match(LINE_COMMENT);
+				}
+			}
+
+			setState(168);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==LIBSL) {
+				{
+				setState(167);
 				header();
 				}
 			}
 
-			setState(170);
+			setState(173);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (((((_la - 45)) & ~0x3f) == 0 && ((1L << (_la - 45)) & 2216345959939L) != 0)) {
 				{
 				{
-				setState(167);
+				setState(170);
 				globalStatement();
 				}
 				}
-				setState(172);
+				setState(175);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(173);
+			setState(176);
 			match(EOF);
 			}
 		}
@@ -270,69 +281,69 @@ public class LibSLParser extends Parser {
 		GlobalStatementContext _localctx = new GlobalStatementContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_globalStatement);
 		try {
-			setState(184);
+			setState(187);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(175);
+				setState(178);
 				match(ImportStatement);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(176);
+				setState(179);
 				match(IncludeStatement);
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(177);
+				setState(180);
 				typesSection();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(178);
+				setState(181);
 				typealiasStatement();
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(179);
+				setState(182);
 				typeDefBlock();
 				}
 				break;
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(180);
+				setState(183);
 				enumBlock();
 				}
 				break;
 			case 7:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(181);
+				setState(184);
 				annotationDecl();
 				}
 				break;
 			case 8:
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(182);
+				setState(185);
 				actionDecl();
 				}
 				break;
 			case 9:
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(183);
+				setState(186);
 				topLevelDecl();
 				}
 				break;
@@ -370,27 +381,27 @@ public class LibSLParser extends Parser {
 		TopLevelDeclContext _localctx = new TopLevelDeclContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_topLevelDecl);
 		try {
-			setState(189);
+			setState(192);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(186);
+				setState(189);
 				automatonDecl();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(187);
+				setState(190);
 				functionDecl();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(188);
+				setState(191);
 				variableDecl();
 				}
 				break;
@@ -420,7 +431,6 @@ public class LibSLParser extends Parser {
 		}
 		public TerminalNode LIBSL() { return getToken(LibSLParser.LIBSL, 0); }
 		public TerminalNode LIBRARY() { return getToken(LibSLParser.LIBRARY, 0); }
-		public TerminalNode LINE_COMMENT() { return getToken(LibSLParser.LINE_COMMENT, 0); }
 		public List<TerminalNode> DoubleQuotedString() { return getTokens(LibSLParser.DoubleQuotedString); }
 		public TerminalNode DoubleQuotedString(int i) {
 			return getToken(LibSLParser.DoubleQuotedString, i);
@@ -444,16 +454,6 @@ public class LibSLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(192);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==LINE_COMMENT) {
-				{
-				setState(191);
-				match(LINE_COMMENT);
-				}
-			}
-
 			{
 			setState(194);
 			match(LIBSL);
@@ -6438,19 +6438,19 @@ public class LibSLParser extends Parser {
 		"F\u0007F\u0002G\u0007G\u0002H\u0007H\u0002I\u0007I\u0002J\u0007J\u0002"+
 		"K\u0007K\u0002L\u0007L\u0002M\u0007M\u0002N\u0007N\u0002O\u0007O\u0002"+
 		"P\u0007P\u0002Q\u0007Q\u0001\u0000\u0003\u0000\u00a6\b\u0000\u0001\u0000"+
-		"\u0005\u0000\u00a9\b\u0000\n\u0000\f\u0000\u00ac\t\u0000\u0001\u0000\u0001"+
-		"\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0003\u0001\u00b9\b\u0001\u0001"+
-		"\u0002\u0001\u0002\u0001\u0002\u0003\u0002\u00be\b\u0002\u0001\u0003\u0003"+
-		"\u0003\u00c1\b\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001"+
-		"\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0003\u0003\u00cc"+
-		"\b\u0003\u0001\u0003\u0001\u0003\u0003\u0003\u00d0\b\u0003\u0001\u0003"+
-		"\u0001\u0003\u0003\u0003\u00d4\b\u0003\u0001\u0003\u0001\u0003\u0001\u0004"+
-		"\u0005\u0004\u00d9\b\u0004\n\u0004\f\u0004\u00dc\t\u0004\u0001\u0004\u0001"+
-		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0005\u0005"+
-		"\u0005\u00e5\b\u0005\n\u0005\f\u0005\u00e8\t\u0005\u0001\u0005\u0001\u0005"+
-		"\u0001\u0005\u0003\u0005\u00ed\b\u0005\u0001\u0005\u0003\u0005\u00f0\b"+
-		"\u0005\u0001\u0005\u0001\u0005\u0005\u0005\u00f4\b\u0005\n\u0005\f\u0005"+
+		"\u0003\u0000\u00a9\b\u0000\u0001\u0000\u0005\u0000\u00ac\b\u0000\n\u0000"+
+		"\f\u0000\u00af\t\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0003\u0001\u00bc\b\u0001\u0001\u0002\u0001\u0002\u0001\u0002"+
+		"\u0003\u0002\u00c1\b\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
+		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0003\u0003"+
+		"\u00cc\b\u0003\u0001\u0003\u0001\u0003\u0003\u0003\u00d0\b\u0003\u0001"+
+		"\u0003\u0001\u0003\u0003\u0003\u00d4\b\u0003\u0001\u0003\u0001\u0003\u0001"+
+		"\u0004\u0005\u0004\u00d9\b\u0004\n\u0004\f\u0004\u00dc\t\u0004\u0001\u0004"+
+		"\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0005"+
+		"\u0005\u0005\u00e5\b\u0005\n\u0005\f\u0005\u00e8\t\u0005\u0001\u0005\u0001"+
+		"\u0005\u0001\u0005\u0003\u0005\u00ed\b\u0005\u0001\u0005\u0003\u0005\u00f0"+
+		"\b\u0005\u0001\u0005\u0001\u0005\u0005\u0005\u00f4\b\u0005\n\u0005\f\u0005"+
 		"\u00f7\t\u0005\u0001\u0005\u0003\u0005\u00fa\b\u0005\u0001\u0006\u0001"+
 		"\u0006\u0003\u0006\u00fe\b\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001"+
 		"\u0007\u0001\u0007\u0001\u0007\u0005\u0007\u0106\b\u0007\n\u0007\f\u0007"+
@@ -6569,8 +6569,8 @@ public class LibSLParser extends Parser {
 		"&(\u0001\u0000)*\u0003\u0000\u0013\u0014\u001c\u001c%%\u0001\u0000\u0010"+
 		"\u0012\u0001\u0000\u0013\u0014\u0002\u0000\u000e\u000f\u001e\u001f\u0002"+
 		"\u0000\u0003\u0003\u001d\u001d\u0001\u0000MN\u04e0\u0000\u00a5\u0001\u0000"+
-		"\u0000\u0000\u0002\u00b8\u0001\u0000\u0000\u0000\u0004\u00bd\u0001\u0000"+
-		"\u0000\u0000\u0006\u00c0\u0001\u0000\u0000\u0000\b\u00da\u0001\u0000\u0000"+
+		"\u0000\u0000\u0002\u00bb\u0001\u0000\u0000\u0000\u0004\u00c0\u0001\u0000"+
+		"\u0000\u0000\u0006\u00c2\u0001\u0000\u0000\u0000\b\u00da\u0001\u0000\u0000"+
 		"\u0000\n\u00e6\u0001\u0000\u0000\u0000\f\u00fd\u0001\u0000\u0000\u0000"+
 		"\u000e\u0102\u0001\u0000\u0000\u0000\u0010\u010c\u0001\u0000\u0000\u0000"+
 		"\u0012\u0111\u0001\u0000\u0000\u0000\u0014\u011f\u0001\u0000\u0000\u0000"+
@@ -6606,27 +6606,27 @@ public class LibSLParser extends Parser {
 		"\u0000\u0000\u0098\u0431\u0001\u0000\u0000\u0000\u009a\u0439\u0001\u0000"+
 		"\u0000\u0000\u009c\u0453\u0001\u0000\u0000\u0000\u009e\u0464\u0001\u0000"+
 		"\u0000\u0000\u00a0\u0467\u0001\u0000\u0000\u0000\u00a2\u0477\u0001\u0000"+
-		"\u0000\u0000\u00a4\u00a6\u0003\u0006\u0003\u0000\u00a5\u00a4\u0001\u0000"+
-		"\u0000\u0000\u00a5\u00a6\u0001\u0000\u0000\u0000\u00a6\u00aa\u0001\u0000"+
-		"\u0000\u0000\u00a7\u00a9\u0003\u0002\u0001\u0000\u00a8\u00a7\u0001\u0000"+
-		"\u0000\u0000\u00a9\u00ac\u0001\u0000\u0000\u0000\u00aa\u00a8\u0001\u0000"+
-		"\u0000\u0000\u00aa\u00ab\u0001\u0000\u0000\u0000\u00ab\u00ad\u0001\u0000"+
-		"\u0000\u0000\u00ac\u00aa\u0001\u0000\u0000\u0000\u00ad\u00ae\u0005\u0000"+
-		"\u0000\u0001\u00ae\u0001\u0001\u0000\u0000\u0000\u00af\u00b9\u0005-\u0000"+
-		"\u0000\u00b0\u00b9\u0005.\u0000\u0000\u00b1\u00b9\u0003\u0016\u000b\u0000"+
-		"\u00b2\u00b9\u0003\b\u0004\u0000\u00b3\u00b9\u0003\n\u0005\u0000\u00b4"+
-		"\u00b9\u0003\u0012\t\u0000\u00b5\u00b9\u0003 \u0010\u0000\u00b6\u00b9"+
-		"\u0003&\u0013\u0000\u00b7\u00b9\u0003\u0004\u0002\u0000\u00b8\u00af\u0001"+
-		"\u0000\u0000\u0000\u00b8\u00b0\u0001\u0000\u0000\u0000\u00b8\u00b1\u0001"+
-		"\u0000\u0000\u0000\u00b8\u00b2\u0001\u0000\u0000\u0000\u00b8\u00b3\u0001"+
-		"\u0000\u0000\u0000\u00b8\u00b4\u0001\u0000\u0000\u0000\u00b8\u00b5\u0001"+
-		"\u0000\u0000\u0000\u00b8\u00b6\u0001\u0000\u0000\u0000\u00b8\u00b7\u0001"+
-		"\u0000\u0000\u0000\u00b9\u0003\u0001\u0000\u0000\u0000\u00ba\u00be\u0003"+
-		",\u0016\u0000\u00bb\u00be\u0003^/\u0000\u00bc\u00be\u0003>\u001f\u0000"+
-		"\u00bd\u00ba\u0001\u0000\u0000\u0000\u00bd\u00bb\u0001\u0000\u0000\u0000"+
-		"\u00bd\u00bc\u0001\u0000\u0000\u0000\u00be\u0005\u0001\u0000\u0000\u0000"+
-		"\u00bf\u00c1\u0005^\u0000\u0000\u00c0\u00bf\u0001\u0000\u0000\u0000\u00c0"+
-		"\u00c1\u0001\u0000\u0000\u0000\u00c1\u00c2\u0001\u0000\u0000\u0000\u00c2"+
+		"\u0000\u0000\u00a4\u00a6\u0005^\u0000\u0000\u00a5\u00a4\u0001\u0000\u0000"+
+		"\u0000\u00a5\u00a6\u0001\u0000\u0000\u0000\u00a6\u00a8\u0001\u0000\u0000"+
+		"\u0000\u00a7\u00a9\u0003\u0006\u0003\u0000\u00a8\u00a7\u0001\u0000\u0000"+
+		"\u0000\u00a8\u00a9\u0001\u0000\u0000\u0000\u00a9\u00ad\u0001\u0000\u0000"+
+		"\u0000\u00aa\u00ac\u0003\u0002\u0001\u0000\u00ab\u00aa\u0001\u0000\u0000"+
+		"\u0000\u00ac\u00af\u0001\u0000\u0000\u0000\u00ad\u00ab\u0001\u0000\u0000"+
+		"\u0000\u00ad\u00ae\u0001\u0000\u0000\u0000\u00ae\u00b0\u0001\u0000\u0000"+
+		"\u0000\u00af\u00ad\u0001\u0000\u0000\u0000\u00b0\u00b1\u0005\u0000\u0000"+
+		"\u0001\u00b1\u0001\u0001\u0000\u0000\u0000\u00b2\u00bc\u0005-\u0000\u0000"+
+		"\u00b3\u00bc\u0005.\u0000\u0000\u00b4\u00bc\u0003\u0016\u000b\u0000\u00b5"+
+		"\u00bc\u0003\b\u0004\u0000\u00b6\u00bc\u0003\n\u0005\u0000\u00b7\u00bc"+
+		"\u0003\u0012\t\u0000\u00b8\u00bc\u0003 \u0010\u0000\u00b9\u00bc\u0003"+
+		"&\u0013\u0000\u00ba\u00bc\u0003\u0004\u0002\u0000\u00bb\u00b2\u0001\u0000"+
+		"\u0000\u0000\u00bb\u00b3\u0001\u0000\u0000\u0000\u00bb\u00b4\u0001\u0000"+
+		"\u0000\u0000\u00bb\u00b5\u0001\u0000\u0000\u0000\u00bb\u00b6\u0001\u0000"+
+		"\u0000\u0000\u00bb\u00b7\u0001\u0000\u0000\u0000\u00bb\u00b8\u0001\u0000"+
+		"\u0000\u0000\u00bb\u00b9\u0001\u0000\u0000\u0000\u00bb\u00ba\u0001\u0000"+
+		"\u0000\u0000\u00bc\u0003\u0001\u0000\u0000\u0000\u00bd\u00c1\u0003,\u0016"+
+		"\u0000\u00be\u00c1\u0003^/\u0000\u00bf\u00c1\u0003>\u001f\u0000\u00c0"+
+		"\u00bd\u0001\u0000\u0000\u0000\u00c0\u00be\u0001\u0000\u0000\u0000\u00c0"+
+		"\u00bf\u0001\u0000\u0000\u0000\u00c1\u0005\u0001\u0000\u0000\u0000\u00c2"+
 		"\u00c3\u00051\u0000\u0000\u00c3\u00c4\u0005W\u0000\u0000\u00c4\u00c5\u0005"+
 		"\u0001\u0000\u0000\u00c5\u00c6\u0001\u0000\u0000\u0000\u00c6\u00c7\u0005"+
 		"2\u0000\u0000\u00c7\u00c8\u0003\u00a2Q\u0000\u00c8\u00cb\u0001\u0000\u0000"+
@@ -7152,7 +7152,7 @@ public class LibSLParser extends Parser {
 		"\u0474\u0476\u0003\u00a2Q\u0000\u0475\u0474\u0001\u0000\u0000\u0000\u0475"+
 		"\u0476\u0001\u0000\u0000\u0000\u0476\u00a1\u0001\u0000\u0000\u0000\u0477"+
 		"\u0478\u0005V\u0000\u0000\u0478\u00a3\u0001\u0000\u0000\u0000\u008a\u00a5"+
-		"\u00aa\u00b8\u00bd\u00c0\u00cb\u00cf\u00d3\u00da\u00e6\u00ec\u00ef\u00f5"+
+		"\u00a8\u00ad\u00bb\u00c0\u00cb\u00cf\u00d3\u00da\u00e6\u00ec\u00ef\u00f5"+
 		"\u00f9\u00fd\u0107\u010c\u0111\u011a\u0129\u0130\u0135\u0141\u014c\u0159"+
 		"\u0163\u0167\u016c\u0171\u0179\u017e\u0187\u018b\u0190\u019a\u019f\u01a6"+
 		"\u01aa\u01b1\u01b8\u01c0\u01c6\u01cb\u01d3\u01d5\u01de\u01e6\u01fe\u0215"+

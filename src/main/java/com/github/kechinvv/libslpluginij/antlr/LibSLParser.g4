@@ -10,7 +10,8 @@ options { tokenVocab = LibSLLexer; }
  * semantic types section and declarations (automata and extension functions)
  */
 file
-   :   header?
+   :   (LINE_COMMENT)?
+       header?
        globalStatement*
        EOF
    ;
@@ -39,7 +40,6 @@ topLevelDecl
  * 'version', 'language' and 'url'
  */
 header:
-   (LINE_COMMENT)?
    (LIBSL lslver=DoubleQuotedString SEMICOLON)
    (LIBRARY libraryName=identifier)
    (VERSION ver = DoubleQuotedString)?
