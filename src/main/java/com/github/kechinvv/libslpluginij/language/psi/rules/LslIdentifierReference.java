@@ -2,8 +2,6 @@ package com.github.kechinvv.libslpluginij.language.psi.rules;
 
 import com.github.kechinvv.libslpluginij.language.LibSLFileType;
 import com.github.kechinvv.libslpluginij.language.psi.LibSLPSIFileRoot;
-import com.github.kechinvv.libslpluginij.language.utils.LslUtils;
-import com.intellij.extapi.psi.ASTDelegatePsiElement;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
@@ -11,7 +9,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Consumer;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.SmartHashSet;
@@ -68,9 +65,8 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
         if (prev != null && prev.getText().equals(".") && prev.getPrevSibling().getText().equals("this"))
             processFieldDeclarationsInAutomaton(requireNonNull(getParentOfType(myElement, LslAutomatonDecl.class)), callback);
         else if (getParentOfType(myElement, LslTypeIdentifier.class) != null) {
-        }
-//            findFiles(myElement.getProject(), callback);
-        else if (myElement.getParent() instanceof LslFunctionHeader || myElement.getParent() instanceof LslProcHeader) {
+            findFiles(myElement.getProject(), callback);
+        } else if (myElement.getParent() instanceof LslFunctionHeader || myElement.getParent() instanceof LslProcHeader) {
         } else if ((varParent = getParentOfType(myElement, LslVariableDecl.class)) != null && varParent.getParent() instanceof LslAutomatonStatement) {
         } else {
             var automaton = getParentOfType(myElement, LslAutomatonDecl.class);
@@ -108,37 +104,22 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
 
     private void findFiles(Project project, Consumer<PsiNamedElement> callback) {
         Collection<VirtualFile> virtualFiles =
-                FileTypeIndex.getFiles(LibSLFileType.INSTANCE, GlobalSearchScope.allScope(project));
+                FileTypeIndex.getFiles(LibSLFileType.INSTANCE, GlobalSearchScope.projectScope(project));
         for (VirtualFile virtualFile : virtualFiles) {
             LibSLPSIFileRoot file = (LibSLPSIFileRoot) PsiManager.getInstance(project).findFile(virtualFile);
             // WANT FIX: DONT WORK, NOT ROOT PSI ELEMENT
             if (file != null) {
                 //var node = file.getNode().getFirstChildNode().getPsi();
-                var test = file.getTreeElement();
-                var typeDefs = getChildrenOfType(file, LslTypeDefBlock.class);
-                if (typeDefs != null) {
-                    LOG.info("type = " + Arrays.stream(typeDefs).map(LslTypeDefBlock::getText).toList());
-                    typeNameResolver(typeDefs, LslTypeDefBlock.class, callback);
-                } else {
-                    var automatons = getChildrenOfType(file, LslAutomatonDecl.class);
-                    if (automatons != null) typeNameResolver(automatons, LslAutomatonDecl.class, callback);
-                }
+                var typeDefs = file.getTypeDefBlockNames();
+                if (typeDefs != null) typeDefs.forEach(callback::consume);
+                var automatons = file.getAutomatonNames();
+                if (automatons != null) automatons.forEach(callback::consume);
             }
         }
     }
-
-    private <T extends PsiElement> void typeNameResolver(T[] elements, Class<T> klass, Consumer<PsiNamedElement> callback) {
-        Function<T, LslIdentifier> mapper = it -> {
-            var typeName = getChildOfType(it, klass);
-            if (typeName != null) return getChildOfType(typeName, LslIdentifier.class);
-            else return null;
-        };
-        Arrays.stream(elements).map(mapper).filter(Objects::nonNull).forEach(it -> {
-            callback.consume(it);
-            LOG.info("type = " + it.getName());
-        });
-    }
 }
+
+
 
 
 
