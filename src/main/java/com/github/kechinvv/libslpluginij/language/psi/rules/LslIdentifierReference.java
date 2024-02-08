@@ -9,18 +9,16 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.Consumer;
+import com.intellij.util.Function;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.SmartHashSet;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
-import java.util.function.Function;
 
-import static com.intellij.psi.util.PsiTreeUtil.*;
-import static java.util.Objects.*;
+import static com.intellij.psi.util.PsiTreeUtil.getParentOfType;
+import static java.util.Objects.requireNonNull;
 
 public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdentifier> {
     public static final Logger LOG = Logger.getInstance("Reference");
@@ -33,8 +31,12 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
     public ResolveResult @NotNull [] multiResolve(boolean incompleteCode) {
         var declarations = new SmartList<PsiElement>();
         var name = myElement.getName();
-        Consumer<PsiNamedElement> adder = it -> {
-            if (Objects.equals(it.getName(), name)) declarations.add(it);
+        Function<PsiNamedElement, Boolean> adder = it -> {
+            if (Objects.equals(it.getName(), name)) {
+                declarations.add(it);
+                return true;
+            }
+            return false;
         };
         processDeclarations(adder);
         return PsiElementResolveResult.createResults(declarations);
@@ -44,21 +46,20 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
     @Override
     public Object @NotNull [] getVariants() {
         var variants = new SmartHashSet<String>();
-        Consumer<PsiNamedElement> adder = it -> {
+        Function<PsiNamedElement, Boolean> adder = it -> {
             var name = it.getName();
-            if (name != null) variants.add(name);
+            if (name != null) {
+                variants.add(name);
+                return true;
+            }
+            return false;
         };
         processDeclarations(adder);
         return variants.toArray();
     }
 
-//    @Override
-//    public PsiElement handleElementRename(@NotNull String newElementName) {
-//        return myElement.setName(newElementName);
-//    }
 
-
-    private void processDeclarations(Consumer<PsiNamedElement> callback) {
+    private void processDeclarations(Function<PsiNamedElement, Boolean> callback) {
         PsiElement varParent;
         PsiElement prev = myElement.getPrevSibling();
 
@@ -76,46 +77,53 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
     }
 
 
-    private void processDeclarationsInHeader(LslFunctionDecl functionDecl, Consumer<PsiNamedElement> callback) {
+    private void processDeclarationsInHeader(LslFunctionDecl functionDecl, Function<PsiNamedElement, Boolean> callback) {
         var header = functionDecl.header();
         if (header == null) return;
         var func = header.methodName();
         if (func == null) return;
-        callback.consume(func);
+        callback.fun(func);
     }
 
-    private void processDeclarationsInHeader(LslProcDecl procDecl, Consumer<PsiNamedElement> callback) {
+    private void processDeclarationsInHeader(LslProcDecl procDecl, Function<PsiNamedElement, Boolean> callback) {
         var header = procDecl.header();
         if (header == null) return;
         var proc = header.methodName();
         if (proc == null) return;
-        callback.consume(proc);
+        callback.fun(proc);
     }
 
-    private void processDeclarationsInAutomaton(LslAutomatonDecl automatonDecl, Consumer<PsiNamedElement> callback) {
+    private void processDeclarationsInAutomaton(LslAutomatonDecl automatonDecl, Function<PsiNamedElement, Boolean> callback) {
         automatonDecl.functionDeclsList().forEach(functionDecl -> processDeclarationsInHeader(functionDecl, callback));
         automatonDecl.procDeclsList().forEach(procDecl -> processDeclarationsInHeader(procDecl, callback));
     }
 
-    private void processFieldDeclarationsInAutomaton(LslAutomatonDecl automatonDecl, Consumer<PsiNamedElement> callback) {
-        automatonDecl.constructorFieldsName().forEach(callback::consume);
-        automatonDecl.bodyFieldsName().forEach(callback::consume);
+    private void processFieldDeclarationsInAutomaton(LslAutomatonDecl automatonDecl, Function<PsiNamedElement, Boolean> callback) {
+        automatonDecl.constructorFieldsName().forEach(callback::fun);
+        automatonDecl.bodyFieldsName().forEach(callback::fun);
     }
 
-    private void findFiles(Project project, Consumer<PsiNamedElement> callback) {
+    private void findFiles(Project project, Function<PsiNamedElement, Boolean> callback) {
         Collection<VirtualFile> virtualFiles =
                 FileTypeIndex.getFiles(LibSLFileType.INSTANCE, GlobalSearchScope.projectScope(project));
         for (VirtualFile virtualFile : virtualFiles) {
             LibSLPSIFileRoot file = (LibSLPSIFileRoot) PsiManager.getInstance(project).findFile(virtualFile);
-            // WANT FIX: DONT WORK, NOT ROOT PSI ELEMENT
             if (file != null) {
-                //var node = file.getNode().getFirstChildNode().getPsi();
                 var typeDefs = file.getTypeDefBlockNames();
-                if (typeDefs != null) typeDefs.forEach(callback::consume);
+                if (typeDefs != null && breakerLoop(typeDefs, callback)) break;
+
                 var automatons = file.getAutomatonNames();
-                if (automatons != null) automatons.forEach(callback::consume);
+                if (automatons != null && breakerLoop(automatons, callback)) break;
             }
         }
+    }
+
+    private boolean breakerLoop(Collection<LslIdentifier> ids, Function<PsiNamedElement, Boolean> callback) {
+        for (LslIdentifier id : ids) {
+            var added = callback.fun(id);
+            if (added) return true;
+        }
+        return false;
     }
 }
 
