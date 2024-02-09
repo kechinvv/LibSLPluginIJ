@@ -12,15 +12,20 @@
     - [x] functions and procs
     - [x] user types and automatons
     - [x] automaton scope variables
-    - [ ] actions
-    - [ ] type aliases
+    - [x] actions
+    - [x] type aliases
     - [ ] local and global variables
+    - [ ] annotations
 - [ ] Completion
 - [ ] Formatter
 ### Unique features
 - [ ] Taint configs generation
 - [ ] Templates generation
 - [ ] Mining specification
+### Dev
+- [ ] CI/CD
+- [ ] Refactoring
+- [ ] Null safety
 
 # Description
 Plugin for [LibSL](https://www.researchgate.net/publication/325074393_LibSL_Language_for_Specification_of_Software_Libraries) supporting.
