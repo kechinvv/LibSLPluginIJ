@@ -2,10 +2,8 @@ package com.github.kechinvv.libslpluginij.language.psi;
 
 import com.github.kechinvv.libslpluginij.language.LibSL;
 import com.github.kechinvv.libslpluginij.language.LibSLFileType;
-import com.github.kechinvv.libslpluginij.language.psi.rules.LslAutomatonDecl;
-import com.github.kechinvv.libslpluginij.language.psi.rules.LslIdentifier;
-import com.github.kechinvv.libslpluginij.language.psi.rules.LslPeriodSeparatedFullName;
-import com.github.kechinvv.libslpluginij.language.psi.rules.LslTypeDefBlock;
+import com.github.kechinvv.libslpluginij.language.psi.rules.*;
+import com.github.kechinvv.libslpluginij.language.utils.LslUtils;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
@@ -33,6 +31,8 @@ public class LibSLPSIFileRoot extends PsiFileBase implements PsiElement {
         return "LibSL File";
     }
 
+    //TODO: refactoring!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     public Collection<LslIdentifier> getTypeDefBlockNames() {
         return findChildrenOfType(this, LslTypeDefBlock.class).stream()
                 .map(lslTypeDefBlock -> findChildOfType(lslTypeDefBlock, LslPeriodSeparatedFullName.class))
@@ -41,7 +41,20 @@ public class LibSLPSIFileRoot extends PsiFileBase implements PsiElement {
 
     public Collection<LslIdentifier> getAutomatonNames() {
         return findChildrenOfType(this, LslAutomatonDecl.class).stream()
-                .map(lslTypeDefBlock -> findChildOfType(lslTypeDefBlock, LslIdentifier.class)).toList();
+                .map(lslAutomatonDecl -> findChildOfType(lslAutomatonDecl, LslIdentifier.class)).toList();
+    }
+
+    public Collection<LslIdentifier> getTypeAliasesNames() {
+        return findChildrenOfType(this, LslTypeAliasStatement.class).stream()
+                .map(lslTypeAliasStatement -> findChildOfType(lslTypeAliasStatement, LslIdentifier.class)).toList();
+    }
+
+
+    //TODO: null safety
+    public Collection<LslIdentifier> getActionsDeclarationsNames() {
+        return findChildrenOfType(this, LslActionDecl.class).stream()
+                .map(lslActionDecl -> (LslIdentifier) LslUtils.getFilteredSiblings(lslActionDecl.getFirstChild(),
+                        it -> it instanceof LslIdentifier).get(0)).toList();
     }
 
 }

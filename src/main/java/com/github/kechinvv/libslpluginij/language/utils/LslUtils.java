@@ -12,6 +12,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Predicate;
 
 import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.tokens;
@@ -50,7 +51,7 @@ public class LslUtils {
         return siblings;
     }
 
-    public static Collection<PsiElement> getFilteredSiblings(PsiElement element, Predicate<PsiElement> predicate) {
+    public static List<PsiElement> getFilteredSiblings(PsiElement element, Predicate<PsiElement> predicate) {
         var siblings = new ArrayList<PsiElement>();
         var temp = element;
         while (temp != null) {

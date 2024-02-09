@@ -15,6 +15,7 @@ import com.intellij.util.containers.SmartHashSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import static com.intellij.psi.util.PsiTreeUtil.getParentOfType;
@@ -22,6 +23,15 @@ import static java.util.Objects.requireNonNull;
 
 public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdentifier> {
     public static final Logger LOG = Logger.getInstance("Reference");
+
+    static public final Collection<String> defaultTypes =
+            List.of("bool",
+                    "int8", "int16", "int32", "int64",
+                    "float32", "float64",
+                    "void", "any", "array",
+                    "char", "string",
+                    "unsigned8", "unsigned16", "unsigned32", "unsigned64");
+
 
     public LslIdentifierReference(@NotNull LslIdentifier element, TextRange range) {
         super(element, range);
@@ -58,7 +68,7 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
         return variants.toArray();
     }
 
-
+    //TODO: refactoring this scary condition monster
     private void processDeclarations(Function<PsiNamedElement, Boolean> callback) {
         PsiElement varParent;
         PsiElement prev = myElement.getPrevSibling();
@@ -66,7 +76,9 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
         if (prev != null && prev.getText().equals(".") && prev.getPrevSibling().getText().equals("this"))
             processFieldDeclarationsInAutomaton(requireNonNull(getParentOfType(myElement, LslAutomatonDecl.class)), callback);
         else if (getParentOfType(myElement, LslTypeIdentifier.class) != null) {
-            findFiles(myElement.getProject(), callback);
+            findTypes(myElement.getProject(), callback);
+        } else if (getParentOfType(myElement, LslActionUsage.class) != null) {
+            findActionsDeclarations(myElement.getProject(), callback);
         } else if (myElement.getParent() instanceof LslFunctionHeader || myElement.getParent() instanceof LslProcHeader) {
         } else if ((varParent = getParentOfType(myElement, LslVariableDecl.class)) != null && varParent.getParent() instanceof LslAutomatonStatement) {
         } else {
@@ -103,7 +115,9 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
         automatonDecl.bodyFieldsName().forEach(callback::fun);
     }
 
-    private void findFiles(Project project, Function<PsiNamedElement, Boolean> callback) {
+    //TODO: separate files loop
+    private void findTypes(Project project, Function<PsiNamedElement, Boolean> callback) {
+        if (defaultTypes.contains(myElement.getText())) return;
         Collection<VirtualFile> virtualFiles =
                 FileTypeIndex.getFiles(LibSLFileType.INSTANCE, GlobalSearchScope.projectScope(project));
         for (VirtualFile virtualFile : virtualFiles) {
@@ -114,6 +128,21 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
 
                 var automatons = file.getAutomatonNames();
                 if (automatons != null && breakerLoop(automatons, callback)) break;
+
+                var typeAliases = file.getTypeAliasesNames();
+                if (typeAliases != null && breakerLoop(typeAliases, callback)) break;
+            }
+        }
+    }
+
+    private void findActionsDeclarations(Project project, Function<PsiNamedElement, Boolean> callback) {
+        Collection<VirtualFile> virtualFiles =
+                FileTypeIndex.getFiles(LibSLFileType.INSTANCE, GlobalSearchScope.projectScope(project));
+        for (VirtualFile virtualFile : virtualFiles) {
+            LibSLPSIFileRoot file = (LibSLPSIFileRoot) PsiManager.getInstance(project).findFile(virtualFile);
+            if (file != null) {
+                var actionDeclarations = file.getActionsDeclarationsNames();
+                if (actionDeclarations != null && breakerLoop(actionDeclarations, callback)) break;
             }
         }
     }
