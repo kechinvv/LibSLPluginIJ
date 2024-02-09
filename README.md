@@ -10,10 +10,9 @@
     - [ ] "import..." statement highlight
 - [ ] Find Usages
     - [x] functions and procs
-    - [x] user types and automatons
+    - [x] types and automatons
     - [x] automaton scope variables
     - [x] actions
-    - [x] type aliases
     - [ ] local and global variables
     - [ ] annotations
 - [ ] Completion

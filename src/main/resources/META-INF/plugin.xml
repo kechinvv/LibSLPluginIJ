@@ -19,9 +19,7 @@
 
     <change-notes><![CDATA[
 	<ul>
-	    <li>Bad characters parsing fixed</li>
-	    <li>Annotator fixed</li>
-	    <li>Basic findUsages provider</li>
+	    <li>FindUsages for types and actions</li>
     </ul>
       ]]>
     </change-notes>
