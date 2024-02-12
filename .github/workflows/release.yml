@@ -52,12 +52,12 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       # Update Unreleased section with the current release note
-      - name: Patch Changelog
-        if: ${{ steps.properties.outputs.changelog != '' }}
-        env:
-          CHANGELOG: ${{ steps.properties.outputs.changelog }}
-        run: |
-          ./gradlew patchChangelog --release-note="$CHANGELOG"
+#      - name: Patch Changelog
+#        if: ${{ steps.properties.outputs.changelog != '' }}
+#        env:
+#          CHANGELOG: ${{ steps.properties.outputs.changelog }}
+#        run: |
+#          ./gradlew patchChangelog --release-note="$CHANGELOG"
 
       # Publish the plugin to JetBrains Marketplace
       - name: Publish Plugin
