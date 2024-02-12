@@ -6,7 +6,7 @@
     <version>0.0.6</version>
 
     <depends>com.intellij.modules.platform</depends>
-    <depends>com.intellij.java</depends>
+    <!--    <depends>com.intellij.java</depends>-->
     <!--    <depends>com.intellij.modules.java-capable</depends>-->
     <description><![CDATA[
       This plugin is for LibSL supporting (Library Specification language). It is very easy to use:
@@ -47,12 +47,12 @@
         <lang.braceMatcher
                 language="LibSL"
                 implementationClass="com.github.kechinvv.libslpluginij.language.highlight.LibSLBraceMatcher"/>
-<!--        <completion.contributor-->
-<!--                language="LibSL"-->
-<!--                implementationClass="com.github.kechinvv.libslpluginij.language.contributor.LibSLCompletionContributor"/>-->
-<!--        <lang.formatter-->
-<!--                language="LibSL"-->
-<!--                implementationClass="com.github.kechinvv.libslpluginij.language.formatter.LibSLFormatter"/>-->
+        <!--        <completion.contributor-->
+        <!--                language="LibSL"-->
+        <!--                implementationClass="com.github.kechinvv.libslpluginij.language.contributor.LibSLCompletionContributor"/>-->
+        <!--        <lang.formatter-->
+        <!--                language="LibSL"-->
+        <!--                implementationClass="com.github.kechinvv.libslpluginij.language.formatter.LibSLFormatter"/>-->
         <codeStyleSettingsProvider
                 implementation="com.github.kechinvv.libslpluginij.language.formatter.LibSLCodeStyleSettingsProvider"/>
         <langCodeStyleSettingsProvider
