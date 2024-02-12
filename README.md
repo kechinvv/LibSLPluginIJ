@@ -9,7 +9,6 @@
 ### Basic features
 
 - [x] Basic highlighter
-    - [ ] "import..." statement highlight
 - [ ] Find Usages
     - [x] functions and procs
     - [x] types and automatons
