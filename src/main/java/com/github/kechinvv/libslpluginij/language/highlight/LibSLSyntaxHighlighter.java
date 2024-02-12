@@ -48,63 +48,68 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
 
     @NotNull
     @Override
-    public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-        if ( !(tokenType instanceof TokenIElementType) ) return EMPTY_KEYS;
-        TokenIElementType myType = (TokenIElementType) tokenType;
+    public TextAttributesKey @NotNull [] getTokenHighlights(IElementType tokenType) {
+        if (!(tokenType instanceof TokenIElementType myType)) return EMPTY_KEYS;
         int ttype = myType.getANTLRTokenType();
         TextAttributesKey attrKey;
-        switch ( ttype ) {
+        switch (ttype) {
             case LibSLLexer.Identifier:
                 attrKey = ID;
                 break;
-            case LibSLLexer.VAR:
-            case LibSLLexer.VAL:
-            case LibSLLexer.DEFINE:
-            case LibSLLexer.IF:
-            case LibSLLexer.ELSE:
-            case LibSLLexer.FUN:
-            case LibSLLexer.PROC:
-            case LibSLLexer.TYPE:
-            case LibSLLexer.TRUE:
-            case LibSLLexer.FALSE:
-            case LibSLLexer.IMPORT:
-            case LibSLLexer.ACTION:
-            case LibSLLexer.NEW:
-            case LibSLLexer.AUTOMATON:
-            case LibSLLexer.ENUM:
-            case LibSLLexer.AS:
+            case LibSLLexer.LIBSL:
             case LibSLLexer.LIBRARY:
             case LibSLLexer.VERSION:
             case LibSLLexer.LANGUAGE:
             case LibSLLexer.URL:
-            case LibSLLexer.LIBSL:
-            case LibSLLexer.SHIFT:
-            case LibSLLexer.STATE:
+            case LibSLLexer.TYPEALIAS:
+            case LibSLLexer.TYPE:
+            case LibSLLexer.TYPES:
+            case LibSLLexer.ENUM:
+            case LibSLLexer.ANNOTATION:
+            case LibSLLexer.AUTOMATON:
+            case LibSLLexer.CONCEPT:
+            case LibSLLexer.VAR:
+            case LibSLLexer.VAL:
             case LibSLLexer.INITSTATE:
+            case LibSLLexer.STATE:
             case LibSLLexer.FINISHSTATE:
+            case LibSLLexer.SHIFT:
+            case LibSLLexer.NEW:
+            case LibSLLexer.FUN:
             case LibSLLexer.CONSTRUCTOR:
             case LibSLLexer.DESTRUCTOR:
+            case LibSLLexer.PROC:
+            case LibSLLexer.ACTION:
+            case LibSLLexer.REQUIRES:
+            case LibSLLexer.ENSURES:
+            case LibSLLexer.ASSIGNS:
+            case LibSLLexer.TRUE:
+            case LibSLLexer.FALSE:
+            case LibSLLexer.DEFINE:
+            case LibSLLexer.IF:
+            case LibSLLexer.ELSE:
             case LibSLLexer.BY:
-            case LibSLLexer.ANNOTATION:
-            case LibSLLexer.TYPEALIAS:
+            case LibSLLexer.IS:
+            case LibSLLexer.AS:
+            case LibSLLexer.NULL:
                 attrKey = KEYWORD;
                 break;
             case LibSLLexer.DoubleQuotedString:
                 attrKey = STRING;
                 break;
-            case LibSLLexer.COMMENT :
+            case LibSLLexer.COMMENT:
                 attrKey = BLOCK_COMMENT;
                 break;
-            case LibSLLexer.LINE_COMMENT :
+            case LibSLLexer.LINE_COMMENT:
                 attrKey = LINE_COMMENT;
                 break;
             case LibSLLexer.BAD_CHARACTER:
                 attrKey = BAD_CHARACTER;
                 break;
-            default :
+            default:
                 return EMPTY_KEYS;
         }
-        return new TextAttributesKey[] {attrKey};
+        return new TextAttributesKey[]{attrKey};
     }
 
 }
