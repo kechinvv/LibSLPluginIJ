@@ -54,20 +54,19 @@ intellij {
 changelog {
     groups.empty()
     repositoryUrl = properties("pluginRepositoryUrl")
-    version = properties("pluginVersion")
-    path.set(file("CHANGELOG.md").canonicalPath)
-    header.set(provider { "[${version.get()}] - ${date()}" })
-    headerParserRegex.set("""(\d+\.\d+\.\d+)""".toRegex())
-
-    itemPrefix.set("-")
-//    keepUnreleasedSection.set(true)
-//    unreleasedTerm.set("[Unreleased]")
-    groups.set(listOf("Added", "Changed", "Fixed"))
-    lineSeparator.set("\n")
-//    combinePreReleases.set(true)
-    sectionUrlBuilder.set(ChangelogSectionUrlBuilder { repositoryUrl, _, _, _ -> repositoryUrl })
+//    version = properties("pluginVersion")
+//    path.set(file("CHANGELOG.md").canonicalPath)
+//    header.set(provider { "[${version.get()}] - ${date()}" })
+//    headerParserRegex.set("""(\d+\.\d+\.\d+)""".toRegex())
+//
+//    itemPrefix.set("-")
+////    keepUnreleasedSection.set(true)
+////    unreleasedTerm.set("[Unreleased]")
+//    groups.set(listOf("Added", "Changed", "Fixed"))
+//    lineSeparator.set("\n")
+////    combinePreReleases.set(true)
+//    sectionUrlBuilder.set(ChangelogSectionUrlBuilder { repositoryUrl, _, _, _ -> repositoryUrl })
 }
-
 
 
 // Configure Gradle Qodana Plugin - read more: https://github.com/JetBrains/gradle-qodana-plugin
@@ -92,7 +91,9 @@ sourceSets.configureEach {
     java.srcDir(generateGrammarSource.map { files() })
 }
 
-
+val printVersionName: Task = tasks.create("printVersionName") {
+    println(properties("pluginVersion").get())
+}
 
 tasks {
 
@@ -118,7 +119,7 @@ tasks {
             val start = "<!-- Plugin description -->"
             val end = "<!-- Plugin description end -->"
 
-            with (it.lines()) {
+            with(it.lines()) {
                 if (!containsAll(listOf(start, end))) {
                     throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
                 }
@@ -126,18 +127,18 @@ tasks {
             }
         }
 
-//        val changelog = project.changelog // local variable for configuration cache compatibility
-//        // Get the latest available change notes from the changelog file
-//        changeNotes = properties("pluginVersion").map { pluginVersion ->
-//            with(changelog) {
-//                renderItem(
-//                    (getOrNull(pluginVersion) ?: getUnreleased())
-//                        .withHeader(false)
-//                        .withEmptySections(false),
-//                    Changelog.OutputType.HTML,
-//                )
-//            }
-//        }
+        val changelog = project.changelog // local variable for configuration cache compatibility
+        // Get the latest available change notes from the changelog file
+        changeNotes = properties("pluginVersion").map { pluginVersion ->
+            with(changelog) {
+                renderItem(
+                        (getOrNull(pluginVersion) ?: getUnreleased())
+                                .withHeader(false)
+                                .withEmptySections(false),
+                        Changelog.OutputType.HTML,
+                )
+            }
+        }
     }
 
     // Configure UI tests plugin
