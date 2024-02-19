@@ -11,6 +11,7 @@ import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.*;
 
 import java.util.Collection;
+import java.util.Objects;
 
 import static com.intellij.psi.util.PsiTreeUtil.*;
 
@@ -50,11 +51,15 @@ public class LibSLPSIFileRoot extends PsiFileBase implements PsiElement {
     }
 
 
-    //TODO: null safety
     public Collection<LslIdentifier> getActionsDeclarationsNames() {
         return findChildrenOfType(this, LslActionDecl.class).stream()
-                .map(lslActionDecl -> (LslIdentifier) LslUtils.getFilteredSiblings(lslActionDecl.getFirstChild(),
-                        it -> it instanceof LslIdentifier).get(0)).toList();
+                .map(lslActionDecl -> {
+                    var listIds = LslUtils.getFilteredSiblings(lslActionDecl.getFirstChild(),
+                            it -> it instanceof LslIdentifier);
+                    if (!listIds.isEmpty()) return (LslIdentifier) listIds.get(0);
+                    else return null;
+                }).filter(Objects::nonNull).toList();
     }
+
 
 }
