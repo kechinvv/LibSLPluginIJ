@@ -123,7 +123,10 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
     private void findTypes(Project project, Function<PsiNamedElement, Boolean> callback) {
         var elText = myElement.getText();
         if (defaultTypes.contains(elText)) return;
-        var imports = ((LibSLPSIFileRoot) myElement.getContainingFile()).getImportsPathsMap();
+
+        //TODO problem: source folder not declared
+
+//        var imports = ((LibSLPSIFileRoot) myElement.getContainingFile()).getImportsPathsMap();
 //        if (imports.containsKey(elText)) {
 //            var prjPath = myElement.getContainingFile().getOriginalFile().get;
 //            var filePath = Paths.get(prjPath, imports.get(elText));

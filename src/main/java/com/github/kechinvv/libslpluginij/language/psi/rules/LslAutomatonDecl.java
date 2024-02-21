@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class LslAutomatonDecl extends ASTWrapperPsiElement {
+public class LslAutomatonDecl extends ASTWrapperPsiElement implements LslStatementsOwner {
     public LslAutomatonDecl(@NotNull ASTNode node) {
         super(node);
     }

@@ -4,7 +4,7 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.NotNull;
 
-public class LslFunctionBody extends ASTWrapperPsiElement {
+public class LslFunctionBody extends ASTWrapperPsiElement implements LslStatementsOwner {
     public LslFunctionBody(@NotNull ASTNode node) {
         super(node);
     }

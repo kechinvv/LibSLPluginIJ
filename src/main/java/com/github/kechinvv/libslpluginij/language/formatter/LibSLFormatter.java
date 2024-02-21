@@ -26,9 +26,7 @@ final class LibSLFormatter implements FormattingModelBuilder {
         return FormattingModelProvider
                 .createFormattingModelForPsiFile(formattingContext.getContainingFile(),
                         new LibSLBlock(formattingContext.getNode(),
-                                Wrap.createWrap(WrapType.NONE, false),
-                                Alignment.createAlignment(),
-                                createSpaceBuilder(codeStyleSettings)),
+                                null, null),
                         codeStyleSettings);
     }
 
