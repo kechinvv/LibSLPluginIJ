@@ -59,7 +59,7 @@ changelog {
     header.set(provider { "[${version.get()}] - ${date()}" })
     headerParserRegex.set("""(\d+\.\d+\.\d+)""".toRegex())
     itemPrefix.set("-")
-//    keepUnreleasedSection.set(true)
+    keepUnreleasedSection.set(false)
 //    unreleasedTerm.set("[Unreleased]")
     groups.set(listOf("Added", "Changed", "Fixed"))
     lineSeparator.set("\n")
