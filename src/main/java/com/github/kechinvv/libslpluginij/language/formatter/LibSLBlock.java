@@ -2,9 +2,7 @@ package com.github.kechinvv.libslpluginij.language.formatter;
 
 import com.github.kechinvv.libslpluginij.language.psi.LibSLPSIFileRoot;
 import com.github.kechinvv.libslpluginij.language.psi.LibSLTokenSets;
-import com.github.kechinvv.libslpluginij.language.psi.rules.LslStatement;
-import com.github.kechinvv.libslpluginij.language.psi.rules.LslStatementsOwner;
-import com.github.kechinvv.libslpluginij.language.psi.rules.LslTopLevelDecl;
+import com.github.kechinvv.libslpluginij.language.psi.rules.*;
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.TokenType;
@@ -27,8 +25,6 @@ public class LibSLBlock extends AbstractBlock {
         List<Block> blocks = new ArrayList<>();
         ASTNode child = myNode.getFirstChildNode();
         while (child != null) {
-            var skip = child.getTextRange().getLength() == 0 || child.getElementType() == TokenType.WHITE_SPACE;
-
             if (child.getElementType() != TokenType.WHITE_SPACE) {
                 Block block = new LibSLBlock(child, null, null);
                 blocks.add(block);
@@ -51,11 +47,17 @@ public class LibSLBlock extends AbstractBlock {
         if (LibSLTokenSets.INSTANCE.BRACES.contains(elementType))
             return Indent.getNoneIndent();
 
-        if (parentElement instanceof LslStatementsOwner && element instanceof LslStatement)
+        if (parentElement instanceof LslStatementsOwner &&
+                (element instanceof LslStatement || LibSLTokenSets.INSTANCE.COMMENTS.contains(elementType)))
+            return Indent.getNormalIndent();
+
+        if (LibSLTokenSets.INSTANCE.TAB_HEADER.contains(elementType) ||
+                element instanceof LslTargetType)
             return Indent.getNormalIndent();
 
         return Indent.getNoneIndent();
     }
+
 
     @Nullable
     @Override

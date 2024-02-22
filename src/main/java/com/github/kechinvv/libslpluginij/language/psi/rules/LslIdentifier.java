@@ -12,7 +12,7 @@ import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class LslIdentifier extends ASTWrapperPsiElement implements PsiNameIdentifierOwner {
+public class LslIdentifier extends ASTWrapperPsiElement implements PsiNameIdentifierOwner, LslStatement {
     public LslIdentifier(@NotNull ASTNode node) {
         super(node);
     }

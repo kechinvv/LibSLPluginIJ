@@ -6,7 +6,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
 
-public class LslFunctionDecl extends LslIdentifierOwner implements PsiElement {
+public class LslFunctionDecl extends LslIdentifierOwner implements PsiElement, LslStatementsOwner {
     public LslFunctionDecl(@NotNull ASTNode node) {
         super(node);
     }
