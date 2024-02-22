@@ -63,6 +63,9 @@
         <lang.findUsagesProvider
                 language="LibSL"
                 implementationClass="com.github.kechinvv.libslpluginij.language.LibSLFindUsagesProvider"/>
+        <lang.quoteHandler
+                language="LibSL"
+                implementationClass="com.github.kechinvv.libslpluginij.language.formatter.LibSLQuoteHandler"/>
     </extensions>
     <actions>
         <action id="Dropdown.LSL" class="com.github.kechinvv.libslpluginij.actions.GenerateTaintConfigAction"
@@ -73,8 +76,8 @@
         </action>
 
     </actions>
-    <applicationListeners>
-        <listener class="com.github.kechinvv.libslpluginij.listeners.MyApplicationActivationListener"
-                  topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
+<!--    <applicationListeners>-->
+<!--        <listener class="com.github.kechinvv.libslpluginij.listeners.MyApplicationActivationListener"-->
+<!--                  topic="com.intellij.openapi.application.ApplicationActivationListener"/>-->
+<!--    </applicationListeners>-->
 </idea-plugin>
