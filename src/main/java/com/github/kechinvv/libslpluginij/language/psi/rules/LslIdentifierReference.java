@@ -5,6 +5,7 @@ import com.github.kechinvv.libslpluginij.language.psi.LibSLPSIFileRoot;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.search.FileTypeIndex;
@@ -14,6 +15,9 @@ import com.intellij.util.SmartList;
 import com.intellij.util.containers.SmartHashSet;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -117,7 +121,21 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
 
     //TODO: separate files loop
     private void findTypes(Project project, Function<PsiNamedElement, Boolean> callback) {
-        if (defaultTypes.contains(myElement.getText())) return;
+        var elText = myElement.getText();
+        if (defaultTypes.contains(elText)) return;
+
+        //TODO problem: source folder not declared
+
+//        var imports = ((LibSLPSIFileRoot) myElement.getContainingFile()).getImportsPathsMap();
+//        if (imports.containsKey(elText)) {
+//            var prjPath = myElement.getContainingFile().getOriginalFile().get;
+//            var filePath = Paths.get(prjPath, imports.get(elText));
+//            var file = filePath.toFile();
+//            var virtualFile = LocalFileSystem.getInstance().findFileByIoFile(file);
+//        }
+//        LocalFileSystem.getInstance().findFileByIoFile(File file) (if the file
+//        already exists in VFS)
+//        or LocalFileSystem.getInstance().refreshAndFindFileByIoFile(File file)
         Collection<VirtualFile> virtualFiles =
                 FileTypeIndex.getFiles(LibSLFileType.INSTANCE, GlobalSearchScope.projectScope(project));
         for (VirtualFile virtualFile : virtualFiles) {

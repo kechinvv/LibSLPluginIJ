@@ -95,6 +95,7 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
                 attrKey = KEYWORD;
                 break;
             case LibSLLexer.DoubleQuotedString:
+            case LibSLLexer.CHARACTER:
                 attrKey = STRING;
                 break;
             case LibSLLexer.COMMENT:

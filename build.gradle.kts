@@ -54,17 +54,16 @@ intellij {
 changelog {
     groups.empty()
     repositoryUrl = properties("pluginRepositoryUrl")
-//    version = properties("pluginVersion")
-//    path.set(file("CHANGELOG.md").canonicalPath)
-//    header.set(provider { "[${version.get()}] - ${date()}" })
-//    headerParserRegex.set("""(\d+\.\d+\.\d+)""".toRegex())
-//
-//    itemPrefix.set("-")
-////    keepUnreleasedSection.set(true)
-////    unreleasedTerm.set("[Unreleased]")
-//    groups.set(listOf("Added", "Changed", "Fixed"))
-//    lineSeparator.set("\n")
-////    combinePreReleases.set(true)
+    version = properties("pluginVersion")
+    path.set(file("CHANGELOG.md").canonicalPath)
+    header.set(provider { "[${version.get()}] - ${date()}" })
+    headerParserRegex.set("""(\d+\.\d+\.\d+)""".toRegex())
+    itemPrefix.set("-")
+//    keepUnreleasedSection.set(true)
+//    unreleasedTerm.set("[Unreleased]")
+    groups.set(listOf("Added", "Changed", "Fixed"))
+    lineSeparator.set("\n")
+//    combinePreReleases.set(true)
 //    sectionUrlBuilder.set(ChangelogSectionUrlBuilder { repositoryUrl, _, _, _ -> repositoryUrl })
 }
 
