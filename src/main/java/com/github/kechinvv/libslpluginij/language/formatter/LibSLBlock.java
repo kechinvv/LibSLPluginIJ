@@ -44,7 +44,8 @@ public class LibSLBlock extends AbstractBlock {
                 parentElement instanceof LslTopLevelDecl)
             return Indent.getNoneIndent();
 
-        if (LibSLTokenSets.INSTANCE.BRACES.contains(elementType))
+        if (LibSLTokenSets.INSTANCE.BRACES.contains(elementType) ||
+                element instanceof LslElseStatement)
             return Indent.getNoneIndent();
 
         if (parentElement instanceof LslStatementsOwner &&
@@ -70,5 +71,15 @@ public class LibSLBlock extends AbstractBlock {
     public boolean isLeaf() {
         return myNode.getFirstChildNode() == null;
     }
+
+//    @Override
+//    public Wrap getWrap() {
+//        var element = myNode.getPsi();
+//
+//        if (element instanceof LslProcDecl || element instanceof LslFunctionDecl)
+//            return Wrap.createWrap(WrapType.NORMAL, true);
+//
+//        return super.getWrap();
+//    }
 
 }
