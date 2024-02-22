@@ -19,13 +19,10 @@ public class LibSLQuoteHandler extends SimpleTokenSetQuoteHandler {
         super(tokens.get(LibSLLexer.DoubleQuotedString), tokens.get(LibSLLexer.CHARACTER));
     }
 
-    //TODO: problem with parsing single quote and ESCAPED_QUOTE
     @Override
     public boolean isOpeningQuote(HighlighterIterator highlighterIterator, int i) {
-        LOG.info("ITS NOT " + highlighterIterator.getTokenType().toString());
-
         if (highlighterIterator.getTokenType() == tokens.get(LibSLLexer.BAD_CHARACTER) ||
-                highlighterIterator.getTokenType().toString() == "'''") {
+                highlighterIterator.getTokenType() == tokens.get(LibSLLexer.APOSTROPHE)) {
             var charSymb = highlighterIterator.getDocument().getCharsSequence().charAt(highlighterIterator.getStart());
             LOG.info("ITS WORK " + (charSymb == '"' || charSymb == '\''));
             return charSymb == '"' || charSymb == '\'';
