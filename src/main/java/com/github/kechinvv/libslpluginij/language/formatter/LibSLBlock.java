@@ -5,6 +5,7 @@ import com.github.kechinvv.libslpluginij.language.psi.LibSLTokenSets;
 import com.github.kechinvv.libslpluginij.language.psi.rules.*;
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.formatter.common.AbstractBlock;
 import org.jetbrains.annotations.NotNull;
@@ -15,9 +16,11 @@ import java.util.List;
 
 public class LibSLBlock extends AbstractBlock {
 
+    private final SpacingBuilder spacingBuilder;
 
-    protected LibSLBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment) {
+    protected LibSLBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment, SpacingBuilder spacingBuilder) {
         super(node, wrap, alignment);
+        this.spacingBuilder = spacingBuilder;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class LibSLBlock extends AbstractBlock {
         ASTNode child = myNode.getFirstChildNode();
         while (child != null) {
             if (child.getElementType() != TokenType.WHITE_SPACE) {
-                Block block = new LibSLBlock(child, null, null);
+                Block block = new LibSLBlock(child, null, null, spacingBuilder);
                 blocks.add(block);
             }
             child = child.getTreeNext();
@@ -63,8 +66,7 @@ public class LibSLBlock extends AbstractBlock {
     @Nullable
     @Override
     public Spacing getSpacing(@Nullable Block child1, @NotNull Block child2) {
-//        return spacingBuilder.getSpacing(this, child1, child2);
-        return null;
+        return spacingBuilder.getSpacing(this, child1, child2);
     }
 
     @Override
@@ -72,14 +74,5 @@ public class LibSLBlock extends AbstractBlock {
         return myNode.getFirstChildNode() == null;
     }
 
-//    @Override
-//    public Wrap getWrap() {
-//        var element = myNode.getPsi();
-//
-//        if (element instanceof LslProcDecl || element instanceof LslFunctionDecl)
-//            return Wrap.createWrap(WrapType.NORMAL, true);
-//
-//        return super.getWrap();
-//    }
 
 }
