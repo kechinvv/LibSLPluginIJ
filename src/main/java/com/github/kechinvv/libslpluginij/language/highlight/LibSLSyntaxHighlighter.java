@@ -35,11 +35,7 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
     public static final TextAttributesKey BAD_CHARACTER =
             createTextAttributesKey("LSL_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
 
-    static {
-        PSIElementTypeFactory.defineLanguageIElementTypes(LibSL.INSTANCE,
-                LibSLParser.tokenNames,
-                LibSLParser.ruleNames);
-    }
+
 
     @NotNull
     @Override
