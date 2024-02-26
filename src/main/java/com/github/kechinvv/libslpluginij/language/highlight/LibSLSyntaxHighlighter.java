@@ -36,7 +36,6 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("LSL_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
 
 
-
     @NotNull
     @Override
     public Lexer getHighlightingLexer() {

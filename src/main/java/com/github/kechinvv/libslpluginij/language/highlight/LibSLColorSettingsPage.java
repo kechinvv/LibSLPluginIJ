@@ -11,6 +11,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 import java.util.Map;
 
 final class LibSLColorSettingsPage implements ColorSettingsPage {
@@ -40,84 +45,12 @@ final class LibSLColorSettingsPage implements ColorSettingsPage {
     @NotNull
     @Override
     public String getDemoText() {
-        return """
-                libsl "1.1.0";
-                                
-                library std
-                    version "11"
-                    language "Java"
-                    url "https://github.com/openjdk/jdk11/blob/master/src/java.base/share/classes/java/lang/StringBuffer.java";
-                                
-                // imports
-                                
-                import java/lang/Character;
-                                
-                automaton SomeAutomaton
-                (
-                    var att: Object,
-                    var mark: int,
-                    var position: int
-                )
-                : LSLSomeAutomaton
-                {
-                    // states and shifts
-                                
-                    initstate Allocated;
-                    state Initialized;
-                                
-                    shift Allocated -> Initialized by [
-                        // constructors
-                        `<init>` (SomeAutomatonT, SomeAutomatonT, int, int, int, int, int),
-                        `<init>` (SomeAutomatonT, int),
-                    ];
-                                
-                    shift Initialized -> self by [
-                        // instance methods
-                        address,
-                        alignedSlice,
-                        alignmentOffset,
-                        capacity,
-                        put (SomeAutomatonT, int, byte),
-                        putChar (SomeAutomatonT, char),
-                        putChar (SomeAutomatonT, int, char),
-                        putDouble (SomeAutomatonT, double),
-                        putDouble (SomeAutomatonT, int, double),
-                        putFloat (SomeAutomatonT, float),
-                        putFloat (SomeAutomatonT, int, float),
-                        putInt (SomeAutomatonT, int),
-                        putInt (SomeAutomatonT, int, int),
-                        putLong (SomeAutomatonT, int, long),
-                    ];
-                                
-                    var storage: array<byte> = null;
-                                
-                    proc _checkBounds(off: int, len: int, size: int): void
-                    {
-                        if ((off | len | (off + len) | (size - (off + len))) < 0)
-                            action THROW_NEW("java.lang.IndexOutOfBoundsException", []);
-                    }
-                                
-                    fun *.asCharBuffer (@target self: DirectByteBuffer): CharBuffer
-                    {
-                        var off: int = this.position;
-                        var lim: int = this.limit;
-                        if (off > lim)
-                            action THROW_NEW("java.lang.AssertionError", []);   // #warning: assert (off <= lim) in original
-                        var rem: int = _remaining();
-                        var size: int = rem >> 1;
-                                
-                        if (UNALIGNED == false && ((this.address + off) % (1 << 1) != 0))
-                        {
-                           if (this.bigEndian == true) result = (new ByteBufferAsCharBufferBAutomaton(state = Initialized, bb = self, mark = -1, position = 0, limit = size, capacity = size, address = this.address + off)) as CharBuffer;
-                           else result = (new ByteBufferAsCharBufferLAutomaton(state = Initialized, bb = self, mark = -1, position = 0, limit = size, capacity = size, address = this.address + off)) as CharBuffer;
-                        } else
-                        {
-                            if (this.nativeByteOrder == true) result = (new DirectCharBufferUAutomaton(state = Initialized, bb = self, mark = -1, position = 0, limit = size, capacity = size, address = off)) as CharBuffer;
-                            else result = (new DirectCharBufferSAutomaton(state = Initialized, bb = self, mark = -1, position = 0, limit = size, capacity = size, address = off)) as CharBuffer;
-                        }
-                    }
-                }
-                """;
+        try {
+            var resource = this.getClass().getResourceAsStream("/examples/CRC32.automaton.lsl").readAllBytes();
+            return new String(resource, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Nullable

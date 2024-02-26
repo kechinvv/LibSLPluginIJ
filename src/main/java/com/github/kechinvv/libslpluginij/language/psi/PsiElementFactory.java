@@ -20,14 +20,9 @@ public class PsiElementFactory {
 
     public PsiElement createElement(ASTNode node) {
         IElementType elType = node.getElementType();
-        if ( elType instanceof TokenIElementType) {
-            LOG.info("TOKEN DECL " + node);
-            return new ASTWrapperPsiElement(node);
-        }
-        if ( !(elType instanceof RuleIElementType ruleElType) ) {
-            LOG.info("NOT RULE DECL " + node);
-            return new ASTWrapperPsiElement(node);
-        }
+        if (elType instanceof TokenIElementType) return new ASTWrapperPsiElement(node);
+
+        if (!(elType instanceof RuleIElementType ruleElType) ) return new ASTWrapperPsiElement(node);
 
         return switch (ruleElType.getRuleIndex()) {
             case LibSLParser.RULE_file -> new LslFile(node);
@@ -112,10 +107,7 @@ public class PsiElementFactory {
             case LibSLParser.RULE_integerNumber -> new LslIntegerNumber(node);
             case LibSLParser.RULE_floatNumber -> new LslFloatNumber(node);
             case LibSLParser.RULE_identifier -> new LslIdentifier(node);
-            default -> {
-                LOG.info("default node " + node);
-                yield new ASTWrapperPsiElement(node);
-            }
+            default -> new ASTWrapperPsiElement(node);
         };
     }
 }
