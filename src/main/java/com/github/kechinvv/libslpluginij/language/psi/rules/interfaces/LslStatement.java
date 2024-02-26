@@ -1,4 +1,4 @@
-package com.github.kechinvv.libslpluginij.language.psi.rules;
+package com.github.kechinvv.libslpluginij.language.psi.rules.interfaces;
 
 import com.intellij.psi.PsiElement;
 

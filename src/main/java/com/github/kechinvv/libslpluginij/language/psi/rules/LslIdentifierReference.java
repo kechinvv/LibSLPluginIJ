@@ -1,7 +1,9 @@
 package com.github.kechinvv.libslpluginij.language.psi.rules;
 
+import com.github.kechinvv.libslpluginij.language.LibSLDefault;
 import com.github.kechinvv.libslpluginij.language.LibSLFileType;
 import com.github.kechinvv.libslpluginij.language.psi.LibSLPSIFileRoot;
+import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslCallable;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
@@ -27,15 +29,6 @@ import static java.util.Objects.requireNonNull;
 
 public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdentifier> {
     public static final Logger LOG = Logger.getInstance("Reference");
-
-    static public final Collection<String> defaultTypes =
-            List.of("bool",
-                    "int8", "int16", "int32", "int64",
-                    "float32", "float64",
-                    "void", "any", "array",
-                    "char", "string",
-                    "unsigned8", "unsigned16", "unsigned32", "unsigned64");
-
 
     public LslIdentifierReference(@NotNull LslIdentifier element, TextRange range) {
         super(element, range);
@@ -93,20 +86,12 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
     }
 
 
-    private void processDeclarationsInHeader(LslFunctionDecl functionDecl, Function<PsiNamedElement, Boolean> callback) {
-        var header = functionDecl.header();
+    private void processDeclarationsInHeader(LslCallable method, Function<PsiNamedElement, Boolean> callback) {
+        var header = method.header();
         if (header == null) return;
-        var func = header.methodName();
-        if (func == null) return;
-        callback.fun(func);
-    }
-
-    private void processDeclarationsInHeader(LslProcDecl procDecl, Function<PsiNamedElement, Boolean> callback) {
-        var header = procDecl.header();
-        if (header == null) return;
-        var proc = header.methodName();
-        if (proc == null) return;
-        callback.fun(proc);
+        var methodName = header.methodName();
+        if (methodName == null) return;
+        callback.fun(methodName);
     }
 
     private void processDeclarationsInAutomaton(LslAutomatonDecl automatonDecl, Function<PsiNamedElement, Boolean> callback) {
@@ -122,11 +107,12 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
     //TODO: separate files loop
     private void findTypes(Project project, Function<PsiNamedElement, Boolean> callback) {
         var elText = myElement.getText();
-        if (defaultTypes.contains(elText)) return;
+        if (LibSLDefault.INSTANCE.defaultTypes.contains(elText)) return;
 
         //TODO problem: source folder not declared
-
-//        var imports = ((LibSLPSIFileRoot) myElement.getContainingFile()).getImportsPathsMap();
+        //TODO update: find references in super classes' imports
+        var imports = ((LibSLPSIFileRoot) myElement.getContainingFile()).getImportsPathsMap();
+        var canResolve = imports.containsKey(elText);
 //        if (imports.containsKey(elText)) {
 //            var prjPath = myElement.getContainingFile().getOriginalFile().get;
 //            var filePath = Paths.get(prjPath, imports.get(elText));
@@ -141,6 +127,8 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
         for (VirtualFile virtualFile : virtualFiles) {
             LibSLPSIFileRoot file = (LibSLPSIFileRoot) PsiManager.getInstance(project).findFile(virtualFile);
             if (file != null) {
+                if (canResolve && !file.getName().startsWith(elText)) continue;
+
                 var typeDefs = file.getTypeDefBlockNames();
                 if (typeDefs != null && breakerLoop(typeDefs, callback)) break;
 

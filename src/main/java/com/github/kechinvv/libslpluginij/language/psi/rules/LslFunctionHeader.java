@@ -1,5 +1,6 @@
 package com.github.kechinvv.libslpluginij.language.psi.rules;
 
+import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslHeader;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
@@ -9,14 +10,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
-public class LslFunctionHeader extends ASTWrapperPsiElement {
+public class LslFunctionHeader extends ASTWrapperPsiElement implements LslHeader {
     public LslFunctionHeader(@NotNull ASTNode node) {
         super(node);
     }
 
     public LslIdentifier methodName() {
         return (LslIdentifier) PsiTreeUtil.skipMatching(this.getFirstChild(),
-                                                        PsiElement::getNextSibling,
-                                                        it -> !(it instanceof LslIdentifier));
+                PsiElement::getNextSibling,
+                it -> !(it instanceof LslIdentifier));
     }
 }

@@ -1,9 +1,9 @@
 package com.github.kechinvv.libslpluginij.language.psi.rules;
 
+import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslStatement;
 import com.github.kechinvv.libslpluginij.language.utils.LslUtils;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;

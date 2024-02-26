@@ -39,7 +39,6 @@ public class LibSLPSIFileRoot extends PsiFileBase implements PsiElement {
         return "LibSL File";
     }
 
-    //TODO: refactoring!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public Collection<LslIdentifier> getTypeDefBlockNames() {
         return findChildrenOfType(this, LslTypeDefBlock.class).stream()
