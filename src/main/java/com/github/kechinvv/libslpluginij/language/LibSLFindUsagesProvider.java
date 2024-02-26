@@ -20,25 +20,10 @@ public class LibSLFindUsagesProvider extends EmptyFindUsagesProvider {
     @Override
     public WordsScanner getWordsScanner() {
               return null;
-//        var lexer = new LibSLLexer(null);
-//        var adapter = new ANTLRLexerAdaptor(LibSL.INSTANCE, lexer);
-//        return new DefaultWordsScanner(adapter,
-//                TokenSet.create(tokens.get(LibSLLexer.Identifier)),
-//                TokenSet.create(tokens.get(LibSLLexer.LINE_COMMENT), tokens.get(LibSLLexer.COMMENT)),
-//                TokenSet.create(tokens.get(LibSLLexer.TRUE),
-//                                tokens.get(LibSLLexer.FALSE),
-//                                tokens.get(LibSLLexer.NULL),
-//                                tokens.get(LibSLLexer.CHARACTER),
-//                                tokens.get(LibSLLexer.DoubleQuotedString),
-//                                tokens.get(LibSLLexer.Digit),
-//                                tokens.get(LibSLLexer.DOT)));
     }
 
     @Override
     public boolean canFindUsagesFor(@NotNull PsiElement psiElement) {
-//        //return psiElement instanceof ANTLRPsiNode;
-//        LOG.info("IDENTIFIER = " + psiElement.getNode().getElementType());
-//        LOG.info("Text PSI = " + psiElement.getText());
         return psiElement instanceof LslIdentifier;
     }
 
