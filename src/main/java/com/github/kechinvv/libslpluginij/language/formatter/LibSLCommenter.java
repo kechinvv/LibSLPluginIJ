@@ -1,25 +1,23 @@
 package com.github.kechinvv.libslpluginij.language.formatter;
 
 import com.intellij.lang.Commenter;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 final class LibSLCommenter implements Commenter {
 
-    @Nullable
     @Override
-    public String getLineCommentPrefix() {
+    public @NotNull String getLineCommentPrefix() {
         return "//";
     }
 
-    @Nullable
     @Override
-    public String getBlockCommentPrefix() {
+    public @NotNull String getBlockCommentPrefix() {
         return "/*";
     }
 
-    @Nullable
     @Override
-    public String getBlockCommentSuffix() {
+    public @NotNull String getBlockCommentSuffix() {
         return "*/";
     }
 

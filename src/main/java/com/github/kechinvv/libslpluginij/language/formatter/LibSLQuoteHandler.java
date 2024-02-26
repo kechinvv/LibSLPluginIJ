@@ -24,7 +24,6 @@ public class LibSLQuoteHandler extends SimpleTokenSetQuoteHandler {
         if (highlighterIterator.getTokenType() == tokens.get(LibSLLexer.BAD_CHARACTER) ||
                 highlighterIterator.getTokenType() == tokens.get(LibSLLexer.APOSTROPHE)) {
             var charSymb = highlighterIterator.getDocument().getCharsSequence().charAt(highlighterIterator.getStart());
-            LOG.info("ITS WORK " + (charSymb == '"' || charSymb == '\''));
             return charSymb == '"' || charSymb == '\'';
         }
 

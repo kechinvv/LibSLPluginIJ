@@ -18,9 +18,8 @@ final class LibSLCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
         return new LibSLCodeStyleSettings(settings);
     }
 
-    @Nullable
     @Override
-    public String getConfigurableDisplayName() {
+    public @NotNull String getConfigurableDisplayName() {
         return "LibSL";
     }
 

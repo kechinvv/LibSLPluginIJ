@@ -19,7 +19,7 @@ public class LibSLFindUsagesProvider extends EmptyFindUsagesProvider {
 
     @Override
     public WordsScanner getWordsScanner() {
-              return null;
+        return null;
     }
 
     @Override

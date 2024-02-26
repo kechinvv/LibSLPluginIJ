@@ -27,6 +27,17 @@ final class LibSLLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
     @Override
     public String getCodeSample(@NotNull SettingsType settingsType) {
         return """
+                libsl "1.1.0";
+                                
+                library std
+                    version "11"
+                    language "Java"
+                    url "https://github.com/openjdk/jdk11/blob/master/src/java.base/share/classes/java/lang/StringBuffer.java";
+                                
+                // imports
+                                
+                import java/lang/Character;
+                                
                 automaton SomeAutomaton
                 (
                     var att: Object,
@@ -90,7 +101,8 @@ final class LibSLLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                             if (this.nativeByteOrder == true) result = (new DirectCharBufferUAutomaton(state = Initialized, bb = self, mark = -1, position = 0, limit = size, capacity = size, address = off)) as CharBuffer;
                             else result = (new DirectCharBufferSAutomaton(state = Initialized, bb = self, mark = -1, position = 0, limit = size, capacity = size, address = off)) as CharBuffer;
                         }
-                    }                 
+                    }
+                }
                 """;
     }
 
