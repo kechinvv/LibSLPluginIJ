@@ -10,8 +10,7 @@ options { tokenVocab = LibSLLexer; }
  * semantic types section and declarations (automata and extension functions)
  */
 file
-   :   (LINE_COMMENT)?
-       header?
+   :   header?
        globalStatement*
        EOF
    ;
