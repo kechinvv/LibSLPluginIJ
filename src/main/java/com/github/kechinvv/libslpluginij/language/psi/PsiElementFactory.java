@@ -18,6 +18,8 @@ public class PsiElementFactory {
 
     public static final PsiElementFactory INSTANCE = new PsiElementFactory();
 
+    private PsiElementFactory() {}
+
     public PsiElement createElement(ASTNode node) {
         IElementType elType = node.getElementType();
         if (elType instanceof TokenIElementType) return new ASTWrapperPsiElement(node);
