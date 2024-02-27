@@ -1,6 +1,7 @@
 package com.github.kechinvv.libslpluginij.language.psi.rules;
 
 import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslStatement;
+import com.github.kechinvv.libslpluginij.language.psi.rules.references.LslIdentifierReference;
 import com.github.kechinvv.libslpluginij.language.utils.LslUtils;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;

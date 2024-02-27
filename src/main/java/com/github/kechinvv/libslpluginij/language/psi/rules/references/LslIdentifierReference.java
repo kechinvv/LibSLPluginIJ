@@ -1,8 +1,9 @@
-package com.github.kechinvv.libslpluginij.language.psi.rules;
+package com.github.kechinvv.libslpluginij.language.psi.rules.references;
 
 import com.github.kechinvv.libslpluginij.language.LibSLDefault;
 import com.github.kechinvv.libslpluginij.language.LibSLFileType;
 import com.github.kechinvv.libslpluginij.language.psi.LibSLPSIFileRoot;
+import com.github.kechinvv.libslpluginij.language.psi.rules.*;
 import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslCallable;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
@@ -12,6 +13,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Function;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.SmartHashSet;
@@ -65,24 +67,36 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
         return variants.toArray();
     }
 
-    //TODO: refactoring this scary condition monster
     private void processDeclarations(Function<PsiNamedElement, Boolean> callback) {
+        var declaration = getDeclarationKind();
+        switch (declaration) {
+            case LocalFunVar, LocalAutomatonVar, Other -> {
+            }
+            case ThisField -> processFieldDeclarationsInAutomaton(
+                    requireNonNull(PsiTreeUtil.getParentOfType(myElement, LslAutomatonDecl.class)), callback);
+            case SomeType -> findTypes(myElement.getProject(), callback);
+            case Action -> findActionsDeclarations(myElement.getProject(), callback);
+            case Method -> {
+                var automaton = getParentOfType(myElement, LslAutomatonDecl.class);
+                if (automaton != null) processDeclarationsInAutomaton(automaton, callback);
+            }
+        }
+    }
+
+    public DeclarationKind getDeclarationKind() {
         PsiElement varParent;
         PsiElement prev = myElement.getPrevSibling();
-
         if (prev != null && prev.getText().equals(".") && prev.getPrevSibling().getText().equals("this"))
-            processFieldDeclarationsInAutomaton(requireNonNull(getParentOfType(myElement, LslAutomatonDecl.class)), callback);
-        else if (getParentOfType(myElement, LslTypeIdentifier.class) != null) {
-            findTypes(myElement.getProject(), callback);
-        } else if (getParentOfType(myElement, LslActionUsage.class) != null) {
-            findActionsDeclarations(myElement.getProject(), callback);
-        } else if (myElement.getParent() instanceof LslFunctionHeader || myElement.getParent() instanceof LslProcHeader) {
-        } else if ((varParent = getParentOfType(myElement, LslVariableDecl.class)) != null && varParent.getParent() instanceof LslAutomatonStatement) {
-        } else {
-            var automaton = getParentOfType(myElement, LslAutomatonDecl.class);
-            if (automaton != null) processDeclarationsInAutomaton(automaton, callback);
-        }
-
+            return DeclarationKind.ThisField;
+        if (PsiTreeUtil.getParentOfType(myElement, LslTypeIdentifier.class) != null)
+            return DeclarationKind.SomeType;
+        if (PsiTreeUtil.getParentOfType(myElement, LslActionUsage.class) != null)
+            return DeclarationKind.Action;
+        if (myElement.getParent() instanceof LslFunctionHeader || myElement.getParent() instanceof LslProcHeader)
+            return DeclarationKind.LocalFunVar;
+        if ((varParent = getParentOfType(myElement, LslVariableDecl.class)) != null && varParent.getParent() instanceof LslAutomatonStatement)
+            return DeclarationKind.LocalAutomatonVar;
+        return DeclarationKind.Method;
     }
 
 
