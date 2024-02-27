@@ -1,7 +1,6 @@
 package com.github.kechinvv.libslpluginij.language.psi;
 
-import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
-import com.github.kechinvv.libslpluginij.language.LibSL;
+import com.github.kechinvv.libslpluginij.antlr.LibSLParser;
 import com.github.kechinvv.libslpluginij.language.psi.rules.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
@@ -10,8 +9,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import org.antlr.intellij.adaptor.lexer.RuleIElementType;
 import org.antlr.intellij.adaptor.lexer.TokenIElementType;
-import org.antlr.intellij.adaptor.psi.ANTLRPsiNode;
-import com.github.kechinvv.libslpluginij.antlr.LibSLParser;
 
 public class PsiElementFactory {
     public static final Logger LOG = Logger.getInstance("PsiElementFactory");

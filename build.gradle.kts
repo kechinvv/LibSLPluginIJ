@@ -29,6 +29,8 @@ dependencies {
 //    implementation(libs.annotations)
     antlr("org.antlr:antlr4:4.13.1")
     implementation("org.antlr:antlr4-intellij-adaptor:0.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
 }
 
 
@@ -95,6 +97,9 @@ val printVersionName: Task = tasks.create("printVersionName") {
 }
 
 tasks {
+    test {
+        useJUnitPlatform()
+    }
 
 //    withType<JavaCompile> {
 //        options.compilerArgs.add("--enable-preview")
