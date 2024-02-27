@@ -18,6 +18,9 @@
     - [ ] annotations
 - [ ] Completion
 - [ ] Formatter
+    - [x] tabs
+    - [x] lines between statements in automaton
+    - [ ] spaces around tokens
 
 ### Unique features
 
