@@ -25,6 +25,7 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.Callable;
 
 import static com.intellij.psi.util.PsiTreeUtil.getParentOfType;
 import static java.util.Objects.requireNonNull;
@@ -83,7 +84,7 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
         }
     }
 
-    public DeclarationKind getDeclarationKind() {
+    private DeclarationKind getDeclarationKind() {
         PsiElement varParent;
         PsiElement prev = myElement.getPrevSibling();
         if (prev != null && prev.getText().equals(".") && prev.getPrevSibling().getText().equals("this"))
@@ -127,44 +128,41 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
         //TODO update: find references in super classes' imports
         var imports = ((LibSLPSIFileRoot) myElement.getContainingFile()).getImportsPathsMap();
         var canResolve = imports.containsKey(elText);
+
 //        if (imports.containsKey(elText)) {
 //            var prjPath = myElement.getContainingFile().getOriginalFile().get;
 //            var filePath = Paths.get(prjPath, imports.get(elText));
 //            var file = filePath.toFile();
 //            var virtualFile = LocalFileSystem.getInstance().findFileByIoFile(file);
 //        }
-//        LocalFileSystem.getInstance().findFileByIoFile(File file) (if the file
-//        already exists in VFS)
+
+//        LocalFileSystem.getInstance().findFileByIoFile(File file) (if the file already exists in VFS)
 //        or LocalFileSystem.getInstance().refreshAndFindFileByIoFile(File file)
-        Collection<VirtualFile> virtualFiles =
-                FileTypeIndex.getFiles(LibSLFileType.INSTANCE, GlobalSearchScope.projectScope(project));
-        for (VirtualFile virtualFile : virtualFiles) {
-            LibSLPSIFileRoot file = (LibSLPSIFileRoot) PsiManager.getInstance(project).findFile(virtualFile);
-            if (file != null) {
-                if (canResolve && !file.getName().startsWith(elText)) continue;
+        Function<LibSLPSIFileRoot, LoopAction> loopAction = file -> {
+            if (canResolve && !file.getName().startsWith(elText)) return LoopAction.CONTINUE;
 
-                var typeDefs = file.getTypeDefBlockNames();
-                if (typeDefs != null && breakerLoop(typeDefs, callback)) break;
+            var typeDefs = file.getTypeDefBlockNames();
+            if (typeDefs != null && breakerLoop(typeDefs, callback)) return LoopAction.BREAK;
 
-                var automatons = file.getAutomatonNames();
-                if (automatons != null && breakerLoop(automatons, callback)) break;
+            var automatons = file.getAutomatonNames();
+            if (automatons != null && breakerLoop(automatons, callback)) return LoopAction.BREAK;
 
-                var typeAliases = file.getTypeAliasesNames();
-                if (typeAliases != null && breakerLoop(typeAliases, callback)) break;
-            }
-        }
+            var typeAliases = file.getTypeAliasesNames();
+            if (typeAliases != null && breakerLoop(typeAliases, callback)) return LoopAction.BREAK;
+            return LoopAction.CONTINUE;
+        };
+
+        projectFilesLoop(project, loopAction);
     }
 
     private void findActionsDeclarations(Project project, Function<PsiNamedElement, Boolean> callback) {
-        Collection<VirtualFile> virtualFiles =
-                FileTypeIndex.getFiles(LibSLFileType.INSTANCE, GlobalSearchScope.projectScope(project));
-        for (VirtualFile virtualFile : virtualFiles) {
-            LibSLPSIFileRoot file = (LibSLPSIFileRoot) PsiManager.getInstance(project).findFile(virtualFile);
-            if (file != null) {
-                var actionDeclarations = file.getActionsDeclarationsNames();
-                if (actionDeclarations != null && breakerLoop(actionDeclarations, callback)) break;
-            }
-        }
+        Function<LibSLPSIFileRoot, LoopAction> loopAction = file -> {
+            var actionDeclarations = file.getActionsDeclarationsNames();
+            if (actionDeclarations != null && breakerLoop(actionDeclarations, callback)) return LoopAction.BREAK;
+            return LoopAction.CONTINUE;
+        };
+
+        projectFilesLoop(project, loopAction);
     }
 
     private boolean breakerLoop(Collection<LslIdentifier> ids, Function<PsiNamedElement, Boolean> callback) {
@@ -173,6 +171,29 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
             if (added) return true;
         }
         return false;
+    }
+
+    private void projectFilesLoop(Project project, Function<LibSLPSIFileRoot, LoopAction> action) {
+        Collection<VirtualFile> virtualFiles =
+                FileTypeIndex.getFiles(LibSLFileType.INSTANCE, GlobalSearchScope.projectScope(project));
+        fileLoop:
+        for (VirtualFile virtualFile : virtualFiles) {
+            LibSLPSIFileRoot file = (LibSLPSIFileRoot) PsiManager.getInstance(project).findFile(virtualFile);
+            if (file != null) {
+                var loopAction = action.fun(file);
+                switch (loopAction) {
+                    case BREAK -> {
+                        break fileLoop;
+                    }
+                    case CONTINUE -> {
+                    }
+                }
+            }
+        }
+    }
+
+    private enum LoopAction {
+        BREAK, CONTINUE
     }
 }
 
