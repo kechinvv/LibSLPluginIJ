@@ -1,14 +1,10 @@
-package com.github.kechinvv.libslpluginij.language.formatter;
+package com.github.kechinvv.libslpluginij.language.interaction;
 
 import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
-import com.intellij.codeInsight.editorActions.QuoteHandler;
 import com.intellij.codeInsight.editorActions.SimpleTokenSetQuoteHandler;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiErrorElement;
-import com.intellij.psi.tree.IElementType;
 
 import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.tokens;
 

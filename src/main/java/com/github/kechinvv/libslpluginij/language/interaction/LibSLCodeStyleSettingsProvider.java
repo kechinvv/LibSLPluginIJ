@@ -1,4 +1,4 @@
-package com.github.kechinvv.libslpluginij.language.formatter;
+package com.github.kechinvv.libslpluginij.language.interaction;
 
 import com.github.kechinvv.libslpluginij.language.LibSL;
 import com.intellij.application.options.CodeStyleAbstractConfigurable;
@@ -9,7 +9,6 @@ import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsProvider;
 import com.intellij.psi.codeStyle.CustomCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 final class LibSLCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
 

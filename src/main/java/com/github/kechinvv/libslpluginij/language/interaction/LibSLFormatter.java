@@ -1,16 +1,12 @@
-package com.github.kechinvv.libslpluginij.language.formatter;
+package com.github.kechinvv.libslpluginij.language.interaction;
 
-import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
 import com.github.kechinvv.libslpluginij.antlr.LibSLParser;
 import com.github.kechinvv.libslpluginij.language.LibSL;
-import com.github.kechinvv.libslpluginij.language.psi.rules.LslAutomatonStatement;
 import com.intellij.formatting.*;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.annotations.NotNull;
 
 import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.rules;
-import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.tokens;
 
 final class LibSLFormatter implements FormattingModelBuilder {
 

@@ -1,4 +1,4 @@
-package com.github.kechinvv.libslpluginij.language.formatter;
+package com.github.kechinvv.libslpluginij.language.interaction;
 
 import com.github.kechinvv.libslpluginij.language.LibSL;
 import com.intellij.lang.Language;

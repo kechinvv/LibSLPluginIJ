@@ -52,20 +52,23 @@
         <!--                implementationClass="com.github.kechinvv.libslpluginij.language.contributor.LibSLCompletionContributor"/>-->
         <lang.formatter
                 language="LibSL"
-                implementationClass="com.github.kechinvv.libslpluginij.language.formatter.LibSLFormatter"/>
+                implementationClass="com.github.kechinvv.libslpluginij.language.interaction.LibSLFormatter"/>
         <codeStyleSettingsProvider
-                implementation="com.github.kechinvv.libslpluginij.language.formatter.LibSLCodeStyleSettingsProvider"/>
+                implementation="com.github.kechinvv.libslpluginij.language.interaction.LibSLCodeStyleSettingsProvider"/>
         <langCodeStyleSettingsProvider
-                implementation="com.github.kechinvv.libslpluginij.language.formatter.LibSLLanguageCodeStyleSettingsProvider"/>
+                implementation="com.github.kechinvv.libslpluginij.language.interaction.LibSLLanguageCodeStyleSettingsProvider"/>
         <lang.commenter
                 language="LibSL"
-                implementationClass="com.github.kechinvv.libslpluginij.language.formatter.LibSLCommenter"/>
+                implementationClass="com.github.kechinvv.libslpluginij.language.interaction.LibSLCommenter"/>
         <lang.findUsagesProvider
                 language="LibSL"
                 implementationClass="com.github.kechinvv.libslpluginij.language.LibSLFindUsagesProvider"/>
         <lang.quoteHandler
                 language="LibSL"
-                implementationClass="com.github.kechinvv.libslpluginij.language.formatter.LibSLQuoteHandler"/>
+                implementationClass="com.github.kechinvv.libslpluginij.language.interaction.LibSLQuoteHandler"/>
+        <lang.foldingBuilder
+                language="LibSL"
+                implementationClass="com.github.kechinvv.libslpluginij.language.interaction.LslFoldingBuilder"/>
     </extensions>
     <actions>
         <action id="Dropdown.LSL" class="com.github.kechinvv.libslpluginij.actions.GenerateTaintConfigAction"

@@ -101,13 +101,13 @@ tasks {
         useJUnitPlatform()
     }
 
-//    withType<JavaCompile> {
-//        options.compilerArgs.add("--enable-preview")
-//    }
-//
-//    withType<JavaExec> {
-//        jvmArgs("--enable-preview")
-//    }
+    withType<JavaCompile> {
+        options.compilerArgs.add("--enable-preview")
+    }
+
+    withType<JavaExec> {
+        jvmArgs("--enable-preview")
+    }
 
     wrapper {
         gradleVersion = properties("gradleVersion").get()
