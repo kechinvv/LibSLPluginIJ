@@ -8,7 +8,6 @@ import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslCallab
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.search.FileTypeIndex;
@@ -19,13 +18,8 @@ import com.intellij.util.SmartList;
 import com.intellij.util.containers.SmartHashSet;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.Callable;
 
 import static com.intellij.psi.util.PsiTreeUtil.getParentOfType;
 import static java.util.Objects.requireNonNull;
