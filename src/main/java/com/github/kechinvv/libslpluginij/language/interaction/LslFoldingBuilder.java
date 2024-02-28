@@ -1,9 +1,6 @@
 package com.github.kechinvv.libslpluginij.language.interaction;
 
-import com.github.kechinvv.libslpluginij.language.psi.rules.LslArrayLiteral;
-import com.github.kechinvv.libslpluginij.language.psi.rules.LslFunctionBody;
-import com.github.kechinvv.libslpluginij.language.psi.rules.LslFunctionsList;
-import com.github.kechinvv.libslpluginij.language.psi.rules.LslIdentifierList;
+import com.github.kechinvv.libslpluginij.language.psi.rules.*;
 import com.github.kechinvv.libslpluginij.language.utils.Pair;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingBuilderEx;
@@ -42,11 +39,14 @@ public class LslFoldingBuilder extends FoldingBuilderEx {
     @Nullable
     private Pair<TextRange, String> getTextRangeStringPair(PsiElement it) {
         Pair<TextRange, String> textRangeAndPlaceholderText;
-        if (it instanceof LslFunctionBody || it instanceof LslIdentifierList || it instanceof LslFunctionsList)
-            textRangeAndPlaceholderText = new Pair<>(it.getTextRange(), "...");
+        if (it instanceof LslFunctionBody || it instanceof LslConditionBody ||
+                it instanceof LslTypeDefBlockBody || it instanceof LslAutomatonBody)
+            textRangeAndPlaceholderText = new Pair<>(it.getTextRange(), "{...}");
+        else if (it instanceof LslShiftFromList)
+            textRangeAndPlaceholderText = new Pair<>(it.getTextRange(), "(...)");
         else if (it instanceof PsiComment)
             textRangeAndPlaceholderText = new Pair<>(it.getTextRange(), "/*...*/");
-        else if (it instanceof LslArrayLiteral)
+        else if (it instanceof LslArrayLiteral || it instanceof LslShiftByList)
             textRangeAndPlaceholderText = new Pair<>(it.getTextRange(), "[...]");
         else textRangeAndPlaceholderText = null;
         return textRangeAndPlaceholderText;

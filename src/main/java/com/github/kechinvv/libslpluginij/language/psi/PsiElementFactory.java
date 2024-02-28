@@ -15,13 +15,14 @@ public class PsiElementFactory {
 
     public static final PsiElementFactory INSTANCE = new PsiElementFactory();
 
-    private PsiElementFactory() {}
+    private PsiElementFactory() {
+    }
 
     public PsiElement createElement(ASTNode node) {
         IElementType elType = node.getElementType();
         if (elType instanceof TokenIElementType) return new ASTWrapperPsiElement(node);
 
-        if (!(elType instanceof RuleIElementType ruleElType) ) return new ASTWrapperPsiElement(node);
+        if (!(elType instanceof RuleIElementType ruleElType)) return new ASTWrapperPsiElement(node);
 
         return switch (ruleElType.getRuleIndex()) {
             case LibSLParser.RULE_file -> new LslFile(node);
@@ -33,6 +34,7 @@ public class PsiElementFactory {
             case LibSLParser.RULE_targetType -> new LslTargetType(node);
             case LibSLParser.RULE_typeList -> new LslTypeList(node);
             case LibSLParser.RULE_typeDefBlockStatement -> new LslTypeDefBlockStatement(node);
+            case LibSLParser.RULE_typeDefBlockBody -> new LslTypeDefBlockBody(node);
             case LibSLParser.RULE_enumBlock -> new LslEnumBlock(node);
             case LibSLParser.RULE_enumBlockStatement -> new LslEnumBlockStatement(node);
             case LibSLParser.RULE_typesSection -> new LslTypesSection(node);
@@ -47,6 +49,7 @@ public class PsiElementFactory {
             case LibSLParser.RULE_actionDeclParamList -> new LslActionDeclParamList(node);
             case LibSLParser.RULE_actionParameter -> new LslActionParameter(node);
             case LibSLParser.RULE_automatonDecl -> new LslAutomatonDecl(node);
+            case LibSLParser.RULE_automatonBody -> new LslAutomatonBody(node);
             case LibSLParser.RULE_constructorVariables -> new LslConstructorVariables(node);
             case LibSLParser.RULE_automatonStatement -> new LslAutomatonStatement(node);
             case LibSLParser.RULE_implementedConcepts -> new LslImplementedConcepts(node);
@@ -54,6 +57,8 @@ public class PsiElementFactory {
             case LibSLParser.RULE_automatonStateDecl -> new LslAutomatonStateDecl(node);
             case LibSLParser.RULE_automatonShiftDecl -> new LslAutomatonShiftDecl(node);
             case LibSLParser.RULE_functionsList -> new LslFunctionsList(node);
+            case LibSLParser.RULE_shiftByList -> new LslShiftByList(node);
+            case LibSLParser.RULE_shiftFromList -> new LslShiftFromList(node);
             case LibSLParser.RULE_functionsListPart -> new LslFunctionsListPart(node);
             case LibSLParser.RULE_variableDecl -> new LslVariableDecl(node);
             case LibSLParser.RULE_nameWithType -> new LslNameWithType(node);
@@ -61,7 +66,8 @@ public class PsiElementFactory {
             case LibSLParser.RULE_generic -> new LslGeneric(node);
             case LibSLParser.RULE_variableAssignment -> new VariableAssignment(node);
             case LibSLParser.RULE_assignmentRight -> new LslAssignmentRight(node);
-            case LibSLParser.RULE_callAutomatonConstructorWithNamedArgs -> new LslCallAutomatonConstructorWithNamedArgs(node);
+            case LibSLParser.RULE_callAutomatonConstructorWithNamedArgs ->
+                    new LslCallAutomatonConstructorWithNamedArgs(node);
             case LibSLParser.RULE_namedArgs -> new LslNamedArgs(node);
             case LibSLParser.RULE_argPair -> new LslArgPair(node);
             case LibSLParser.RULE_headerWithAsterisk -> new LslHeaderWithAsterisk(node);
@@ -79,6 +85,7 @@ public class PsiElementFactory {
             case LibSLParser.RULE_functionContract -> new LslFunctionContract(node);
             case LibSLParser.RULE_functionBody -> new LslFunctionBody(node);
             case LibSLParser.RULE_functionBodyStatement -> new LslFunctionBodyStatement(node);
+            case LibSLParser.RULE_conditionBody -> new LslConditionBody(node);
             case LibSLParser.RULE_ifStatement -> new LslIfStatement(node);
             case LibSLParser.RULE_elseStatement -> new LslElseStatement(node);
             case LibSLParser.RULE_actionUsage -> new LslActionUsage(node);

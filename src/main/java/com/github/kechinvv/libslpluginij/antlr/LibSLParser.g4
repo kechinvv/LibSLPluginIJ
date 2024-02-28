@@ -57,8 +57,9 @@ typealiasStatement
  * syntax: type full.name { field1: Type; field2: Type; ... }
  */
 typeDefBlock
-   :   annotationUsage* TYPE name=periodSeparatedFullName generic? targetType? (L_BRACE typeDefBlockStatement* R_BRACE)?
+   :   annotationUsage* TYPE name=periodSeparatedFullName generic? targetType? typeDefBlockBody?
    ;
+
 
 targetType
    :   (IS typeIdentifier)? for=identifier typeList
@@ -72,6 +73,11 @@ typeList
 typeDefBlockStatement
    :   variableDecl
    |   functionDecl
+   ;
+
+
+typeDefBlockBody
+   : L_BRACE typeDefBlockStatement* R_BRACE
    ;
 
 /* enum block
@@ -153,8 +159,11 @@ actionParameter
  */
 automatonDecl
    :   annotationUsage* AUTOMATON CONCEPT? name=periodSeparatedFullName (L_BRACKET constructorVariables* R_BRACKET)?
-   COLON type=typeIdentifier implementedConcepts*
-   L_BRACE automatonStatement* R_BRACE
+   COLON type=typeIdentifier implementedConcepts* automatonBody
+   ;
+
+automatonBody
+   : L_BRACE automatonStatement* R_BRACE
    ;
 
 constructorVariables
@@ -193,9 +202,17 @@ automatonStateDecl
  */
 automatonShiftDecl
    :   SHIFT from=Identifier MINUS_ARROW to=Identifier BY functionsListPart SEMICOLON
-   |   SHIFT from=Identifier MINUS_ARROW to=Identifier BY L_SQUARE_BRACKET functionsList? R_SQUARE_BRACKET SEMICOLON
-   |   SHIFT from=L_BRACKET identifierList R_BRACKET MINUS_ARROW to=Identifier BY functionsListPart SEMICOLON
-   |   SHIFT from=L_BRACKET identifierList R_BRACKET MINUS_ARROW to=Identifier BY L_SQUARE_BRACKET functionsList? R_SQUARE_BRACKET SEMICOLON
+   |   SHIFT from=Identifier MINUS_ARROW to=Identifier BY shiftByList SEMICOLON
+   |   SHIFT shiftFromList MINUS_ARROW to=Identifier BY functionsListPart SEMICOLON
+   |   SHIFT shiftFromList MINUS_ARROW to=Identifier BY shiftByList SEMICOLON
+   ;
+
+shiftByList
+   : L_SQUARE_BRACKET functionsList? R_SQUARE_BRACKET
+   ;
+
+shiftFromList
+   : L_BRACKET identifierList R_BRACKET
    ;
 
 functionsList
@@ -259,7 +276,7 @@ headerWithAsterisk
    ;
 
 constructorDecl
-   :   constructorHeader (SEMICOLON | L_BRACE functionBody R_BRACE)
+   :   constructorHeader (SEMICOLON | functionBody )
    ;
 
 constructorHeader
@@ -268,7 +285,7 @@ constructorHeader
    ;
 
 destructorDecl
-   :   destructorHeader (SEMICOLON | L_BRACE functionBody R_BRACE)?
+   :   destructorHeader (SEMICOLON | functionBody )?
    ;
 
 destructorHeader
@@ -277,7 +294,7 @@ destructorHeader
    ;
 
 procDecl
-   :   procHeader (SEMICOLON | L_BRACE functionBody R_BRACE)
+   :   procHeader (SEMICOLON | functionBody )
    ;
 
 procHeader
@@ -290,7 +307,7 @@ procHeader
  * In case of declaring extension-function, name must look like Automaton.functionName
  */
 functionDecl
-   :   functionHeader (SEMICOLON | (L_BRACE functionBody R_BRACE)?)
+   :   functionHeader (SEMICOLON | functionBody?)
    ;
 
 functionHeader
@@ -320,7 +337,7 @@ functionContract
    ;
 
 functionBody
-   :   functionContract* functionBodyStatement*
+   :   L_BRACE functionContract* functionBodyStatement* R_BRACE
    ;
 
 functionBodyStatement
@@ -330,13 +347,17 @@ functionBodyStatement
    |   expression SEMICOLON
    ;
 
+conditionBody
+   : L_BRACE functionBodyStatement* R_BRACE
+   ;
+
 ifStatement
-   :   IF expression L_BRACE functionBodyStatement* R_BRACE (elseStatement)?
+   :   IF expression conditionBody (elseStatement)?
    |   IF expression functionBodyStatement (elseStatement)?
    ;
 
 elseStatement
-   :   ELSE L_BRACE functionBodyStatement* R_BRACE
+   :   ELSE conditionBody
    |   ELSE functionBodyStatement
    ;
 
