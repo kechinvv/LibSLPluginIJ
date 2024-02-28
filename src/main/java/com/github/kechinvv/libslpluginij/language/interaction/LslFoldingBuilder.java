@@ -24,14 +24,7 @@ public class LslFoldingBuilder extends FoldingBuilderEx {
     public FoldingDescriptor @NotNull [] buildFoldRegions(@NotNull PsiElement psiElement, @NotNull Document document, boolean b) {
         var descriptors = new HashSet<FoldingDescriptor>();
         PsiElementProcessor<PsiElement> processor = it -> {
-            Pair<TextRange, String> textRangeAndPlaceholderText;
-            if (it instanceof LslFunctionBody || it instanceof LslIdentifierList || it instanceof LslFunctionsList)
-                textRangeAndPlaceholderText = new Pair<>(it.getTextRange(), "...");
-            else if (it instanceof PsiComment)
-                textRangeAndPlaceholderText = new Pair<>(it.getTextRange(), "/*...*/");
-            else if (it instanceof LslArrayLiteral)
-                textRangeAndPlaceholderText = new Pair<>(it.getTextRange(), "[...]");
-            else textRangeAndPlaceholderText = null;
+            Pair<TextRange, String> textRangeAndPlaceholderText = getTextRangeStringPair(it);
 
             if (textRangeAndPlaceholderText != null) {
                 var textRange = textRangeAndPlaceholderText.first;
@@ -46,41 +39,24 @@ public class LslFoldingBuilder extends FoldingBuilderEx {
         return descriptors.toArray(new FoldingDescriptor[0]);
     }
 
+    @Nullable
+    private Pair<TextRange, String> getTextRangeStringPair(PsiElement it) {
+        Pair<TextRange, String> textRangeAndPlaceholderText;
+        if (it instanceof LslFunctionBody || it instanceof LslIdentifierList || it instanceof LslFunctionsList)
+            textRangeAndPlaceholderText = new Pair<>(it.getTextRange(), "...");
+        else if (it instanceof PsiComment)
+            textRangeAndPlaceholderText = new Pair<>(it.getTextRange(), "/*...*/");
+        else if (it instanceof LslArrayLiteral)
+            textRangeAndPlaceholderText = new Pair<>(it.getTextRange(), "[...]");
+        else textRangeAndPlaceholderText = null;
+        return textRangeAndPlaceholderText;
+    }
+
     private boolean isOnMultipleLines(TextRange textRange, Document document) {
         var startLine = document.getLineNumber(textRange.getStartOffset());
         var endLine = document.getLineNumber(textRange.getEndOffset());
         return startLine != endLine;
     }
-
-
-//    override fun buildFoldRegions(root: PsiElement, document: Document, quick: Boolean): Array<FoldingDescriptor> {
-//        val descriptors = mutableListOf<FoldingDescriptor>()
-//        PsiTreeUtil.processElements(root) {
-//            val textRangeAndPlaceholderText = when (it) {
-//                is JavaScriptFunctionBody, is JavaScriptBlock, is JavaScriptObject, is JavaScriptCaseBlock -> Pair(it.textRange, "{...}")
-//                is JavaScriptArray -> Pair(it.textRange, "[...]")
-//                is JavaScriptClassDeclaration -> {
-//                    val openBraceOffset = it.node.findChildByType(JavaScriptTypes.OPEN_BRACE)?.startOffset
-//                    if (openBraceOffset == null) null
-//                    else Pair(TextRange(openBraceOffset, it.textRange.endOffset), "{...}")
-//                }
-//                is PsiComment -> {
-//                    if (it.node.elementType == JavaScriptTypes.MULTILINE_COMMENT) Pair(it.textRange, "/*...*/")
-//                    else null
-//                }
-//                else -> null
-//            }
-//            if (textRangeAndPlaceholderText != null) {
-//                val textRange = textRangeAndPlaceholderText.first
-//                val placeholderText = textRangeAndPlaceholderText.second
-//                if (isOnMultipleLines(textRange, document)) {
-//                    descriptors.add(FoldingDescriptor(it.node, textRange, null, placeholderText))
-//                }
-//            }
-//            return@processElements true
-//        }
-//        return descriptors.toTypedArray()
-//    }
 
 
     @Override
