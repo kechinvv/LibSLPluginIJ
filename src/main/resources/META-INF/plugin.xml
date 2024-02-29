@@ -46,7 +46,7 @@
                 implementationClass="com.github.kechinvv.libslpluginij.language.highlight.LibSLAnnotator"/>
         <lang.braceMatcher
                 language="LibSL"
-                implementationClass="com.github.kechinvv.libslpluginij.language.highlight.LibSLBraceMatcher"/>
+                implementationClass="com.github.kechinvv.libslpluginij.language.interaction.LibSLBraceMatcher"/>
         <!--        <completion.contributor-->
         <!--                language="LibSL"-->
         <!--                implementationClass="com.github.kechinvv.libslpluginij.language.contributor.LibSLCompletionContributor"/>-->
