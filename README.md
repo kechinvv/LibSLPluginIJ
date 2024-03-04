@@ -34,6 +34,8 @@
 - [ ] Refactoring
 - [ ] Null safety
 - [ ] Optimization of search algorithms for find usages
+- [ ] Tests
+  - [x] [Test cases description](https://docs.google.com/document/d/1lOTSDMsUHc6SwaIhIhQRKjiW5FJ6AfxI3b3VRvDrc6Y/edit?usp=sharing)
 
 # Description
 <!-- Plugin description -->
