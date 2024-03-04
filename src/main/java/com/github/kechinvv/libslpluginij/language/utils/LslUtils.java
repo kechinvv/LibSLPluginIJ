@@ -32,8 +32,8 @@ public class LslUtils {
     }
 
     public static LslIdentifier createIdentifierFromText(Project project, String text) {
-        var javaScriptFile = createFileFromText(project, text);
-        return PsiTreeUtil.findChildOfType(javaScriptFile, LslIdentifier.class, true);
+        var lslFile = createFileFromText(project, text);
+        return PsiTreeUtil.findChildOfType(lslFile, LslIdentifier.class, true);
     }
 
     public static LibSLPSIFileRoot createFileFromText(Project project, String text)  {
