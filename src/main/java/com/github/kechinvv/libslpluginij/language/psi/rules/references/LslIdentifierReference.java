@@ -64,6 +64,7 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
 
     private void processDeclarations(Function<PsiNamedElement, Boolean> callback) {
         var declaration = getDeclarationKind();
+        LOG.info("Clicked = " + declaration.name());
         switch (declaration) {
             case LocalFunVar, LocalAutomatonVar, Other -> {
             }
@@ -91,11 +92,16 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
             return DeclarationKind.Action;
         if (varParent instanceof LslAnnotationUsage)
             return DeclarationKind.Annotation;
-        if (myElement.getParent() instanceof LslFunctionHeader || myElement.getParent() instanceof LslProcHeader)
+        if (PsiTreeUtil.getParentOfType(varParent, LslFunctionBody.class) != null
+                || varParent instanceof LslParameter)
             return DeclarationKind.LocalFunVar;
-        if ((varParent = getParentOfType(myElement, LslVariableDecl.class)) != null && varParent.getParent() instanceof LslAutomatonStatement)
+        if (varParent instanceof LslProcHeader || varParent instanceof LslFunctionHeader)
+            return DeclarationKind.Method;
+        if ((varParent = getParentOfType(myElement, LslVariableDecl.class)) != null
+                && varParent.getParent() instanceof LslAutomatonStatement)
             return DeclarationKind.LocalAutomatonVar;
-        return DeclarationKind.Method;
+
+        return DeclarationKind.Other;
     }
 
 
@@ -157,7 +163,8 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
     private void findAnnotationsDeclarations(Project project, Function<PsiNamedElement, Boolean> callback) {
         Function<LibSLPSIFileRoot, LoopAction> loopAction = file -> {
             var annotationsDeclarations = file.getAnnotationsDeclarationsNames();
-            if (annotationsDeclarations != null && breakerLoop(annotationsDeclarations, callback)) return LoopAction.BREAK;
+            if (annotationsDeclarations != null && breakerLoop(annotationsDeclarations, callback))
+                return LoopAction.BREAK;
             return LoopAction.CONTINUE;
         };
 
