@@ -1,13 +1,15 @@
 // Generated from /home/valera/IdeaProjects/LibSLPluginIJ/src/main/java/com/github/kechinvv/libslpluginij/antlr/LibSLParser.g4 by ANTLR 4.13.1
 package com.github.kechinvv.libslpluginij.antlr;
-import org.antlr.v4.runtime.atn.*;
-import org.antlr.v4.runtime.dfa.DFA;
+
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
-import org.antlr.v4.runtime.tree.*;
+import org.antlr.v4.runtime.atn.ATN;
+import org.antlr.v4.runtime.atn.ATNDeserializer;
+import org.antlr.v4.runtime.atn.ParserATNSimulator;
+import org.antlr.v4.runtime.atn.PredictionContextCache;
+import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.tree.TerminalNode;
+
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class LibSLParser extends Parser {
@@ -6257,9 +6259,7 @@ public class LibSLParser extends Parser {
 		public TerminalNode Digit(int i) {
 			return getToken(LibSLParser.Digit, i);
 		}
-		public IdentifierContext identifier() {
-			return getRuleContext(IdentifierContext.class,0);
-		}
+		public TerminalNode Identifier() { return getToken(LibSLParser.Identifier, 0); }
 		public IntegerNumberContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -6314,7 +6314,7 @@ public class LibSLParser extends Parser {
 				case 1:
 					{
 					setState(1113);
-					identifier();
+					match(Identifier);
 					}
 					break;
 				}
@@ -6331,7 +6331,7 @@ public class LibSLParser extends Parser {
 				case 1:
 					{
 					setState(1117);
-					identifier();
+					match(Identifier);
 					}
 					break;
 				}
@@ -6358,9 +6358,7 @@ public class LibSLParser extends Parser {
 		public TerminalNode Digit(int i) {
 			return getToken(LibSLParser.Digit, i);
 		}
-		public IdentifierContext identifier() {
-			return getRuleContext(IdentifierContext.class,0);
-		}
+		public TerminalNode Identifier() { return getToken(LibSLParser.Identifier, 0); }
 		public FloatNumberContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -6427,7 +6425,7 @@ public class LibSLParser extends Parser {
 			case 1:
 				{
 				setState(1136);
-				identifier();
+				match(Identifier);
 				}
 				break;
 			}
@@ -7229,9 +7227,9 @@ public class LibSLParser extends Parser {
 		"\u0000\u0000\u0454\u0456\u0005Y\u0000\u0000\u0455\u0454\u0001\u0000\u0000"+
 		"\u0000\u0456\u0457\u0001\u0000\u0000\u0000\u0457\u0455\u0001\u0000\u0000"+
 		"\u0000\u0457\u0458\u0001\u0000\u0000\u0000\u0458\u045a\u0001\u0000\u0000"+
-		"\u0000\u0459\u045b\u0003\u00acV\u0000\u045a\u0459\u0001\u0000\u0000\u0000"+
+		"\u0000\u0459\u045b\u0005V\u0000\u0000\u045a\u0459\u0001\u0000\u0000\u0000"+
 		"\u045a\u045b\u0001\u0000\u0000\u0000\u045b\u0461\u0001\u0000\u0000\u0000"+
-		"\u045c\u045e\u0005Y\u0000\u0000\u045d\u045f\u0003\u00acV\u0000\u045e\u045d"+
+		"\u045c\u045e\u0005Y\u0000\u0000\u045d\u045f\u0005V\u0000\u0000\u045e\u045d"+
 		"\u0001\u0000\u0000\u0000\u045e\u045f\u0001\u0000\u0000\u0000\u045f\u0461"+
 		"\u0001\u0000\u0000\u0000\u0460\u0452\u0001\u0000\u0000\u0000\u0460\u045c"+
 		"\u0001\u0000\u0000\u0000\u0461\u00a9\u0001\u0000\u0000\u0000\u0462\u0464"+
@@ -7243,7 +7241,7 @@ public class LibSLParser extends Parser {
 		"\n\u0000\u0000\u046b\u046d\u0005Y\u0000\u0000\u046c\u046b\u0001\u0000"+
 		"\u0000\u0000\u046d\u046e\u0001\u0000\u0000\u0000\u046e\u046c\u0001\u0000"+
 		"\u0000\u0000\u046e\u046f\u0001\u0000\u0000\u0000\u046f\u0471\u0001\u0000"+
-		"\u0000\u0000\u0470\u0472\u0003\u00acV\u0000\u0471\u0470\u0001\u0000\u0000"+
+		"\u0000\u0000\u0470\u0472\u0005V\u0000\u0000\u0471\u0470\u0001\u0000\u0000"+
 		"\u0000\u0471\u0472\u0001\u0000\u0000\u0000\u0472\u00ab\u0001\u0000\u0000"+
 		"\u0000\u0473\u0474\u0005V\u0000\u0000\u0474\u00ad\u0001\u0000\u0000\u0000"+
 		"\u0087\u00af\u00b4\u00c2\u00c7\u00d2\u00d6\u00da\u00e1\u00ed\u00f3\u00f6"+

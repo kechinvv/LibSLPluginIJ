@@ -40,7 +40,6 @@ public class LslIdentifier extends ASTWrapperPsiElement implements PsiNameIdenti
     @Override
     public PsiReference getReference() {
         var rangeInElement = new TextRange(0, this.getNode().getTextLength());
-        if (this.getTextLength() > 1) return new LslIdentifierReference(this, rangeInElement);
-        else return null;
+        return new LslIdentifierReference(this, rangeInElement);
     }
 }

@@ -522,12 +522,12 @@ periodSeparatedFullName
    ;
 
 integerNumber
-   :   MINUS? Digit+ identifier?
-   |   Digit identifier?
+   :   MINUS? Digit+ Identifier?
+   |   Digit Identifier?
    ;
 
 floatNumber
-   :   MINUS? Digit+ DOT Digit+ identifier?
+   :   MINUS? Digit+ DOT Digit+ Identifier?
    ;
 
 identifier
