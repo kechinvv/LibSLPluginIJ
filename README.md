@@ -23,6 +23,7 @@
     - [ ] spaces around tokens
 - [ ] Helper
     - [ ] Name scope resolving
+    - [ ] Tips about constructions
 
 ### Unique features
 
