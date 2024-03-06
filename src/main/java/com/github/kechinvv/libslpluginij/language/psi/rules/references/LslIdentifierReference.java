@@ -75,18 +75,22 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
                 var automaton = getParentOfType(myElement, LslAutomatonDecl.class);
                 if (automaton != null) processDeclarationsInAutomaton(automaton, callback);
             }
+            case Annotation -> findAnnotationsDeclarations(myElement.getProject(), callback);
         }
     }
 
     private DeclarationKind getDeclarationKind() {
-        PsiElement varParent;
+        PsiElement varParent = myElement.getParent();
         PsiElement prev = myElement.getPrevSibling();
+        // note: order is important
         if (prev != null && prev.getText().equals(".") && prev.getPrevSibling().getText().equals("this"))
             return DeclarationKind.ThisField;
         if (PsiTreeUtil.getParentOfType(myElement, LslTypeIdentifier.class) != null)
             return DeclarationKind.SomeType;
         if (PsiTreeUtil.getParentOfType(myElement, LslActionUsage.class) != null)
             return DeclarationKind.Action;
+        if (varParent instanceof LslAnnotationUsage)
+            return DeclarationKind.Annotation;
         if (myElement.getParent() instanceof LslFunctionHeader || myElement.getParent() instanceof LslProcHeader)
             return DeclarationKind.LocalFunVar;
         if ((varParent = getParentOfType(myElement, LslVariableDecl.class)) != null && varParent.getParent() instanceof LslAutomatonStatement)
@@ -113,25 +117,16 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
         automatonDecl.bodyFieldsName().forEach(callback::fun);
     }
 
-    //TODO: separate files loop
+    //TODO problem: source folder not declared
+    //TODO update: find references in super classes' imports
     private void findTypes(Project project, Function<PsiNamedElement, Boolean> callback) {
         var elText = myElement.getText();
         if (LibSLDefault.INSTANCE.defaultTypes.contains(elText)) return;
 
-        //TODO problem: source folder not declared
-        //TODO update: find references in super classes' imports
+
         var imports = ((LibSLPSIFileRoot) myElement.getContainingFile()).getImportsPathsMap();
         var canResolve = imports.containsKey(elText);
 
-//        if (imports.containsKey(elText)) {
-//            var prjPath = myElement.getContainingFile().getOriginalFile().get;
-//            var filePath = Paths.get(prjPath, imports.get(elText));
-//            var file = filePath.toFile();
-//            var virtualFile = LocalFileSystem.getInstance().findFileByIoFile(file);
-//        }
-
-//        LocalFileSystem.getInstance().findFileByIoFile(File file) (if the file already exists in VFS)
-//        or LocalFileSystem.getInstance().refreshAndFindFileByIoFile(File file)
         Function<LibSLPSIFileRoot, LoopAction> loopAction = file -> {
             if (canResolve && !file.getName().startsWith(elText)) return LoopAction.CONTINUE;
 
@@ -153,6 +148,16 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
         Function<LibSLPSIFileRoot, LoopAction> loopAction = file -> {
             var actionDeclarations = file.getActionsDeclarationsNames();
             if (actionDeclarations != null && breakerLoop(actionDeclarations, callback)) return LoopAction.BREAK;
+            return LoopAction.CONTINUE;
+        };
+
+        projectFilesLoop(project, loopAction);
+    }
+
+    private void findAnnotationsDeclarations(Project project, Function<PsiNamedElement, Boolean> callback) {
+        Function<LibSLPSIFileRoot, LoopAction> loopAction = file -> {
+            var annotationsDeclarations = file.getAnnotationsDeclarationsNames();
+            if (annotationsDeclarations != null && breakerLoop(annotationsDeclarations, callback)) return LoopAction.BREAK;
             return LoopAction.CONTINUE;
         };
 
@@ -190,6 +195,18 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
         BREAK, CONTINUE
     }
 }
+
+// TODO: get references by paths
+
+//        if (imports.containsKey(elText)) {
+//            var prjPath = myElement.getContainingFile().getOriginalFile().get;
+//            var filePath = Paths.get(prjPath, imports.get(elText));
+//            var file = filePath.toFile();
+//            var virtualFile = LocalFileSystem.getInstance().findFileByIoFile(file);
+//        }
+
+//        LocalFileSystem.getInstance().findFileByIoFile(File file) (if the file already exists in VFS)
+//        or LocalFileSystem.getInstance().refreshAndFindFileByIoFile(File file)
 
 
 

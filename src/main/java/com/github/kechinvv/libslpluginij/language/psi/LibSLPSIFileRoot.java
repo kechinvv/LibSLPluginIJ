@@ -67,6 +67,16 @@ public class LibSLPSIFileRoot extends PsiFileBase implements PsiElement {
                 }).filter(Objects::nonNull).toList();
     }
 
+    public Collection<LslIdentifier> getAnnotationsDeclarationsNames() {
+        return findChildrenOfType(this, LslAnnotationDecl.class).stream()
+                .map(lslAnnotationDecl -> {
+                    var listIds = LslUtils.getFilteredSiblings(lslAnnotationDecl.getFirstChild(),
+                            it -> it instanceof LslIdentifier);
+                    if (!listIds.isEmpty()) return (LslIdentifier) listIds.get(0);
+                    else return null;
+                }).filter(Objects::nonNull).toList();
+    }
+
     public Collection<PsiElement> getImports() {
         return findChildrenOfType(this, LslGlobalStatement.class).stream()
                 .map(PsiElement::getFirstChild)

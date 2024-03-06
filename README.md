@@ -15,7 +15,7 @@
     - [x] automaton scope variables
     - [x] actions
     - [ ] local and global variables
-    - [ ] annotations
+    - [x] annotations
 - [ ] Completion
 - [ ] Formatter
     - [x] tabs
