@@ -1,5 +1,6 @@
 package com.github.kechinvv.libslpluginij.language.psi.rules;
 
+import com.github.kechinvv.libslpluginij.language.psi.PsiElementFactory;
 import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslStatement;
 import com.github.kechinvv.libslpluginij.language.psi.rules.references.LslIdentifierReference;
 import com.github.kechinvv.libslpluginij.language.utils.LslUtils;
@@ -9,6 +10,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.search.SearchScope;
 import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,10 +30,15 @@ public class LslIdentifier extends ASTWrapperPsiElement implements PsiNameIdenti
         return getText();
     }
 
+//    @Override
+//    public @NotNull SearchScope getUseScope(){
+//
+//    }
+
     @Override
     public PsiElement setName(@NotNull String s) throws IncorrectOperationException {
         var idLeaf = getNameIdentifier();
-        var newIdLeaf = LslUtils.createIdentifierTokenFromText(getProject(), s);
+        var newIdLeaf = PsiElementFactory.createIdentifierTokenFromText(getProject(), s);
         assert idLeaf != null;
         assert newIdLeaf != null;
         return idLeaf.replace(newIdLeaf);

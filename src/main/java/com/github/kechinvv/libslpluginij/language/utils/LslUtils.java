@@ -21,24 +21,7 @@ public class LslUtils {
 
     public final static LslUtils INSTANCE = new LslUtils();
 
-    private LslUtils() {}
-
-    public static PsiElement createIdentifierTokenFromText(Project project, String text) {
-        var child = createIdentifierFromText(project, text)
-                .getNode()
-                .findChildByType(tokens.get(LibSLLexer.Identifier));
-        if (child != null) return child.getPsi();
-        else return null;
-    }
-
-    public static LslIdentifier createIdentifierFromText(Project project, String text) {
-        var lslFile = createFileFromText(project, text);
-        return PsiTreeUtil.findChildOfType(lslFile, LslIdentifier.class, true);
-    }
-
-    public static LibSLPSIFileRoot createFileFromText(Project project, String text)  {
-        return (LibSLPSIFileRoot) PsiFileFactory.getInstance(project)
-                .createFileFromText("stub.lsl", LibSLFileType.INSTANCE, text);
+    private LslUtils() {
     }
 
     public static Collection<PsiElement> getAllSiblings(PsiElement element) {
@@ -60,4 +43,6 @@ public class LslUtils {
         }
         return siblings;
     }
+
+
 }

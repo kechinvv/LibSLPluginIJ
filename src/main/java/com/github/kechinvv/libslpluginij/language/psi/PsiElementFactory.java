@@ -1,14 +1,26 @@
 package com.github.kechinvv.libslpluginij.language.psi;
 
+import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
 import com.github.kechinvv.libslpluginij.antlr.LibSLParser;
+import com.github.kechinvv.libslpluginij.language.LibSLFileType;
 import com.github.kechinvv.libslpluginij.language.psi.rules.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import org.antlr.intellij.adaptor.lexer.RuleIElementType;
 import org.antlr.intellij.adaptor.lexer.TokenIElementType;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Predicate;
+
+import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.tokens;
 
 public class PsiElementFactory {
     public static final Logger LOG = Logger.getInstance("PsiElementFactory");
@@ -116,4 +128,24 @@ public class PsiElementFactory {
             default -> new ASTWrapperPsiElement(node);
         };
     }
+
+    public static PsiElement createIdentifierTokenFromText(Project project, String text) {
+        var child = createIdentifierFromText(project, text)
+                .getNode()
+                .findChildByType(tokens.get(LibSLLexer.Identifier));
+        if (child != null) return child.getPsi();
+        else return null;
+    }
+
+    public static LslIdentifier createIdentifierFromText(Project project, String text) {
+        var lslFile = createFileFromText(project, text);
+        return PsiTreeUtil.findChildOfType(lslFile, LslIdentifier.class, true);
+    }
+
+    public static LibSLPSIFileRoot createFileFromText(Project project, String text)  {
+        return (LibSLPSIFileRoot) PsiFileFactory.getInstance(project)
+                .createFileFromText("stub.lsl", LibSLFileType.INSTANCE, text);
+    }
+
+
 }
