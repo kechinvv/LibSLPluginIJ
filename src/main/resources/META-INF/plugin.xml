@@ -71,11 +71,23 @@
                 implementationClass="com.github.kechinvv.libslpluginij.language.interaction.LslFoldingBuilder"/>
     </extensions>
     <actions>
-        <action id="Dropdown.LSL" class="com.github.kechinvv.libslpluginij.actions.GenerateTaintConfigAction"
-                text="GenerateTaintConfig" icon="/icons/libsl3.svg">
+        <action id="lsl.taint" class="com.github.kechinvv.libslpluginij.actions.GenerateTaintConfigAction"
+                text="Generate Taint Config" icon="/icons/libsl3.svg">
+            <add-to-group group-id="ToolsMenu" anchor="before" relative-to-action="com.intellij.tools.ExternalToolsGroup"/>
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
             <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
-            <!--<keyboard-shortcut keymap="$default" first-keystroke="control shift G"/> -->
+        </action>
+        <action id="lsl.translate" class="com.github.kechinvv.libslpluginij.actions.TranslateAction"
+                text="Translate LIbSL" icon="/icons/libsl3.svg">
+            <add-to-group group-id="ToolsMenu" anchor="before" relative-to-action="com.intellij.tools.ExternalToolsGroup"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        </action>
+        <action id="lsl.configure" class="com.github.kechinvv.libslpluginij.actions.ConfigurationAction"
+                text="Configure LibSL Tools..." icon="/icons/libsl3.svg">
+            <add-to-group group-id="ToolsMenu" anchor="before" relative-to-action="com.intellij.tools.ExternalToolsGroup"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
         </action>
 
     </actions>
