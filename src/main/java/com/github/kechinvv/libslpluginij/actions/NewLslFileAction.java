@@ -29,7 +29,8 @@ public class NewLslFileAction extends CreateFileFromTemplateAction implements Du
     @Override
     protected void buildDialog(@NotNull Project project, @NotNull PsiDirectory directory, CreateFileFromTemplateDialog.@NotNull Builder builder) {
         builder.setTitle(NEW_LSL_FILE)
-                .addKind("Empty file", LibSLIcon.FILE, "Header.lsl")
+                .addKind("Empty", LibSLIcon.FILE, "Empty.lsl")
+                .addKind("Header", LibSLIcon.FILE, "Header.lsl")
                 .addKind("Automaton", LibSLIcon.FILE, "Automaton.lsl")
                 .addKind("Type", LibSLIcon.FILE, "Type.lsl");
     }
