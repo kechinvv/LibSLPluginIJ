@@ -5,8 +5,8 @@ library sample
     language "-"
     url "-";
 
-
-automaton ${NAME}(): void
+#set ($newName = $NAME.split("\.").get(0))
+automaton ${newName}(): void
 {
 
 }
