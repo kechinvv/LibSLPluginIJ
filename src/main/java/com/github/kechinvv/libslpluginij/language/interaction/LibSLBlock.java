@@ -2,7 +2,9 @@ package com.github.kechinvv.libslpluginij.language.interaction;
 
 import com.github.kechinvv.libslpluginij.language.psi.LibSLPSIFileRoot;
 import com.github.kechinvv.libslpluginij.language.psi.LibSLTokenSets;
-import com.github.kechinvv.libslpluginij.language.psi.rules.*;
+import com.github.kechinvv.libslpluginij.language.psi.rules.LslElseStatement;
+import com.github.kechinvv.libslpluginij.language.psi.rules.LslTargetType;
+import com.github.kechinvv.libslpluginij.language.psi.rules.LslTopLevelDecl;
 import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslParametersOwner;
 import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslStatement;
 import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslStatementsOwner;
