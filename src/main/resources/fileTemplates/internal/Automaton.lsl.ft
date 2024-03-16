@@ -1,0 +1,12 @@
+libsl "1.1.0";
+
+library sample
+    version "-"
+    language "-"
+    url "-";
+
+
+automaton ${NAME}(): void
+{
+
+}
