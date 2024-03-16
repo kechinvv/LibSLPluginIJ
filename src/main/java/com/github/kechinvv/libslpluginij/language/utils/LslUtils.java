@@ -1,21 +1,13 @@
 package com.github.kechinvv.libslpluginij.language.utils;
 
-import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
-import com.github.kechinvv.libslpluginij.language.LibSLFileType;
-import com.github.kechinvv.libslpluginij.language.psi.LibSLPSIFileRoot;
-import com.github.kechinvv.libslpluginij.language.psi.rules.LslFile;
-import com.github.kechinvv.libslpluginij.language.psi.rules.LslIdentifier;
-import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFileFactory;
-import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.PsiWhiteSpace;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
-
-import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.tokens;
 
 public class LslUtils {
 
@@ -42,6 +34,14 @@ public class LslUtils {
             temp = temp.getNextSibling();
         }
         return siblings;
+    }
+
+    public static PsiElement getPrevSiblingSkipSpacesAndComments(PsiElement element) {
+        var prevSibling = element.getPrevSibling();
+        while (prevSibling instanceof PsiWhiteSpace || prevSibling instanceof PsiComment) {
+            prevSibling = prevSibling.getPrevSibling();
+        }
+        return prevSibling;
     }
 
 

@@ -64,7 +64,6 @@ public class LslIdentifierReference extends PsiPolyVariantReferenceBase<LslIdent
 
     private void processDeclarations(Function<PsiNamedElement, Boolean> callback) {
         var declaration = getDeclarationKind();
-        LOG.info("Clicked = " + declaration.name());
         switch (declaration) {
             case LocalFunVar, LocalAutomatonVar, Other -> {
             }

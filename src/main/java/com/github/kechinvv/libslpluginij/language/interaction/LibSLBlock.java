@@ -3,10 +3,12 @@ package com.github.kechinvv.libslpluginij.language.interaction;
 import com.github.kechinvv.libslpluginij.language.psi.LibSLPSIFileRoot;
 import com.github.kechinvv.libslpluginij.language.psi.LibSLTokenSets;
 import com.github.kechinvv.libslpluginij.language.psi.rules.*;
+import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslParametersOwner;
 import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslStatement;
 import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslStatementsOwner;
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.formatter.common.AbstractBlock;
 import org.jetbrains.annotations.NotNull;
@@ -14,6 +16,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.github.kechinvv.libslpluginij.language.utils.LslUtils.getPrevSiblingSkipSpacesAndComments;
 
 public class LibSLBlock extends AbstractBlock {
 
@@ -44,18 +48,42 @@ public class LibSLBlock extends AbstractBlock {
         var element = myNode.getPsi();
         var parentElement = element.getParent();
 
+        //No tabulation for highest statements
         if (parentElement instanceof LibSLPSIFileRoot ||
                 parentElement instanceof LslTopLevelDecl)
             return Indent.getNoneIndent();
 
-        if (LibSLTokenSets.INSTANCE.BRACES.contains(elementType) ||
-                element instanceof LslElseStatement)
+        //Tabulation for return type in signatures (if it uses few lines)
+        if (getPrevSiblingSkipSpacesAndComments(element) instanceof LslParametersOwner)
+            return Indent.getNormalIndent();
+
+        //No tab relative to if for else
+        if (element instanceof LslElseStatement)
             return Indent.getNoneIndent();
 
+        //Tabulation for params in proc/fun/annotation/action signatures
+        if (parentElement instanceof LslParametersOwner) {
+            var previewSib = element.getPrevSibling();
+            var maybeSpace = parentElement.getPrevSibling();
+            if (previewSib == null || maybeSpace instanceof PsiWhiteSpace)
+                return Indent.getContinuationIndent();
+
+            var previewSibParent = parentElement.getPrevSibling();
+
+            int spaces = 0;
+            while (previewSibParent != null) {
+                spaces += previewSibParent.getTextLength();
+                previewSibParent = previewSibParent.getPrevSibling();
+            }
+            return Indent.getSpaceIndent(spaces);
+        }
+
+        //Tabulation for statements and comments in body
         if (parentElement instanceof LslStatementsOwner &&
                 (element instanceof LslStatement || LibSLTokenSets.INSTANCE.COMMENTS.contains(elementType)))
             return Indent.getNormalIndent();
 
+        //Tabulation for libsl version declaration, links e.t.c.
         if (LibSLTokenSets.INSTANCE.TAB_HEADER.contains(elementType) ||
                 element instanceof LslTargetType)
             return Indent.getNormalIndent();
