@@ -22,9 +22,6 @@ public class NewLslFileAction extends CreateFileFromTemplateAction implements Du
     public NewLslFileAction() {
         super(NEW_LSL_FILE, "", LibSLIcon.FILE);
     }
-    protected NewLslFileAction(String text, String description, Icon icon) {
-        super(text, description, icon);
-    }
 
     @Override
     protected void buildDialog(@NotNull Project project, @NotNull PsiDirectory directory, CreateFileFromTemplateDialog.@NotNull Builder builder) {
