@@ -3,19 +3,11 @@ package com.github.kechinvv.libslpluginij.actions;
 import com.github.kechinvv.libslpluginij.language.LibSLIcon;
 import com.intellij.ide.actions.CreateFileFromTemplateAction;
 import com.intellij.ide.actions.CreateFileFromTemplateDialog;
-import com.intellij.ide.actions.CreateTemplateInPackageAction;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.NlsContexts;
 import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
-import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.util.Set;
 
 public class NewLslFileAction extends CreateFileFromTemplateAction implements DumbAware {
     public static final String NEW_LSL_FILE = "LibSL File";
@@ -36,5 +28,6 @@ public class NewLslFileAction extends CreateFileFromTemplateAction implements Du
     protected String getActionName(PsiDirectory directory, @NonNls @NotNull String newName, @NonNls String templateName) {
         return NEW_LSL_FILE;
     }
+
 
 }

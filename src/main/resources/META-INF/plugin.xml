@@ -6,6 +6,7 @@
     <version>0.0.6</version>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
     <!--    <depends>com.intellij.java</depends>-->
     <!--    <depends>com.intellij.modules.java-capable</depends>-->
     <description><![CDATA[
@@ -69,6 +70,10 @@
         <lang.foldingBuilder
                 language="LibSL"
                 implementationClass="com.github.kechinvv.libslpluginij.language.interaction.LslFoldingBuilder"/>
+
+
+        <directoryProjectGenerator implementation="com.github.kechinvv.libslpluginij.project.LibSLProjectGenerator"/>
+
     </extensions>
     <actions>
         <action id="lsl.taint" class="com.github.kechinvv.libslpluginij.actions.GenerateTaintConfigAction"
