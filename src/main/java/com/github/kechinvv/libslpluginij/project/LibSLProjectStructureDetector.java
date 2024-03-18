@@ -1,13 +1,23 @@
 package com.github.kechinvv.libslpluginij.project;
 
+import com.intellij.ide.util.importProject.ModuleDescriptor;
+import com.intellij.ide.util.importProject.ProjectDescriptor;
+import com.intellij.ide.util.projectWizard.ModuleWizardStep;
+import com.intellij.ide.util.projectWizard.ProjectJdkForModuleStep;
 import com.intellij.ide.util.projectWizard.importSources.DetectedProjectRoot;
+import com.intellij.ide.util.projectWizard.importSources.ProjectFromSourcesBuilder;
 import com.intellij.ide.util.projectWizard.importSources.ProjectStructureDetector;
 import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.io.File;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class LibSLProjectStructureDetector extends ProjectStructureDetector {
     @NotNull
@@ -28,5 +38,26 @@ public class LibSLProjectStructureDetector extends ProjectStructureDetector {
             });
         }
         return DirectoryProcessingResult.SKIP_CHILDREN;
+    }
+
+    @Override
+    public void setupProjectStructure(@NotNull Collection<DetectedProjectRoot> roots,
+                                      @NotNull ProjectDescriptor projectDescriptor,
+                                      @NotNull ProjectFromSourcesBuilder builder) {
+        if (!roots.isEmpty() && !builder.hasRootsFromOtherDetectors(this)) {
+            if (projectDescriptor.getModules().isEmpty()) {
+                projectDescriptor.setModules(roots.stream()
+                        .map(root -> new ModuleDescriptor(root.getDirectory(), LibSLModuleType.getInstance(),
+                                ContainerUtil.emptyList())).toList());
+            }
+        }
+    }
+
+    @NotNull
+    @Override
+    public List<ModuleWizardStep> createWizardSteps(@NotNull ProjectFromSourcesBuilder builder,
+                                                    ProjectDescriptor projectDescriptor,
+                                                    Icon stepIcon) {
+        return Collections.emptyList();
     }
 }
