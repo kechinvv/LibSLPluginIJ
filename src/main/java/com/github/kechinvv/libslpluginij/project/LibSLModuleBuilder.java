@@ -1,28 +1,70 @@
 package com.github.kechinvv.libslpluginij.project;
 
+import com.github.kechinvv.libslpluginij.language.LibSLIcon;
 import com.intellij.compiler.CompilerWorkspaceConfiguration;
-import com.intellij.ide.util.projectWizard.ModuleBuilder;
-import com.intellij.ide.util.projectWizard.ModuleBuilderListener;
-import com.intellij.ide.util.projectWizard.SourcePathsBuilder;
+import com.intellij.ide.util.projectWizard.*;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleType;
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.roots.CompilerModuleExtension;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.libraries.LibraryTable;
+import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuilder, ModuleBuilderListener {
+
+    public LibSLModuleBuilder() {
+        addListener(this);
+    }
+
+
+    @Override
+    public String getBuilderId() {
+        return "lslbuilder";
+    }
+
+
+    @Override
+    public Icon getNodeIcon() {
+        return LibSLIcon.FILE;
+    }
+
+    @Override
+    public String getDescription() {
+            return "LibSL. Library specification language.";
+    }
+
+    @Override
+    public String getPresentableName() {
+        return "LibSL Module";
+    }
+
+    @Override
+    public String getGroupName() {
+        return "LibSL";
+    }
+
+//    @Override
+//    public ModuleWizardStep[] createWizardSteps(WizardContext wizardContext, ModulesProvider modulesProvider) {
+//        return new ModuleWizardStep[]{new LibSLModuleWizardStep()};
+//    }
+
+
+    @Nullable
+    @Override
+    public ModuleWizardStep modifySettingsStep(@NotNull SettingsStep settingsStep) {
+        return LibSLModuleType.getInstance().modifySettingsStep(settingsStep, this);
+    }
 
     private List<Pair<String,String>> mySourcePaths;
 
