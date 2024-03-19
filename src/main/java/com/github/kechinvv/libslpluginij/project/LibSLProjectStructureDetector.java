@@ -17,7 +17,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class LibSLProjectStructureDetector extends ProjectStructureDetector {
     @NotNull
@@ -58,6 +57,7 @@ public class LibSLProjectStructureDetector extends ProjectStructureDetector {
     public List<ModuleWizardStep> createWizardSteps(@NotNull ProjectFromSourcesBuilder builder,
                                                     ProjectDescriptor projectDescriptor,
                                                     Icon stepIcon) {
-        return Collections.emptyList();
+        ProjectJdkForModuleStep projectJdkForModuleStep = new ProjectJdkForModuleStep(builder.getContext(), null);
+        return Collections.singletonList(projectJdkForModuleStep);
     }
 }

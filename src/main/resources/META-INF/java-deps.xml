@@ -1,12 +1,14 @@
 <idea-plugin version="2">
     <extensions defaultExtensionNs="com.intellij">
         <moduleType id="LIBSL_MODULE" implementationClass="com.github.kechinvv.libslpluginij.project.LibSLModuleType"/>
-<!--        <moduleConfigurationEditorProvider implementation="com.goide.configuration.GoModuleEditorsProvider" order="first"/>-->
-<!--        <editorNotificationProvider implementation="com.goide.inspections.WrongModuleTypeNotificationProvider"/>-->
+        <moduleBuilder builderClass="com.github.kechinvv.libslpluginij.project.LibSLModuleBuilder"/>
+        <!--        <moduleConfigurationEditorProvider implementation="com.goide.configuration.GoModuleEditorsProvider" order="first"/>-->
+        <!--        <editorNotificationProvider implementation="com.goide.inspections.WrongModuleTypeNotificationProvider"/>-->
 
-        <projectStructureDetector implementation="com.github.kechinvv.libslpluginij.project.LibSLProjectStructureDetector"/>
+        <projectStructureDetector
+                implementation="com.github.kechinvv.libslpluginij.project.LibSLProjectStructureDetector"/>
 
-<!--        <projectService serviceInterface="com.goide.sdk.GoSdkService" serviceImplementation="com.goide.sdk.GoIdeaSdkService" overrides="true"/>-->
+        <!--        <projectService serviceInterface="com.goide.sdk.GoSdkService" serviceImplementation="com.goide.sdk.GoIdeaSdkService" overrides="true"/>-->
 
     </extensions>
 </idea-plugin>

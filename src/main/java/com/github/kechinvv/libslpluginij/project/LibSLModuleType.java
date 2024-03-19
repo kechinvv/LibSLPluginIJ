@@ -14,8 +14,8 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 
 public class LibSLModuleType extends ModuleType<LibSLModuleBuilder> {
-    protected LibSLModuleType(@NotNull @NonNls String id) {
-        super(id);
+    protected LibSLModuleType() {
+        super("LIBSL_MODULE");
     }
 
     @NotNull
@@ -43,17 +43,17 @@ public class LibSLModuleType extends ModuleType<LibSLModuleBuilder> {
         return LibSLIcon.FILE;
     }
 
-//    @NotNull
-//    @Override
-//    public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext,
-//                                                @NotNull LibSLModuleBuilder moduleBuilder,
-//                                                @NotNull ModulesProvider modulesProvider) {
-//        return new ModuleWizardStep[]{new ProjectJdkForModuleStep(wizardContext, GoSdkType.getInstance()) {
-//            @Override
-//            public void updateDataModel() {
-//                super.updateDataModel();
+    @NotNull
+    @Override
+    public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext,
+                                                @NotNull LibSLModuleBuilder moduleBuilder,
+                                                @NotNull ModulesProvider modulesProvider) {
+        return new ModuleWizardStep[]{new ProjectJdkForModuleStep(wizardContext, null) {
+            @Override
+            public void updateDataModel() {
+                super.updateDataModel();
 //                moduleBuilder.setModuleJdk(getJdk());
-//            }
-//        }};
-//    }
+            }
+        }};
+    }
 }

@@ -1,7 +1,7 @@
 package com.github.kechinvv.libslpluginij.language.interaction;
 
 import com.github.kechinvv.libslpluginij.language.psi.rules.*;
-import com.github.kechinvv.libslpluginij.language.utils.Pair;
+import com.intellij.openapi.util.Pair;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingBuilderEx;
 import com.intellij.lang.folding.FoldingDescriptor;
