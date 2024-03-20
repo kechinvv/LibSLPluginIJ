@@ -49,10 +49,10 @@ public class LibSLModuleType extends ModuleType<LibSLModuleBuilder> {
 //        return new ModuleWizardStep[]{new LslPanel()};
 //    }
 
-    @Override
-    public ModuleWizardStep modifyProjectTypeStep(@NotNull SettingsStep settingsStep, @NotNull final ModuleBuilder moduleBuilder) {
-        return ProjectWizardStepFactory.getInstance().createJavaSettingsStep(settingsStep, moduleBuilder,
-                moduleBuilder::isSuitableSdkType);
-    }
+//    @Override
+//    public ModuleWizardStep modifyProjectTypeStep(@NotNull SettingsStep settingsStep, @NotNull final ModuleBuilder moduleBuilder) {
+//        return ProjectWizardStepFactory.getInstance().createJavaSettingsStep(settingsStep, moduleBuilder,
+//                moduleBuilder::isSuitableSdkType);
+//    }
 
 }

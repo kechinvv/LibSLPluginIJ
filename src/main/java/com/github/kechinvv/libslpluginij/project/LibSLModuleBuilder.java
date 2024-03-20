@@ -2,9 +2,16 @@ package com.github.kechinvv.libslpluginij.project;
 
 import com.github.kechinvv.libslpluginij.language.LibSLIcon;
 import com.intellij.compiler.CompilerWorkspaceConfiguration;
+import com.intellij.ide.projectWizard.ProjectSettingsStep;
+import com.intellij.ide.starters.local.*;
+import com.intellij.ide.starters.local.wizard.StarterInitialStep;
+import com.intellij.ide.starters.shared.StarterLanguage;
+import com.intellij.ide.starters.shared.StarterProjectType;
 import com.intellij.ide.util.projectWizard.*;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleType;
+import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
@@ -20,6 +27,8 @@ import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Collections.emptyList;
 
 public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuilder, ModuleBuilderListener {
 
@@ -41,7 +50,7 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
 
     @Override
     public String getDescription() {
-            return "LibSL. Library specification language.";
+        return "LibSL. Library specification language.";
     }
 
     @Override
@@ -54,19 +63,7 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
         return "LibSL";
     }
 
-//    @Override
-//    public ModuleWizardStep[] createWizardSteps(WizardContext wizardContext, ModulesProvider modulesProvider) {
-//        return new ModuleWizardStep[]{new LibSLModuleWizardStep()};
-//    }
-
-
-    @Nullable
-    @Override
-    public ModuleWizardStep modifySettingsStep(@NotNull SettingsStep settingsStep) {
-        return LibSLModuleType.getInstance().modifySettingsStep(settingsStep, this);
-    }
-
-    private List<Pair<String,String>> mySourcePaths;
+    private List<Pair<String, String>> mySourcePaths;
 
     @Override
     public void moduleCreated(@NotNull Module module) {
@@ -74,7 +71,7 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
     }
 
     @Override
-    public List<Pair<String,String>> getSourcePaths() {
+    public List<Pair<String, String>> getSourcePaths() {
         if (mySourcePaths == null) {
             final List<Pair<String, String>> paths = new ArrayList<>();
             @NonNls final String path = getContentEntryPath() + File.separator + "spec";
@@ -109,7 +106,7 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
 
         ContentEntry contentEntry = doAddContentEntry(rootModel);
         if (contentEntry != null) {
-            final List<Pair<String,String>> sourcePaths = getSourcePaths();
+            final List<Pair<String, String>> sourcePaths = getSourcePaths();
 
             if (sourcePaths != null) {
                 for (final Pair<String, String> sourcePath : sourcePaths) {
@@ -124,5 +121,55 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
             }
         }
     }
+
+//    public ModuleWizardStep modifyProjectTypeStep(@NotNull SettingsStep settingsStep) {
+//        // do not add standard SDK selector at the top
+//        return null;
+//    }
+
+//    @NotNull
+//    @Override
+//    protected List<GeneratorAsset> getAssets(@NotNull Starter starter) {
+//        return null;
+//    }
+//
+//    @NotNull
+//    @Override
+//    protected List<StarterLanguage> getLanguages() {
+//        return List.of(new StarterLanguage("LibSL", "LibSL", "LibSL", false, "Library specification language"));
+//    }
+//
+//    @NotNull
+//    @Override
+//    protected List<StarterProjectType> getProjectTypes() {
+//        return emptyList();
+//    }
+//
+//    @NotNull
+//    @Override
+//    protected StarterPack getStarterPack() {
+//        return new StarterPack("LibSL", List.of(
+//                new Starter("LibSL", "LibSL", getDependencyConfig("/META-INF/plugin.xml"), emptyList())
+//        ));
+//    }
+
+    @Override
+    public ModuleWizardStep[] createWizardSteps(WizardContext wizardContext, ModulesProvider modulesProvider) {
+        return new ModuleWizardStep[]{};
+    }
+
+    @Override
+    public ModuleWizardStep getCustomOptionsStep(WizardContext context, Disposable parentDisposable ) {
+        return new LslPanel();
+    }
+
+//    @Override
+//    public @NotNull StarterInitialStep createOptionsStep(@NotNull StarterContextProvider contextProvider) {
+//    }
+
+    public @NotNull List<Class<? extends ModuleWizardStep>> getIgnoredSteps() {
+        return List.of(ProjectSettingsStep.class);
+    }
+
 
 }
