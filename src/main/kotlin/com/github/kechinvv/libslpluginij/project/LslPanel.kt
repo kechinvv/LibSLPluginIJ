@@ -38,11 +38,16 @@ class LslPanel(val context: LslContext) : ModuleWizardStep() {
     private val entityNameProperty: GraphProperty<String> = propertyGraph.lazyProperty(::suggestName)
     private val locationProperty: GraphProperty<String> = propertyGraph.lazyProperty(::suggestLocationByName)
     private val canonicalPathProperty = locationProperty.joinCanonicalPath(entityNameProperty)
+    private val groupIdProperty: GraphProperty<String> = propertyGraph.lazyProperty { context.generatorContext.group }
     private val gitProperty: GraphProperty<Boolean> = propertyGraph.property(false)
         .bindBooleanStorage("NewProjectWizard.gitState")
 
     private var entityName: String by entityNameProperty.trim()
     private var location: String by locationProperty
+    protected var groupId: String by groupIdProperty.trim()
+
+    protected lateinit var groupRow: Row
+
 
     private val parentDisposable: Disposable = context.parentDisposable;
     private val moduleBuilder: ModuleBuilder = context.moduleBuilder;
@@ -58,6 +63,7 @@ class LslPanel(val context: LslContext) : ModuleWizardStep() {
 
     override fun updateDataModel() {
         generatorContext.gitIntegration = gitProperty.get()
+        generatorContext.group = groupId
 
         wizardContext.projectName = entityName
         wizardContext.setProjectFileDirectory(FileUtil.join(location, entityName))
@@ -110,6 +116,19 @@ class LslPanel(val context: LslContext) : ModuleWizardStep() {
         } else {
             locationRow.bottomGap(BottomGap.SMALL)
         }
+
+        row(JavaStartersBundle.message("title.project.group.label")) {
+            groupRow = this
+
+            textField()
+                .bindText(groupIdProperty)
+                .columns(COLUMNS_MEDIUM)
+                .withSpecialValidation(
+                    ValidationFunctions.CHECK_NOT_EMPTY,
+                    ValidationFunctions.CHECK_NO_WHITESPACES,
+                    ValidationFunctions.CHECK_GROUP_FORMAT,
+                    ValidationFunctions.CHECK_NO_RESERVED_WORDS)
+        }.bottomGap(BottomGap.SMALL)
     }
 
     private fun suggestName(): String {
