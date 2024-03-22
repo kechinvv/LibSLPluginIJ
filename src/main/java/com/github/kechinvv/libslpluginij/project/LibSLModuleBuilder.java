@@ -5,7 +5,6 @@ import com.intellij.codeInsight.actions.ReformatCodeProcessor;
 import com.intellij.compiler.CompilerWorkspaceConfiguration;
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.projectWizard.ProjectSettingsStep;
-import com.intellij.ide.starters.local.StarterContext;
 import com.intellij.ide.util.projectWizard.*;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.GitRepositoryInitializer;
@@ -40,7 +39,7 @@ import static com.intellij.openapi.progress.ProgressKt.runBackgroundableTask;
 
 public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuilder, ModuleBuilderListener {
     private List<Pair<String, String>> mySourcePaths;
-    protected StarterContext lslGeneratorContext = new StarterContext();
+    protected LslGeneratorContext lslGeneratorContext = new LslGeneratorContext();
 
     public LibSLModuleBuilder() {
         addListener(this);
@@ -110,7 +109,7 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
 
                     (new ReformatCodeProcessor(module.getProject(), module, false)).run();
 
-                    if (lslGeneratorContext.getGitIntegration()) {
+                    if (lslGeneratorContext.gitIntegration) {
                         runBackgroundableTask(IdeBundle.message("progress.title.creating.git.repository"),
                                 module.getProject(),
                                 true,
@@ -155,7 +154,7 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
 
     @Override
     public ModuleWizardStep getCustomOptionsStep(WizardContext context, Disposable parentDisposable) {
-        return new LslPanel(lslGeneratorContext);
+        return new LslPanel(new LslContext(context, parentDisposable, lslGeneratorContext, this));
     }
 
 

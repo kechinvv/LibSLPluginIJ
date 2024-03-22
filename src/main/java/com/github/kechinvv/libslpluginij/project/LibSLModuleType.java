@@ -46,7 +46,7 @@ public class LibSLModuleType extends ModuleType<LibSLModuleBuilder> {
 //    public ModuleWizardStep @NotNull [] createWizardSteps(@NotNull WizardContext wizardContext,
 //                                                          @NotNull LibSLModuleBuilder moduleBuilder,
 //                                                          @NotNull ModulesProvider modulesProvider) {
-//        return new ModuleWizardStep[]{new LslPanel()};
+//        return new ModuleWizardStep[]{new LslPanel.form()};
 //    }
 
 //    @Override
