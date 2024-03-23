@@ -124,7 +124,6 @@ class LslPanel(val context: LslContext) : ModuleWizardStep() {
                 .bindText(groupIdProperty)
                 .columns(COLUMNS_MEDIUM)
                 .withSpecialValidation(
-                    ValidationFunctions.CHECK_NOT_EMPTY,
                     ValidationFunctions.CHECK_NO_WHITESPACES,
                     ValidationFunctions.CHECK_GROUP_FORMAT,
                     ValidationFunctions.CHECK_NO_RESERVED_WORDS)

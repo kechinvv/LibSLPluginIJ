@@ -10,6 +10,7 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.GitRepositoryInitializer;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.options.ConfigurationException;
@@ -30,12 +31,10 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static com.intellij.openapi.progress.ProgressKt.runBackgroundableTask;
+import static java.util.Collections.emptyMap;
 
 public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuilder, ModuleBuilderListener {
     private List<Pair<String, String>> mySourcePaths;
@@ -103,7 +102,13 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
 
 
         if (!ApplicationManager.getApplication().isUnitTestMode()) {
-            StartupManager.getInstance(module.getProject()).runAfterOpened(() -> {  // IDEA-244863
+            WriteAction.runAndWait(() -> {
+                new File(getSourcePaths().get(0).first +
+                        File.separator +
+                        lslGeneratorContext.group.replace(".", File.separator))
+                        .mkdirs();
+            });
+            StartupManager.getInstance(module.getProject()).runAfterOpened(() -> {
                 ModalityUiUtil.invokeLaterIfNeeded(ModalityState.NON_MODAL, module.getDisposed(), () -> {
                     if (module.isDisposed()) return;
 
@@ -170,11 +175,12 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
     @Override
     public List<Pair<String, String>> getSourcePaths() {
         if (mySourcePaths == null) {
-            final List<Pair<String, String>> paths = new ArrayList<>();
-            @NonNls final String path = getContentEntryPath() + File.separator + "spec";
+            mySourcePaths = new ArrayList<>();
+            @NonNls final String path = getContentEntryPath()
+                    + File.separator
+                    + "spec";
             new File(path).mkdirs();
-            paths.add(Pair.create(path, ""));
-            return paths;
+            mySourcePaths.add(Pair.create(path, ""));
         }
         return mySourcePaths;
     }
@@ -198,16 +204,4 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
         return LibSLModuleType.getInstance();
     }
 
-//    public static void openSampleFiles(Module module, List<String> filePathsToOpen) {
-//        var contentRoot = Arrays.stream(ModuleRootManager.getInstance(module).getContentRoots()).findFirst().orElse(null);
-//        if (contentRoot != null) {
-//            var fileEditorManager = FileEditorManager.getInstance(module.getProject());
-//            for (String filePath : filePathsToOpen) {
-//                var fileToOpen = VfsUtil.findRelativeFile(filePath, contentRoot);
-//                if (fileToOpen != null) {
-//                    fileEditorManager.openTextEditor(new OpenFileDescriptor(module.getProject(), fileToOpen), true);
-//                }
-//            }
-//        }
-//    }
 }
