@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class LibSLModuleType extends ModuleType<LibSLModuleBuilder> {
+public class LibSLModuleType extends ModuleType<EmptyLslModuleBuilder> {
     protected LibSLModuleType() {
         super("LIBSL_MODULE");
     }
@@ -23,8 +23,8 @@ public class LibSLModuleType extends ModuleType<LibSLModuleBuilder> {
     }
 
     @Override
-    public @NotNull LibSLModuleBuilder createModuleBuilder() {
-        return new LibSLModuleBuilder();
+    public @NotNull EmptyLslModuleBuilder createModuleBuilder() {
+        return new EmptyLslModuleBuilder();
     }
 
     @Override
