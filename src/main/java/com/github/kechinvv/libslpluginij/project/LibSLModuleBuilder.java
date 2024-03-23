@@ -31,14 +31,22 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 import static com.intellij.openapi.progress.ProgressKt.runBackgroundableTask;
-import static java.util.Collections.emptyMap;
 
 public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuilder, ModuleBuilderListener {
     private List<Pair<String, String>> mySourcePaths;
     protected LslGeneratorContext lslGeneratorContext = new LslGeneratorContext();
+
+    @Override
+    public int getWeight() {
+        return IJ_PLUGIN_WEIGHT;
+    }
+
 
     public LibSLModuleBuilder() {
         addListener(this);
