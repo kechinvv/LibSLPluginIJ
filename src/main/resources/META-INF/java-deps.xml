@@ -1,10 +1,10 @@
 <idea-plugin version="2">
     <extensions defaultExtensionNs="com.intellij">
         <moduleType id="LIBSL_MODULE" implementationClass="com.github.kechinvv.libslpluginij.project.LibSLModuleType"/>
-        <!--<moduleBuilder builderClass="com.github.kechinvv.libslpluginij.project.LibSLModuleBuilder"/>-->
+        <moduleBuilder builderClass="com.github.kechinvv.libslpluginij.project.LibSLModuleBuilder"/>
         <!--        <moduleConfigurationEditorProvider implementation="com.goide.configuration.GoModuleEditorsProvider" order="first"/>-->
         <!--        <editorNotificationProvider implementation="com.goide.inspections.WrongModuleTypeNotificationProvider"/>-->
-        <moduleBuilder builderClass="com.github.kechinvv.libslpluginij.project.EmptyLslModuleBuilder"/>
+        <!--        <moduleBuilder builderClass="com.github.kechinvv.libslpluginij.project.EmptyLslModuleBuilder"/>-->
 
         <projectStructureDetector
                 implementation="com.github.kechinvv.libslpluginij.project.LibSLProjectStructureDetector"/>
