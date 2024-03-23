@@ -2,7 +2,9 @@ package com.github.kechinvv.libslpluginij.project
 
 import com.intellij.ide.IdeBundle
 import com.intellij.ide.starters.JavaStartersBundle
-import com.intellij.ide.starters.shared.*
+import com.intellij.ide.starters.shared.TextValidationFunction
+import com.intellij.ide.starters.shared.ValidationFunctions
+import com.intellij.ide.starters.shared.withValidation
 import com.intellij.ide.util.installNameGenerators
 import com.intellij.ide.util.projectWizard.ModuleBuilder
 import com.intellij.ide.util.projectWizard.ModuleWizardStep
@@ -23,12 +25,10 @@ import com.intellij.openapi.ui.getPresentablePath
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.ui.SimpleListCellRenderer
 import com.intellij.ui.UIBundle
 import com.intellij.ui.dsl.builder.*
 import org.jetbrains.annotations.Nls
 import java.io.File
-import javax.swing.DefaultComboBoxModel
 import javax.swing.JComponent
 import javax.swing.JTextField
 

@@ -64,7 +64,7 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
 
     @Override
     public String getPresentableName() {
-        return "LibSL Module";
+        return "LibSL";
     }
 
     @Override
