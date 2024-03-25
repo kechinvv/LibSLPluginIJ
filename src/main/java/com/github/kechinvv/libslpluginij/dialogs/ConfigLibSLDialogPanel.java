@@ -1,7 +1,10 @@
 package com.github.kechinvv.libslpluginij.dialogs;
 
+import com.intellij.openapi.fileChooser.FileChooserDescriptor;
+import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -10,9 +13,9 @@ import static com.github.kechinvv.libslpluginij.dialogs.LibSLConfigPropsStore.ge
 
 public class ConfigLibSLDialogPanel extends DialogWrapper {
     private JPanel dialogContents;
-    private JTextField translatorBin;
+    private TextFieldWithBrowseButton translatorBin;
     private JTextField translatorRun;
-    private JTextField taintBin;
+    private TextFieldWithBrowseButton taintBin;
     private JTextField taintRun;
 
     protected ConfigLibSLDialogPanel(@Nullable Project project) {
@@ -27,6 +30,16 @@ public class ConfigLibSLDialogPanel extends DialogWrapper {
     }
 
     private void initFields(Project project) {
+        var dirChooser = FileChooserDescriptorFactory.createSingleFolderDescriptor();
+        translatorBin.addBrowseFolderListener("Select path to binary", null, project, dirChooser);
+        translatorBin.setTextFieldPreferredWidth(50);
+        dirChooser = FileChooserDescriptorFactory.createSingleFolderDescriptor();
+        taintBin.addBrowseFolderListener("Select path to binary", null, project, dirChooser);
+        taintBin.setTextFieldPreferredWidth(50);
+        loadValues(project);
+    }
+
+    private void loadValues(Project project) {
         var props = getProperties(project);
         translatorBin.setText(props.translatorBin);
         translatorRun.setText(props.translatorRun);
