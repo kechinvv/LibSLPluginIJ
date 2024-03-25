@@ -16,6 +16,7 @@ public class ConfigurationAction extends AnAction {
 
     @Override
     public void update(AnActionEvent e) {
+        //TODO: need refactoring
         var psi = e.getData(CommonDataKeys.PSI_FILE);
         var virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE);
         var project = e.getData(CommonDataKeys.PROJECT);
