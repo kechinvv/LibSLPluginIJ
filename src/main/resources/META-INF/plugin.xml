@@ -73,7 +73,7 @@
 
 
         <directoryProjectGenerator implementation="com.github.kechinvv.libslpluginij.project.LibSLProjectGenerator"/>
-        <projectService serviceImplementation="com.github.kechinvv.libslpluginij.project.LibSLPropsComponent"/>
+        <projectService serviceImplementation="com.github.kechinvv.libslpluginij.dialogs.LibSLPropsComponent"/>
 
     </extensions>
     <actions>

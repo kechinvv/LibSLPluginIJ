@@ -1,6 +1,5 @@
-package com.github.kechinvv.libslpluginij.project;
+package com.github.kechinvv.libslpluginij.dialogs;
 
-import com.github.kechinvv.libslpluginij.dialogs.LibSLConfigPropsStore;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.project.Project;

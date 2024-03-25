@@ -1,6 +1,5 @@
 package com.github.kechinvv.libslpluginij.dialogs;
 
-import com.github.kechinvv.libslpluginij.project.LibSLPropsComponent;
 import com.intellij.openapi.project.Project;
 
 public class LibSLConfigPropsStore {
