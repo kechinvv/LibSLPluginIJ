@@ -2,8 +2,8 @@ package com.github.kechinvv.libslpluginij.dialogs;
 
 public class LibSLConfigProps {
 
-    public String translatorBin;
-    public String translatorRun;
-    public String taintBin;
-    public String taintRun;
+    public String translatorCmd;
+    public String translatorInput;
+    public String taintCmd;
+    public String taintInput;
 }

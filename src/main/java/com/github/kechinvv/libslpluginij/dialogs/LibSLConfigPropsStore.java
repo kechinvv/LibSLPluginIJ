@@ -20,10 +20,10 @@ public class LibSLConfigPropsStore {
     private static LibSLConfigProps initDefaultProperties() {
         LibSLConfigProps defaultSettings = new LibSLConfigProps();
 
-        defaultSettings.translatorBin = "";
-        defaultSettings.translatorRun = "";
-        defaultSettings.taintBin = "";
-        defaultSettings.taintRun = "";
+        defaultSettings.translatorCmd = "";
+        defaultSettings.translatorInput = "--work-dir";
+        defaultSettings.taintCmd = "";
+        defaultSettings.taintInput = "--work-dir";
 
         return defaultSettings;
     }

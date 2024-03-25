@@ -34,8 +34,8 @@ public class TranslateAction extends AnAction {
         if (file == null || project == null) return;
         if(!file.isDirectory()) return;
         var props = LibSLConfigPropsStore.getProperties(project);
-        var bin = props.translatorBin;
-        var cmd = props.translatorRun;
+        var bin = props.translatorCmd;
+        var cmd = props.translatorInput;
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.github.kechinvv.libslpluginij.dialogs;
 
-import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
@@ -13,10 +11,14 @@ import static com.github.kechinvv.libslpluginij.dialogs.LibSLConfigPropsStore.ge
 
 public class ConfigLibSLDialogPanel extends DialogWrapper {
     private JPanel dialogContents;
-    private TextFieldWithBrowseButton translatorBin;
-    private JTextField translatorRun;
-    private TextFieldWithBrowseButton taintBin;
-    private JTextField taintRun;
+    private TextFieldWithBrowseButton translatorCmd;
+    private JTextField translatorInput;
+    private TextFieldWithBrowseButton taintCmd;
+    private JTextField taintInput;
+    private JTextPane commandForTerminalWithoutTextPane;
+    private JTextPane commandForTerminalWithoutTextPane1;
+    private JTextPane onlyParameterNameTextArea;
+    private JTextPane onlyParameterNameTextPane;
 
     protected ConfigLibSLDialogPanel(@Nullable Project project) {
         super(project);
@@ -30,21 +32,21 @@ public class ConfigLibSLDialogPanel extends DialogWrapper {
     }
 
     private void initFields(Project project) {
-        var dirChooser = FileChooserDescriptorFactory.createSingleFolderDescriptor();
-        translatorBin.addBrowseFolderListener("Select path to binary", null, project, dirChooser);
-        translatorBin.setTextFieldPreferredWidth(50);
-        dirChooser = FileChooserDescriptorFactory.createSingleFolderDescriptor();
-        taintBin.addBrowseFolderListener("Select path to binary", null, project, dirChooser);
-        taintBin.setTextFieldPreferredWidth(50);
+//        var dirChooser = FileChooserDescriptorFactory.createSingleFolderDescriptor();
+//        translatorCmd.addBrowseFolderListener("Select path to binary", null, project, dirChooser);
+//        translatorCmd.setTextFieldPreferredWidth(50);
+//        dirChooser = FileChooserDescriptorFactory.createSingleFolderDescriptor();
+//        taintCmd.addBrowseFolderListener("Select path to binary", null, project, dirChooser);
+//        taintCmd.setTextFieldPreferredWidth(50);
         loadValues(project);
     }
 
     private void loadValues(Project project) {
         var props = getProperties(project);
-        translatorBin.setText(props.translatorBin);
-        translatorRun.setText(props.translatorRun);
-        taintBin.setText(props.taintBin);
-        taintRun.setText(props.taintRun);
+        translatorCmd.setText(props.translatorCmd);
+        translatorInput.setText(props.translatorInput);
+        taintCmd.setText(props.taintCmd);
+        taintInput.setText(props.taintInput);
     }
 
     @Override
@@ -56,10 +58,10 @@ public class ConfigLibSLDialogPanel extends DialogWrapper {
     public void saveValues(Project project) {
         LibSLConfigProps lslProps = getProperties(project);
 
-        lslProps.translatorBin = translatorBin.getText();
-        lslProps.translatorRun = translatorRun.getText();
-        lslProps.taintBin = taintBin.getText();
-        lslProps.taintRun = taintRun.getText();
+        lslProps.translatorCmd = translatorCmd.getText();
+        lslProps.translatorInput = translatorInput.getText();
+        lslProps.taintCmd = taintCmd.getText();
+        lslProps.taintInput = taintInput.getText();
     }
 
     private void createUIComponents() {
