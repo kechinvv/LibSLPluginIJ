@@ -22,17 +22,13 @@ public class ConfigurationAction extends AnAction {
         if (e.getProject()==null ) {
             return;
         }
-//        VirtualFile grammarFile = MyActionUtils.getGrammarFileFromEvent(e);
-//        if ( grammarFile==null ) return;
-//        LOG.info("actionPerformed "+grammarFile);
-
         var configDialog = ConfigLibSLDialogPanel.getDialogForm(e.getProject());
         configDialog.getPeer().setTitle("Configure LibSL");
 
         configDialog.show();
 
         if ( configDialog.getExitCode()== DialogWrapper.OK_EXIT_CODE ) {
-//            configDialog.saveValues(e.getProject(), grammarFile.getPath());
+            configDialog.saveValues(e.getProject());
         }
     }
 

@@ -5,14 +5,15 @@ import com.intellij.openapi.ui.DialogWrapper;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.*;
+
+import static com.github.kechinvv.libslpluginij.dialogs.LibSLConfigPropsStore.getProperties;
 
 public class ConfigLibSLDialogPanel extends DialogWrapper {
     private JPanel dialogContents;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
+    private JTextField translatorBin;
+    private JTextField translatorRun;
+    private JTextField taintBin;
+    private JTextField taintRun;
 
     protected ConfigLibSLDialogPanel(@Nullable Project project) {
         super(project);
@@ -21,12 +22,34 @@ public class ConfigLibSLDialogPanel extends DialogWrapper {
     public static ConfigLibSLDialogPanel getDialogForm(final Project project) {
         var grammarFrom = new ConfigLibSLDialogPanel(project);
         grammarFrom.init();
-//        grammarFrom.initAntlrFields(project, qualFileName);
+        grammarFrom.initFields(project);
         return grammarFrom;
+    }
+
+    private void initFields(Project project) {
+        var props = getProperties(project);
+        translatorBin.setText(props.translatorBin);
+        translatorRun.setText(props.translatorRun);
+        taintBin.setText(props.taintBin);
+        taintRun.setText(props.taintRun);
     }
 
     @Override
     protected @Nullable JComponent createCenterPanel() {
         return dialogContents;
+    }
+
+
+    public void saveValues(Project project) {
+        LibSLConfigProps lslProps = getProperties(project);
+
+        lslProps.translatorBin = translatorBin.getText();
+        lslProps.translatorRun = translatorRun.getText();
+        lslProps.taintBin = taintBin.getText();
+        lslProps.taintRun = taintRun.getText();
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }
