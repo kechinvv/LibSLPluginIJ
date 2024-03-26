@@ -9,7 +9,9 @@ import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBPanel
 import com.intellij.ui.content.ContentFactory
 import com.github.kechinvv.libslpluginij.MyBundle
+import com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.isLibSLModule
 import com.github.kechinvv.libslpluginij.services.MyProjectService
+import com.intellij.openapi.wm.ToolWindowAnchor
 import javax.swing.JButton
 
 
@@ -20,12 +22,13 @@ class MyToolWindowFactory : ToolWindowFactory {
     }
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
+        toolWindow.setAnchor(ToolWindowAnchor.BOTTOM, null)
         val myToolWindow = MyToolWindow(toolWindow)
         val content = ContentFactory.getInstance().createContent(myToolWindow.getContent(), null, false)
         toolWindow.contentManager.addContent(content)
     }
 
-    override fun shouldBeAvailable(project: Project) = true
+    override fun shouldBeAvailable(project: Project) = isLibSLModule(project, project.projectFile)
 
     class MyToolWindow(toolWindow: ToolWindow) {
 

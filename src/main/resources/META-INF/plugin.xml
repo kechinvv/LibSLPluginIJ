@@ -28,7 +28,7 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!--        <toolWindow factoryClass="com.github.kechinvv.libslpluginij.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>-->
+        <toolWindow factoryClass="com.github.kechinvv.libslpluginij.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
         <fileType
                 name="LibSL File"
                 implementationClass="com.github.kechinvv.libslpluginij.language.LibSLFileType"
