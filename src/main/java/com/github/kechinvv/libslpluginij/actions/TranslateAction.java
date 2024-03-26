@@ -15,22 +15,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Objects;
 
+import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.visibleForDir;
+import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.visibleForFile;
+
 public class TranslateAction extends AnAction {
     public final static Logger LOG = Logger.getInstance("TranslateAction");
 
     @Override
     public void update(AnActionEvent e) {
-        //TODO: need refactoring
-        var psi = e.getData(CommonDataKeys.PSI_FILE);
-        var virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE);
-        var project = e.getData(CommonDataKeys.PROJECT);
-        var isLslModule = false;
-        if (project != null && virtualFile != null)
-            isLslModule = Objects.equals(
-                    ProjectFileIndex.getInstance(project).getModuleForFile(virtualFile).getModuleTypeName(),
-                    "LIBSL_MODULE");
-        boolean isLsl = (psi != null) && (psi.getFileType() == LibSLFileType.INSTANCE);
-        e.getPresentation().setEnabledAndVisible(isLsl || isLslModule);
+        e.getPresentation().setEnabledAndVisible(visibleForDir(e) || visibleForFile(e));
     }
 
     @Override
