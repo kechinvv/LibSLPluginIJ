@@ -1,6 +1,8 @@
 package com.github.kechinvv.libslpluginij.actions;
 
 import com.github.kechinvv.libslpluginij.language.LibSLFileType;
+import com.github.kechinvv.libslpluginij.toolWindow.LibSLToolOutputWindowFactory;
+import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.roots.ProjectFileIndex;
@@ -30,6 +32,7 @@ public class GenerateTaintConfigAction extends AnAction {
             return;
         }
         LOG.info("Performed success " + currentFile.getCanonicalPath());
+        LibSLToolOutputWindowFactory.console.print("aaaaa", ConsoleViewContentType.SYSTEM_OUTPUT);
         // If an element is selected in the editor, add info about it.
     }
 
