@@ -30,7 +30,7 @@ class LibSLToolOutputWindowFactory : ToolWindowFactory {
 
     override fun shouldBeAvailable(project: Project) = runReadAction { isLibSLModule(project, project.projectFile) }
 
-    class LibSLToolOutput(toolWindow: ToolWindow) {
+    class LibSLToolOutput(val toolWindow: ToolWindow) {
 
         private val project = toolWindow.project
         private lateinit var console: ConsoleView
@@ -50,6 +50,10 @@ class LibSLToolOutputWindowFactory : ToolWindowFactory {
         fun lslPrint(message: String) {
             val timeStamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
             console.print("$timeStamp: $message", ConsoleViewContentType.SYSTEM_OUTPUT)
+        }
+
+        fun show() {
+            toolWindow.show()
         }
     }
 }
