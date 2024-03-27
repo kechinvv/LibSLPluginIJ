@@ -11,15 +11,13 @@ import com.intellij.ui.content.ContentFactory
 import com.github.kechinvv.libslpluginij.MyBundle
 import com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.isLibSLModule
 import com.github.kechinvv.libslpluginij.services.MyProjectService
+import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.wm.ToolWindowAnchor
 import javax.swing.JButton
 
 
 class MyToolWindowFactory : ToolWindowFactory {
 
-    init {
-        thisLogger().warn("Don't forget to remove all non-needed sample code files with their corresponding registration entries in `plugin.xml`.")
-    }
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         toolWindow.setAnchor(ToolWindowAnchor.BOTTOM, null)
@@ -28,7 +26,7 @@ class MyToolWindowFactory : ToolWindowFactory {
         toolWindow.contentManager.addContent(content)
     }
 
-    override fun shouldBeAvailable(project: Project) = isLibSLModule(project, project.projectFile)
+    override fun shouldBeAvailable(project: Project) = runReadAction { isLibSLModule(project, project.projectFile) }
 
     class MyToolWindow(toolWindow: ToolWindow) {
 

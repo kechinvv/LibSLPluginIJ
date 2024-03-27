@@ -61,11 +61,8 @@ changelog {
     headerParserRegex.set("""(\d+\.\d+\.\d+)""".toRegex())
     itemPrefix.set("-")
     keepUnreleasedSection.set(false)
-//    unreleasedTerm.set("[Unreleased]")
     groups.set(listOf("Added", "Changed", "Fixed"))
     lineSeparator.set("\n")
-//    combinePreReleases.set(true)
-//    sectionUrlBuilder.set(ChangelogSectionUrlBuilder { repositoryUrl, _, _, _ -> repositoryUrl })
 }
 
 
