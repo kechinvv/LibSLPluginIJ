@@ -35,7 +35,7 @@ public class LibSLModuleType extends ModuleType<LibSLModuleBuilder> {
 
     @Override
     public @NotNull Icon getNodeIcon(boolean b) {
-        return LibSLIcon.FILE;
+        return LibSLIcon.PROJECT;
     }
 
 

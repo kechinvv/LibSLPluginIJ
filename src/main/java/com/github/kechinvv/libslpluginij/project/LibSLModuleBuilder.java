@@ -3,6 +3,7 @@ package com.github.kechinvv.libslpluginij.project;
 import com.github.kechinvv.libslpluginij.language.LibSLIcon;
 import com.intellij.codeInsight.actions.ReformatCodeProcessor;
 import com.intellij.compiler.CompilerWorkspaceConfiguration;
+import com.intellij.icons.AllIcons;
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.projectWizard.ProjectSettingsStep;
 import com.intellij.ide.util.projectWizard.*;
@@ -61,7 +62,7 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
 
     @Override
     public Icon getNodeIcon() {
-        return LibSLIcon.FILE;
+        return LibSLIcon.PROJECT;
     }
 
     @Override
