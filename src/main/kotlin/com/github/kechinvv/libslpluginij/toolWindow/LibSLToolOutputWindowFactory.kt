@@ -1,30 +1,29 @@
 package com.github.kechinvv.libslpluginij.toolWindow
 
 import com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.isLibSLModule
-import com.github.kechinvv.libslpluginij.services.MyProjectService
 import com.intellij.execution.filters.TextConsoleBuilderFactory
 import com.intellij.execution.ui.ConsoleView
+import com.intellij.execution.ui.ConsoleViewContentType
 import com.intellij.openapi.application.runReadAction
-import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
-import com.intellij.openapi.wm.ToolWindowAnchor
 import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.content.Content
 import com.intellij.ui.content.ContentFactory
-import javax.swing.JComponent
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class LibSLToolOutputWindowFactory : ToolWindowFactory {
 
     companion object {
-        lateinit var console: ConsoleView
+        lateinit var toolOutput: LibSLToolOutput
     }
 
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        val myToolWindow = LibSLToolOutput(toolWindow)
-        toolWindow.contentManager.addContent(myToolWindow.getContent())
+        toolOutput = LibSLToolOutput(toolWindow)
+        toolWindow.contentManager.addContent(toolOutput.getContent())
     }
 
     override fun isApplicable(project: Project) = runReadAction { isLibSLModule(project, project.projectFile) }
@@ -34,6 +33,7 @@ class LibSLToolOutputWindowFactory : ToolWindowFactory {
     class LibSLToolOutput(toolWindow: ToolWindow) {
 
         private val project = toolWindow.project
+        private lateinit var console: ConsoleView
 
         fun getContent() : Content {
             val contentFactory = ContentFactory.getInstance()
@@ -45,6 +45,11 @@ class LibSLToolOutputWindowFactory : ToolWindowFactory {
             content.isCloseable = false
             content.setDisposer(console)
             return content
+        }
+
+        fun lslPrint(message: String) {
+            val timeStamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
+            console.print("$timeStamp: $message", ConsoleViewContentType.SYSTEM_OUTPUT)
         }
     }
 }

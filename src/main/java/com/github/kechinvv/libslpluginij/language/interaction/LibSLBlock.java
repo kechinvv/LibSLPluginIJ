@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.github.kechinvv.libslpluginij.language.utils.LslUtils.getPrevSiblingSkipSpacesAndComments;
+import static com.github.kechinvv.libslpluginij.language.utils.LslPsiUtils.getPrevSiblingSkipSpacesAndComments;
 
 public class LibSLBlock extends AbstractBlock {
 

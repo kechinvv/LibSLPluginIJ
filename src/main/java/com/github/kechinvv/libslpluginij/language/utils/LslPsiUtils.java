@@ -9,11 +9,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class LslUtils {
+public class LslPsiUtils {
 
-    public final static LslUtils INSTANCE = new LslUtils();
+    public final static LslPsiUtils INSTANCE = new LslPsiUtils();
 
-    private LslUtils() {
+    private LslPsiUtils() {
     }
 
     public static Collection<PsiElement> getAllSiblings(PsiElement element) {

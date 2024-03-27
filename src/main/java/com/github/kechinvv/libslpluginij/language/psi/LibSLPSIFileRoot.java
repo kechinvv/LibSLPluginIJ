@@ -4,13 +4,11 @@ import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
 import com.github.kechinvv.libslpluginij.language.LibSL;
 import com.github.kechinvv.libslpluginij.language.LibSLFileType;
 import com.github.kechinvv.libslpluginij.language.psi.rules.*;
-import com.github.kechinvv.libslpluginij.language.utils.LslUtils;
+import com.github.kechinvv.libslpluginij.language.utils.LslPsiUtils;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.TokenType;
-import com.intellij.psi.util.PsiTreeUtil;
 import org.antlr.intellij.adaptor.lexer.TokenIElementType;
 import org.jetbrains.annotations.*;
 
@@ -19,7 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.tokens;
 import static com.intellij.psi.util.PsiTreeUtil.*;
 
 public class LibSLPSIFileRoot extends PsiFileBase implements PsiElement {
@@ -60,7 +57,7 @@ public class LibSLPSIFileRoot extends PsiFileBase implements PsiElement {
     public Collection<LslIdentifier> getActionsDeclarationsNames() {
         return findChildrenOfType(this, LslActionDecl.class).stream()
                 .map(lslActionDecl -> {
-                    var listIds = LslUtils.getFilteredSiblings(lslActionDecl.getFirstChild(),
+                    var listIds = LslPsiUtils.getFilteredSiblings(lslActionDecl.getFirstChild(),
                             it -> it instanceof LslIdentifier);
                     if (!listIds.isEmpty()) return (LslIdentifier) listIds.get(0);
                     else return null;
@@ -70,7 +67,7 @@ public class LibSLPSIFileRoot extends PsiFileBase implements PsiElement {
     public Collection<LslIdentifier> getAnnotationsDeclarationsNames() {
         return findChildrenOfType(this, LslAnnotationDecl.class).stream()
                 .map(lslAnnotationDecl -> {
-                    var listIds = LslUtils.getFilteredSiblings(lslAnnotationDecl.getFirstChild(),
+                    var listIds = LslPsiUtils.getFilteredSiblings(lslAnnotationDecl.getFirstChild(),
                             it -> it instanceof LslIdentifier);
                     if (!listIds.isEmpty()) return (LslIdentifier) listIds.get(0);
                     else return null;

@@ -1,18 +1,12 @@
 package com.github.kechinvv.libslpluginij.actions;
 
-import com.github.kechinvv.libslpluginij.language.LibSLFileType;
 import com.github.kechinvv.libslpluginij.toolWindow.LibSLToolOutputWindowFactory;
-import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
-import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.visibleForDir;
-import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.visibleForFile;
+import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.*;
 
 
 public class GenerateTaintConfigAction extends AnAction {
@@ -32,8 +26,7 @@ public class GenerateTaintConfigAction extends AnAction {
             return;
         }
         LOG.info("Performed success " + currentFile.getCanonicalPath());
-        LibSLToolOutputWindowFactory.console.print("aaaaa", ConsoleViewContentType.SYSTEM_OUTPUT);
-        // If an element is selected in the editor, add info about it.
+        LibSLToolOutputWindowFactory.toolOutput.lslPrint("pressed");
     }
 
     @Override
