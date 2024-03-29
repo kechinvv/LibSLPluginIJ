@@ -1,22 +1,23 @@
 package com.github.kechinvv.libslpluginij.actions;
 
 import com.github.kechinvv.libslpluginij.actions.utils.ToolType;
+import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.diagnostic.Logger;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Random;
 
 import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.*;
 
-public class TranslateAction extends AnAction {
-    public final static Logger LOG = Logger.getInstance("TranslateAction");
+abstract class LslToolAction extends AnAction {
 
+    abstract String getActionId();
     @Override
     public void update(AnActionEvent e) {
-        e.getPresentation().setEnabledAndVisible(visibleForDir(e) || visibleForFile(e));
+        e.getPresentation().setEnabledAndVisible(true);
     }
-
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
@@ -27,4 +28,14 @@ public class TranslateAction extends AnAction {
     public @NotNull ActionUpdateThread getActionUpdateThread() {
         return ActionUpdateThread.BGT;
     }
+
+    public  void register() {
+        ActionManager actionManager = ActionManager.getInstance();
+        String actionId = getActionId();
+        if (actionManager.getAction(actionId) == null) {
+            System.out.println("REGISTER ACTION " + actionId);
+            actionManager.registerAction(actionId, this);
+        }
+    }
+
 }

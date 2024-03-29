@@ -49,7 +49,6 @@ public class ActionUtils {
             case TRANSLATOR -> processRun(props.translatorCmd, props.translatorInput, targetFile);
             case TAINT_GENERATOR -> processRun(props.taintCmd, props.taintInput, targetFile);
         }
-
     }
 
     public static void processRun(String cmd, String workdir, VirtualFile targetFile) {
