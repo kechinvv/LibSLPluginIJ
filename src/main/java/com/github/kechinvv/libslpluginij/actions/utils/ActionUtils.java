@@ -33,6 +33,7 @@ public class ActionUtils {
     }
 
     public static boolean isLibSLModule(Project project, VirtualFile virtualFile) {
+        if (virtualFile == null || project == null) return false;
         var module = ProjectFileIndex.getInstance(project).getModuleForFile(virtualFile);
         if (module == null) return false;
         return Objects.equals(module.getModuleTypeName(), "LIBSL_MODULE");
