@@ -73,9 +73,10 @@
 
 
         <directoryProjectGenerator implementation="com.github.kechinvv.libslpluginij.project.LibSLProjectGenerator"/>
-        <projectService serviceImplementation="com.github.kechinvv.libslpluginij.dialogs.LibSLPropsComponent"/>
-
+        <projectService serviceImplementation="com.github.kechinvv.libslpluginij.dialogs.LibSLToolsComponent"/>
+        <postStartupActivity implementation="com.github.kechinvv.libslpluginij.activities.ActionLoader"/>
     </extensions>
+
     <actions>
         <action id="lsl.taint" class="com.github.kechinvv.libslpluginij.actions.GenerateTaintConfigAction"
                 text="Generate Taint Config" icon="/icons/libsl.svg">
@@ -91,14 +92,14 @@
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
             <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
         </action>
-        <action id="lsl.configure" class="com.github.kechinvv.libslpluginij.actions.ConfigurationAction"
-                text="Configure LibSL Tools..." icon="/icons/libsl.svg">
-            <add-to-group group-id="ToolsMenu" anchor="before"
-                          relative-to-action="com.intellij.tools.ExternalToolsGroup"/>
-            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
-        </action>
-        <action id="lsl.configureTest" class="com.github.kechinvv.libslpluginij.actions.ConfigurationActionNew"
+        <!--        <action id="lsl.configure" class="com.github.kechinvv.libslpluginij.actions.ConfigurationActionOld"-->
+        <!--                text="Configure LibSL Tools..." icon="/icons/libsl.svg">-->
+        <!--            <add-to-group group-id="ToolsMenu" anchor="before"-->
+        <!--                          relative-to-action="com.intellij.tools.ExternalToolsGroup"/>-->
+        <!--            <add-to-group group-id="EditorPopupMenu" anchor="last"/>-->
+        <!--            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>-->
+        <!--        </action>-->
+        <action id="lsl.configureTest" class="com.github.kechinvv.libslpluginij.actions.ConfigurationAction"
                 text="Configure LibSL Tools TEST..." icon="/icons/libsl.svg">
             <add-to-group group-id="ToolsMenu" anchor="before"
                           relative-to-action="com.intellij.tools.ExternalToolsGroup"/>
@@ -109,4 +110,10 @@
             <add-to-group group-id="NewGroup" anchor="after" relative-to-action="NewFile"/>
         </action>
     </actions>
+
+    <projectListeners>
+        <listener
+                class="com.github.kechinvv.libslpluginij.listeners.ActionUnloader"
+                topic="com.intellij.openapi.project.ProjectManagerListener"/>
+    </projectListeners>
 </idea-plugin>

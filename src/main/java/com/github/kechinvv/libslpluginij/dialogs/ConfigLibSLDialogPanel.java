@@ -1,5 +1,6 @@
 package com.github.kechinvv.libslpluginij.dialogs;
 
+import com.github.kechinvv.libslpluginij.actions.LslToolAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
@@ -7,7 +8,9 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-import static com.github.kechinvv.libslpluginij.dialogs.LibSLConfigPropsStore.getProperties;
+import java.util.ArrayList;
+
+import static com.github.kechinvv.libslpluginij.dialogs.LibSLToolsStore.getActions;
 
 public class ConfigLibSLDialogPanel extends DialogWrapper {
     private JPanel dialogContents;
@@ -42,11 +45,8 @@ public class ConfigLibSLDialogPanel extends DialogWrapper {
     }
 
     private void loadValues(Project project) {
-        var props = getProperties(project);
-        translatorCmd.setText(props.translatorCmd);
-        translatorInput.setText(props.translatorInput);
-        taintCmd.setText(props.taintCmd);
-        taintInput.setText(props.taintInput);
+        var actions = getActions(project);
+
     }
 
     @Override
@@ -55,13 +55,9 @@ public class ConfigLibSLDialogPanel extends DialogWrapper {
     }
 
 
-    public void saveValues(Project project) {
-        LibSLConfigProps lslProps = getProperties(project);
-
-        lslProps.translatorCmd = translatorCmd.getText();
-        lslProps.translatorInput = translatorInput.getText();
-        lslProps.taintCmd = taintCmd.getText();
-        lslProps.taintInput = taintInput.getText();
+    public void savaAction(Project project, LslToolAction action) {
+        ArrayList<LslToolAction> actions = getActions(project);
+        actions.add(action);
     }
 
     private void createUIComponents() {

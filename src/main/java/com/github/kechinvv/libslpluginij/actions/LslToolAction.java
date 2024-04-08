@@ -1,6 +1,5 @@
 package com.github.kechinvv.libslpluginij.actions;
 
-import com.github.kechinvv.libslpluginij.actions.utils.ToolType;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -9,9 +8,18 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.runLslTool;
 
-abstract class LslToolAction extends AnAction {
+public abstract class LslToolAction extends AnAction {
+
+    String cmd;
+    String input;
+
+    LslToolAction(String cmd, String input) {
+        this.cmd = cmd;
+        this.input = input;
+    }
 
     abstract String getActionId();
+
     @Override
     public void update(AnActionEvent e) {
         e.getPresentation().setEnabledAndVisible(true);
@@ -19,7 +27,7 @@ abstract class LslToolAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        runLslTool(e, ToolType.TRANSLATOR);
+        runLslTool(e, cmd, input);
     }
 
     @Override
@@ -27,12 +35,21 @@ abstract class LslToolAction extends AnAction {
         return ActionUpdateThread.BGT;
     }
 
-    public  void register() {
+    public void register() {
         ActionManager actionManager = ActionManager.getInstance();
         String actionId = getActionId();
         if (actionManager.getAction(actionId) == null) {
             System.out.println("REGISTER ACTION " + actionId);
             actionManager.registerAction(actionId, this);
+        }
+    }
+
+    public void unregister() {
+        ActionManager actionManager = ActionManager.getInstance();
+        String actionId = getActionId();
+        if (actionManager.getAction(actionId) != null) {
+            System.out.println("UNREGISTER ACTION " + actionId);
+            actionManager.unregisterAction(actionId);
         }
     }
 

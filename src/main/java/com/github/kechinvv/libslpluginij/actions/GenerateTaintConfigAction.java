@@ -1,6 +1,5 @@
 package com.github.kechinvv.libslpluginij.actions;
 
-import com.github.kechinvv.libslpluginij.actions.utils.ToolType;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.diagnostic.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +17,7 @@ public class GenerateTaintConfigAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        runLslTool(e, ToolType.TAINT_GENERATOR);
+        runLslTool(e, "a", "b");
     }
 
     @Override

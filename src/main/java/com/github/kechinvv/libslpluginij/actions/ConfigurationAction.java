@@ -1,13 +1,9 @@
 package com.github.kechinvv.libslpluginij.actions;
 
-import com.github.kechinvv.libslpluginij.dialogs.ConfigLibSLDialogPanel;
-import com.intellij.openapi.actionSystem.ActionUpdateThread;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.ui.DialogWrapper;
+import com.github.kechinvv.libslpluginij.language.LibSLIcon;
+import com.intellij.openapi.actionSystem.*;
 import org.jetbrains.annotations.NotNull;
 
-import static com.github.kechinvv.libslpluginij.LslNames.message;
 import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.visibleForDir;
 import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.visibleForFile;
 
@@ -20,18 +16,20 @@ public class ConfigurationAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        if (e.getProject() == null) {
-            return;
-        }
-        var configDialog = ConfigLibSLDialogPanel.getDialogForm(e.getProject());
-        configDialog.getPeer().setTitle(message("lsl.configuration.title"));
-
-        configDialog.show();
-
-        if (configDialog.getExitCode() == DialogWrapper.OK_EXIT_CODE) {
-            configDialog.saveValues(e.getProject());
-        }
+        var newAction = new LslToolAction("a", "b") {
+            @Override
+            String getActionId() {
+                return "TEST_ACTION";
+            }
+        };
+        newAction.getTemplatePresentation().setIcon(LibSLIcon.FILE);
+        newAction.getTemplatePresentation().setText("TEST ACTION");
+        DefaultActionGroup mainMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("ProjectViewPopupMenu");
+        mainMenu.add(newAction, new Constraints(Anchor.BEFORE, "com.intellij.tools.ExternalToolsGroup"));
+        newAction.register();
     }
+
+
 
     @Override
     public @NotNull ActionUpdateThread getActionUpdateThread() {

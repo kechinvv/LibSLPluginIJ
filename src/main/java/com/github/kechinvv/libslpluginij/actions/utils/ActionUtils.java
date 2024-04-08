@@ -1,6 +1,5 @@
 package com.github.kechinvv.libslpluginij.actions.utils;
 
-import com.github.kechinvv.libslpluginij.dialogs.LibSLConfigPropsStore;
 import com.github.kechinvv.libslpluginij.language.LibSLFileType;
 import com.github.kechinvv.libslpluginij.toolWindow.LibSLToolOutputWindowFactory;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -41,16 +40,12 @@ public class ActionUtils {
         return Objects.equals(module.getModuleTypeName(), message("lsl.module"));
     }
 
-    public static void runLslTool(@NotNull AnActionEvent e, ToolType type) {
+    public static void runLslTool(@NotNull AnActionEvent e, String cmd, String input) {
         var project = e.getData(CommonDataKeys.PROJECT);
         var targetFile = e.getData(CommonDataKeys.VIRTUAL_FILE);
         if (targetFile == null || project == null) return;
         if (!targetFile.isDirectory()) return;
-        var props = LibSLConfigPropsStore.getProperties(project);
-        switch (type) {
-            case TRANSLATOR -> processRun(props.translatorCmd, props.translatorInput, targetFile);
-            case TAINT_GENERATOR -> processRun(props.taintCmd, props.taintInput, targetFile);
-        }
+        processRun(cmd, input, targetFile);
     }
 
     public static void processRun(String cmd, String workdir, VirtualFile targetFile) {

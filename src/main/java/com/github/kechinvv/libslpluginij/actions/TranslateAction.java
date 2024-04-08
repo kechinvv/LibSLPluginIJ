@@ -1,6 +1,5 @@
 package com.github.kechinvv.libslpluginij.actions;
 
-import com.github.kechinvv.libslpluginij.actions.utils.ToolType;
 import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -19,7 +18,7 @@ public class TranslateAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        runLslTool(e, ToolType.TRANSLATOR);
+        runLslTool(e,"a", "b");
     }
 
     @Override

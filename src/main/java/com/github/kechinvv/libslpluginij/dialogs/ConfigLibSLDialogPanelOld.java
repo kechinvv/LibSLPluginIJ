@@ -1,5 +1,6 @@
 package com.github.kechinvv.libslpluginij.dialogs;
 
+import com.github.kechinvv.libslpluginij.actions.LslToolAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
@@ -7,9 +8,11 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-import static com.github.kechinvv.libslpluginij.dialogs.LibSLConfigPropsStore.getProperties;
+import java.util.ArrayList;
 
-public class ConfigLibSLDialogPanelNew extends DialogWrapper {
+import static com.github.kechinvv.libslpluginij.dialogs.LibSLToolsStore.getActions;
+
+public class ConfigLibSLDialogPanelOld extends DialogWrapper {
     private JPanel dialogContents;
     private TextFieldWithBrowseButton translatorCmd;
     private JTextField translatorInput;
@@ -20,12 +23,12 @@ public class ConfigLibSLDialogPanelNew extends DialogWrapper {
     private JTextPane onlyParameterNameTextArea;
     private JTextPane onlyParameterNameTextPane;
 
-    protected ConfigLibSLDialogPanelNew(@Nullable Project project) {
+    protected ConfigLibSLDialogPanelOld(@Nullable Project project) {
         super(project);
     }
 
-    public static ConfigLibSLDialogPanelNew getDialogForm(final Project project) {
-        var grammarFrom = new ConfigLibSLDialogPanelNew(project);
+    public static ConfigLibSLDialogPanelOld getDialogForm(final Project project) {
+        var grammarFrom = new ConfigLibSLDialogPanelOld(project);
         grammarFrom.init();
         grammarFrom.initFields(project);
         return grammarFrom;
@@ -42,11 +45,8 @@ public class ConfigLibSLDialogPanelNew extends DialogWrapper {
     }
 
     private void loadValues(Project project) {
-        var props = getProperties(project);
-        translatorCmd.setText(props.translatorCmd);
-        translatorInput.setText(props.translatorInput);
-        taintCmd.setText(props.taintCmd);
-        taintInput.setText(props.taintInput);
+        var props = getActions(project);
+
     }
 
     @Override
@@ -56,12 +56,7 @@ public class ConfigLibSLDialogPanelNew extends DialogWrapper {
 
 
     public void saveValues(Project project) {
-        LibSLConfigProps lslProps = getProperties(project);
-
-        lslProps.translatorCmd = translatorCmd.getText();
-        lslProps.translatorInput = translatorInput.getText();
-        lslProps.taintCmd = taintCmd.getText();
-        lslProps.taintInput = taintInput.getText();
+        ArrayList<LslToolAction> lslProps = getActions(project);
     }
 
     private void createUIComponents() {
