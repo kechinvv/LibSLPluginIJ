@@ -3,7 +3,6 @@ package com.github.kechinvv.libslpluginij.project;
 import com.github.kechinvv.libslpluginij.language.LibSLIcon;
 import com.intellij.codeInsight.actions.ReformatCodeProcessor;
 import com.intellij.compiler.CompilerWorkspaceConfiguration;
-import com.intellij.icons.AllIcons;
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.projectWizard.ProjectSettingsStep;
 import com.intellij.ide.util.projectWizard.*;
@@ -38,6 +37,8 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.intellij.openapi.progress.ProgressKt.runBackgroundableTask;
+import static com.github.kechinvv.libslpluginij.LslNames.message;
+
 
 public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuilder, ModuleBuilderListener {
     private List<Pair<String, String>> mySourcePaths;
@@ -48,17 +49,14 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
         return IJ_PLUGIN_WEIGHT;
     }
 
-
     public LibSLModuleBuilder() {
         addListener(this);
     }
 
-
     @Override
     public String getBuilderId() {
-        return "lslbuilder";
+        return message("lsl.module.builder.id");
     }
-
 
     @Override
     public Icon getNodeIcon() {
@@ -67,17 +65,17 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
 
     @Override
     public String getDescription() {
-        return "LibSL. Library specification language.";
+        return message("lsl.module.builder.description");
     }
 
     @Override
     public String getPresentableName() {
-        return "LibSL";
+        return message("lsl.main.name");
     }
 
     @Override
     public String getGroupName() {
-        return "LibSL";
+        return message("lsl.main.name");
     }
 
     @Override
@@ -187,7 +185,7 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
             mySourcePaths = new ArrayList<>();
             @NonNls final String path = getContentEntryPath()
                     + File.separator
-                    + "spec";
+                    + message("lsl.root.default");
             new File(path).mkdirs();
             mySourcePaths.add(Pair.create(path, ""));
         }

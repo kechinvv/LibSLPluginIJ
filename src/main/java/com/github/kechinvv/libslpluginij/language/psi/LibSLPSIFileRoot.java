@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.intellij.psi.util.PsiTreeUtil.*;
-
+import static com.github.kechinvv.libslpluginij.LslNames.message;
 public class LibSLPSIFileRoot extends PsiFileBase implements PsiElement {
 
     public LibSLPSIFileRoot(@NotNull FileViewProvider viewProvider) {
@@ -33,7 +33,7 @@ public class LibSLPSIFileRoot extends PsiFileBase implements PsiElement {
 
     @Override
     public String toString() {
-        return "LibSL File";
+        return message("lsl.file.decl");
     }
 
 

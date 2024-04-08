@@ -9,8 +9,11 @@ import com.intellij.psi.PsiDirectory;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import static com.github.kechinvv.libslpluginij.LslNames.message;
+
 public class NewLslFileAction extends CreateFileFromTemplateAction implements DumbAware {
-    public static final String NEW_LSL_FILE = "LibSL File";
+    public static final String NEW_LSL_FILE = message("lsl.file.decl");
+
     public NewLslFileAction() {
         super(NEW_LSL_FILE, "", LibSLIcon.FILE);
     }
@@ -18,10 +21,10 @@ public class NewLslFileAction extends CreateFileFromTemplateAction implements Du
     @Override
     protected void buildDialog(@NotNull Project project, @NotNull PsiDirectory directory, CreateFileFromTemplateDialog.@NotNull Builder builder) {
         builder.setTitle(NEW_LSL_FILE)
-                .addKind("Empty", LibSLIcon.FILE, "Empty.lsl")
-                .addKind("Header", LibSLIcon.FILE, "Header.lsl")
-                .addKind("Automaton", LibSLIcon.FILE, "Automaton.lsl")
-                .addKind("Type", LibSLIcon.FILE, "Type.lsl");
+                .addKind(message("lsl.file.template.empty"), LibSLIcon.FILE, message("lsl.file.template.empty.path"))
+                .addKind(message("lsl.file.template.header"), LibSLIcon.FILE, message("lsl.file.template.header.path"))
+                .addKind(message("lsl.file.template.automaton"), LibSLIcon.FILE, message("lsl.file.template.automaton.path"))
+                .addKind(message("lsl.file.template.type"), LibSLIcon.FILE, message("lsl.file.template.type.path"));
     }
 
     @Override

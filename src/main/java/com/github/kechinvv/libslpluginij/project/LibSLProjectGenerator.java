@@ -12,10 +12,12 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
+import static com.github.kechinvv.libslpluginij.LslNames.message;
+
 public class LibSLProjectGenerator implements DirectoryProjectGenerator {
     @Override
     public @NotNull @NlsContexts.Label String getName() {
-        return "LibSL";
+        return message("lsl.main.name");
     }
 
     @Override

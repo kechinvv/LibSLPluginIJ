@@ -9,7 +9,7 @@ import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsProvider;
 import com.intellij.psi.codeStyle.CustomCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
-
+import static com.github.kechinvv.libslpluginij.LslNames.message;
 final class LibSLCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
 
     @Override
@@ -19,7 +19,7 @@ final class LibSLCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
 
     @Override
     public @NotNull String getConfigurableDisplayName() {
-        return "LibSL";
+        return message("lsl.main.name");
     }
 
     @NotNull

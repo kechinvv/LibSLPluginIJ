@@ -7,9 +7,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Random;
-
-import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.*;
+import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.runLslTool;
 
 abstract class LslToolAction extends AnAction {
 

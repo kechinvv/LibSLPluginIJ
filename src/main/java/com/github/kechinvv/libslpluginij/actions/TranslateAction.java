@@ -17,7 +17,6 @@ public class TranslateAction extends AnAction {
         e.getPresentation().setEnabledAndVisible(visibleForDir(e) || visibleForFile(e));
     }
 
-
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         runLslTool(e, ToolType.TRANSLATOR);

@@ -8,14 +8,16 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
+import static com.github.kechinvv.libslpluginij.LslNames.message;
+
 public class LibSLModuleType extends ModuleType<LibSLModuleBuilder> {
     protected LibSLModuleType() {
-        super("LIBSL_MODULE");
+        super(message("lsl.module"));
     }
 
     @NotNull
     public static LibSLModuleType getInstance() {
-        return (LibSLModuleType) ModuleTypeManager.getInstance().findByID("LIBSL_MODULE");
+        return (LibSLModuleType) ModuleTypeManager.getInstance().findByID(message("lsl.module"));
     }
 
     @Override
@@ -25,12 +27,12 @@ public class LibSLModuleType extends ModuleType<LibSLModuleBuilder> {
 
     @Override
     public @NotNull @Nls(capitalization = Nls.Capitalization.Title) String getName() {
-        return "LibSL";
+        return message("lsl.main.name");
     }
 
     @Override
     public @NotNull @Nls(capitalization = Nls.Capitalization.Sentence) String getDescription() {
-        return "Create specification with LibSL";
+        return message("lsl.module.type.description");
     }
 
     @Override

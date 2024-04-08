@@ -1,17 +1,13 @@
 package com.github.kechinvv.libslpluginij.actions;
 
 import com.github.kechinvv.libslpluginij.dialogs.ConfigLibSLDialogPanel;
-import com.github.kechinvv.libslpluginij.language.LibSLFileType;
 import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.ui.DialogWrapper;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
+import static com.github.kechinvv.libslpluginij.LslNames.message;
 import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.visibleForDir;
 import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.visibleForFile;
 
@@ -28,7 +24,7 @@ public class ConfigurationAction extends AnAction {
             return;
         }
         var configDialog = ConfigLibSLDialogPanel.getDialogForm(e.getProject());
-        configDialog.getPeer().setTitle("Configure LibSL");
+        configDialog.getPeer().setTitle(message("lsl.configuration.title"));
 
         configDialog.show();
 

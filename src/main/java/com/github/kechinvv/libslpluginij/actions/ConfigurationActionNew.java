@@ -1,13 +1,8 @@
 package com.github.kechinvv.libslpluginij.actions;
 
-import com.github.kechinvv.libslpluginij.dialogs.ConfigLibSLDialogPanel;
-import com.github.kechinvv.libslpluginij.dialogs.ConfigLibSLDialogPanelNew;
 import com.github.kechinvv.libslpluginij.language.LibSLIcon;
 import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.ui.DialogWrapper;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Random;
 
 import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.visibleForDir;
 import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.visibleForFile;
@@ -32,7 +27,6 @@ public class ConfigurationActionNew extends AnAction {
         DefaultActionGroup mainMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("ProjectViewPopupMenu");
         mainMenu.add(newAction, new Constraints(Anchor.BEFORE, "com.intellij.tools.ExternalToolsGroup"));
         newAction.register();
-
     }
 
 

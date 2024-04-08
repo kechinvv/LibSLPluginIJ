@@ -5,6 +5,8 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.github.kechinvv.libslpluginij.LslNames.message;
+
 import java.io.File;
 
 public class LibSLSourceRoot extends DetectedSourceRoot {
@@ -14,6 +16,6 @@ public class LibSLSourceRoot extends DetectedSourceRoot {
 
     @Override
     public @NotNull @Nls(capitalization = Nls.Capitalization.Sentence) String getRootTypeName() {
-        return "LibSL";
+        return message("lsl.main.name");
     }
 }

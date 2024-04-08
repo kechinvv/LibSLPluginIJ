@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Objects;
 
+import static com.github.kechinvv.libslpluginij.LslNames.message;
+
 public class ActionUtils {
 
     public static boolean visibleForDir(AnActionEvent e) {
@@ -36,7 +38,7 @@ public class ActionUtils {
         if (virtualFile == null || project == null) return false;
         var module = ProjectFileIndex.getInstance(project).getModuleForFile(virtualFile);
         if (module == null) return false;
-        return Objects.equals(module.getModuleTypeName(), "LIBSL_MODULE");
+        return Objects.equals(module.getModuleTypeName(), message("lsl.module"));
     }
 
     public static void runLslTool(@NotNull AnActionEvent e, ToolType type) {

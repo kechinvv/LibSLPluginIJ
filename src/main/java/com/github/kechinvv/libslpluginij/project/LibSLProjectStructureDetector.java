@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static com.github.kechinvv.libslpluginij.LslNames.message;
+
 public class LibSLProjectStructureDetector extends ProjectStructureDetector {
 
     private final static Logger LOG = Logger.getInstance("LibSLProjectStructureDetector");
@@ -30,7 +32,7 @@ public class LibSLProjectStructureDetector extends ProjectStructureDetector {
                                                  @NotNull File base,
                                                  @NotNull List<DetectedProjectRoot> result) {
         try (var walkStream = Files.walk(base.toPath(), 1)) {
-            var newBase = walkStream.filter(path -> path.toFile().getName().equals("spec"))
+            var newBase = walkStream.filter(path -> path.toFile().getName().equals(message("lsl.root.default")))
                     .findFirst().map(Path::toFile)
                     .orElseThrow(() -> new IllegalArgumentException("No spec dir"));
             var patternFileName = Pattern.compile(".*\\.lsl");
@@ -40,7 +42,7 @@ public class LibSLProjectStructureDetector extends ProjectStructureDetector {
                     @NotNull
                     @Override
                     public String getRootTypeName() {
-                        return "LIBSL_MODULE";
+                        return message("lsl.module");
                     }
                 });
             }
@@ -69,7 +71,7 @@ public class LibSLProjectStructureDetector extends ProjectStructureDetector {
     private List<LibSLSourceRoot> getSources(DetectedProjectRoot root) {
         var res = new ArrayList<LibSLSourceRoot>();
         try (var walkStream = Files.walk(root.getDirectory().toPath(), 1)) {
-            walkStream.filter(path -> path.toFile().getName().equals("spec"))
+            walkStream.filter(path -> path.toFile().getName().equals(message("lsl.root.default")))
                     .findFirst().map((it) -> res.add(new LibSLSourceRoot(it.toFile(), null)))
                     .orElseThrow(() -> new IllegalArgumentException("No spec dir"));
         } catch (IOException e) {
@@ -82,6 +84,6 @@ public class LibSLProjectStructureDetector extends ProjectStructureDetector {
 
     @Override
     public String getDetectorId() {
-        return "LibSL";
+        return message("lsl.main.name");
     }
 }

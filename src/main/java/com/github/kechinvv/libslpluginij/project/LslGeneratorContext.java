@@ -1,12 +1,11 @@
 package com.github.kechinvv.libslpluginij.project;
 
-import com.intellij.ide.util.projectWizard.ModuleBuilder;
-import com.intellij.ide.util.projectWizard.WizardContext;
+import static com.github.kechinvv.libslpluginij.LslNames.message;
 
 public class LslGeneratorContext {
 
     boolean gitIntegration = false;
-    String group = "com.example";
+    String group = message("lsl.project.default.group");
 
 
 }

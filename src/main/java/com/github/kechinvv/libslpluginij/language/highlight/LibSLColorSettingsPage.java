@@ -18,6 +18,8 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.Map;
 
+import static com.github.kechinvv.libslpluginij.LslNames.message;
+
 final class LibSLColorSettingsPage implements ColorSettingsPage {
 
     private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
@@ -72,7 +74,7 @@ final class LibSLColorSettingsPage implements ColorSettingsPage {
     @NotNull
     @Override
     public String getDisplayName() {
-        return "LibSL";
+        return message("lsl.main.name");
     }
 
 }
