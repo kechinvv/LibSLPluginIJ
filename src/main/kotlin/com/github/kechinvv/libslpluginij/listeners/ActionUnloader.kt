@@ -8,6 +8,6 @@ import com.intellij.openapi.project.ProjectManagerListener
 class ActionUnloader : ProjectManagerListener {
 
     override fun projectClosing(project: Project) {
-        LibSLToolsStore.getActions(project).forEach(LslToolAction::unregister)
+        LibSLToolsStore.getActions(project).forEach { (_, action) -> action.unregister() }
     }
 }

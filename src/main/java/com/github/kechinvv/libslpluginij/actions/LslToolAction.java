@@ -10,15 +10,16 @@ import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.runLsl
 
 public abstract class LslToolAction extends AnAction {
 
+    public String toolName;
     String cmd;
     String input;
 
-    LslToolAction(String cmd, String input) {
+    public LslToolAction(String cmd, String input) {
         this.cmd = cmd;
         this.input = input;
     }
 
-    abstract String getActionId();
+    abstract public String getActionId();
 
     @Override
     public void update(AnActionEvent e) {

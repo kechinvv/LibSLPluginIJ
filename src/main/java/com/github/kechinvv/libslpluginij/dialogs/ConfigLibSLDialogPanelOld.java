@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.github.kechinvv.libslpluginij.dialogs.LibSLToolsStore.getActions;
 
@@ -56,7 +57,7 @@ public class ConfigLibSLDialogPanelOld extends DialogWrapper {
 
 
     public void saveValues(Project project) {
-        ArrayList<LslToolAction> lslProps = getActions(project);
+        HashMap<String, LslToolAction> lslProps = getActions(project);
     }
 
     private void createUIComponents() {
