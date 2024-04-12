@@ -91,8 +91,8 @@ public class DynamicToolsPanel extends DialogWrapper {
         var inputFlagCleared = cmd.getText().trim();
 
         var newTool = new JPanel(new BorderLayout());
-        newTool.add(new JLabel(toolNameCleared), BorderLayout.WEST);
-        newTool.add(new JLabel(cmdCleared + " " + inputFlagCleared), BorderLayout.WEST);
+        newTool.add(new JLabel(toolNameCleared), BorderLayout.BEFORE_FIRST_LINE);
+        newTool.add(new JLabel(cmdCleared + " " + inputFlagCleared), BorderLayout.AFTER_LAST_LINE);
 
         newTool.setBorder(BorderFactory.createLineBorder(JBColor.BLACK, 3));
 
