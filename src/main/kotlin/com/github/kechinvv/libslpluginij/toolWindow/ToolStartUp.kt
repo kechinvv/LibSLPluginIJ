@@ -1,7 +1,7 @@
 package com.github.kechinvv.libslpluginij.toolWindow
 
 import com.github.kechinvv.libslpluginij.LslNames.message
-import com.github.kechinvv.libslpluginij.actions.LslToolAction
+import com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.createAction
 import com.github.kechinvv.libslpluginij.dialogs.LibSLToolsStore
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.StartupActivity
@@ -13,10 +13,12 @@ class ToolStartUp : StartupActivity {
             if (!it.isActive) it.activate(null, false)
             it.hide()
         }
+
         val actions = LibSLToolsStore.getActions(project)
-        actions.forEach { (_: String?, action: LslToolAction) ->
+        actions.forEach { (name, actionDataStr) ->
+            val actionData = actionDataStr.split("@tempkostil")
+            val action = createAction(name, actionData[0], actionData[1])
             if (!action.wasRegistered()) action.register()
         }
     }
-
 }

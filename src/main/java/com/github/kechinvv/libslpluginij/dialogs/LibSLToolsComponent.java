@@ -1,13 +1,14 @@
 package com.github.kechinvv.libslpluginij.dialogs;
 
 import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.Service;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
+@Service
 @State(name = "LibSLGenSettings")
 public class LibSLToolsComponent implements PersistentStateComponent<LibSLToolsStore> {
-
 
     private LibSLToolsStore mySettings = new LibSLToolsStore();
 

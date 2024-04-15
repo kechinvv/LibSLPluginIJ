@@ -1,6 +1,7 @@
 package com.github.kechinvv.libslpluginij.dialogs;
 
 import com.github.kechinvv.libslpluginij.actions.LslToolAction;
+import com.github.kechinvv.libslpluginij.actions.utils.ActionUtils;
 import com.github.kechinvv.libslpluginij.language.LibSLIcon;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
@@ -12,8 +13,8 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
 
+import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.createAction;
 import static com.github.kechinvv.libslpluginij.dialogs.LibSLToolsStore.getActions;
 import static com.github.kechinvv.libslpluginij.LslNames.message;
 
@@ -24,9 +25,9 @@ public class DynamicToolsPanel extends DialogWrapper {
     private JTextField inputFlag;
     private final int defaultMainHeight = 500;
     private final int defaultMainWidth = 300;
-    private Project project;
+    private final Project project;
 
-    private JPanel rowHolderPanel = new JPanel(new GridLayout(0, 1, 1, 1));
+    private final JPanel rowHolderPanel = new JPanel(new GridLayout(0, 1, 1, 1));
 
     public DynamicToolsPanel(@Nullable Project project) {
         super(project);
@@ -62,7 +63,6 @@ public class DynamicToolsPanel extends DialogWrapper {
         var cmdLabel = new JLabel("Command");
         var inputLabel = new JLabel("Workdir flag (empty if input in cmd line)");
 
-
         toolName = new JTextField();
         cmd = new JTextField();
         inputFlag = new JTextField();
@@ -70,12 +70,16 @@ public class DynamicToolsPanel extends DialogWrapper {
         cmd.setToolTipText("ex: java -jar .../.../Tool.jar -m ...");
         inputFlag.setToolTipText("ex: -i");
 
+        var marginBottom = new JPanel();
+        marginBottom.setSize(toolName.getSize());
+
         footer.add(nameLabel);
         footer.add(toolName);
         footer.add(cmdLabel);
         footer.add(cmd);
         footer.add(inputLabel);
         footer.add(inputFlag);
+        footer.add(marginBottom);
         footer.add(addButton);
         return footer;
     }
@@ -100,29 +104,24 @@ public class DynamicToolsPanel extends DialogWrapper {
 
     public void saveAction(Project project, LslToolAction action) {
         if (action == null) return;
-        HashMap<String, LslToolAction> actions = getActions(project);
-        actions.put(action.name, action);
+        var actions = getActions(project);
+        //TODO: impl structure for serialization
+        actions.put(action.name, action.cmd + "@tempkostil " + action.input);
     }
 
-    public void deleteAction(Project project, LslToolAction action) {
+    private void deleteAction(Project project, LslToolAction action) {
         if (action == null) return;
-        HashMap<String, LslToolAction> actions = getActions(project);
+        var actions = getActions(project);
         actions.remove(action.name);
-    }
-
-    private LslToolAction createAction(String name, String cmd, String input) {
-        return new LslToolAction(name, cmd, input) {
-            @Override
-            public String getActionId() {
-                return name;
-            }
-        };
     }
 
 
     private void loadActions() {
-        HashMap<String, LslToolAction> actions = getActions(project);
-        actions.forEach((key, action) -> {
+        var actions = getActions(project);
+        actions.forEach((name, actionDataStr) -> {
+            var action = ActionUtils.findLslAction(name);
+            var actionData = actionDataStr.split("@tempkostil");
+            if (action == null) action = createAction(name, actionData[0], actionData[1].trim());
             if (!action.wasRegistered()) action.register();
             addActionToPanel(action);
         });
@@ -133,11 +132,13 @@ public class DynamicToolsPanel extends DialogWrapper {
 
     private void addActionToPanel(LslToolAction action) {
         var newTool = new JPanel(new BorderLayout());
-        newTool.add(new JLabel(action.name), BorderLayout.LINE_START);
+
+        var labelName = new JLabel(action.name);
+        labelName.setBorder(JBUI.Borders.empty(4));
+        newTool.add(labelName, BorderLayout.LINE_START);
 
         var deleteActionButton = new InlineIconButton(LibSLIcon.DELETE, LibSLIcon.DELETE_HOVERED);
         deleteActionButton.setBorder(JBUI.Borders.empty(4));
-
         deleteActionButton.setActionListener(e -> {
             rowHolderPanel.remove(newTool);
             action.unregister();
@@ -147,7 +148,10 @@ public class DynamicToolsPanel extends DialogWrapper {
         });
         newTool.add(deleteActionButton, BorderLayout.LINE_END);
 
-        newTool.add(new JLabel(action.cmd + " " + action.input), BorderLayout.AFTER_LAST_LINE);
+        var labelCmd = new JLabel(action.cmd + " " + action.input);
+        labelCmd.setBorder(JBUI.Borders.empty(4));
+        newTool.add(labelCmd, BorderLayout.AFTER_LAST_LINE);
+
         newTool.setBorder(BorderFactory.createLineBorder(JBColor.BLACK, 3));
         rowHolderPanel.add(newTool);
     }

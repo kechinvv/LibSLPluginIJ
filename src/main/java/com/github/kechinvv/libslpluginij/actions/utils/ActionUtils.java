@@ -1,7 +1,9 @@
 package com.github.kechinvv.libslpluginij.actions.utils;
 
+import com.github.kechinvv.libslpluginij.actions.LslToolAction;
 import com.github.kechinvv.libslpluginij.language.LibSLFileType;
 import com.github.kechinvv.libslpluginij.toolWindow.LibSLToolOutputWindowFactory;
+import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
@@ -28,10 +30,12 @@ public class ActionUtils {
         return visible;
     }
 
+
     public static boolean visibleForFile(AnActionEvent e) {
         var psi = e.getData(CommonDataKeys.PSI_FILE);
         return (psi != null) && (psi.getFileType() == LibSLFileType.INSTANCE);
     }
+
 
     public static boolean isLibSLModule(Project project, VirtualFile virtualFile) {
         if (virtualFile == null || project == null) return false;
@@ -40,12 +44,14 @@ public class ActionUtils {
         return Objects.equals(module.getModuleTypeName(), message("lsl.module"));
     }
 
+
     public static void runLslTool(@NotNull AnActionEvent e, String cmd, String input) {
         var project = e.getData(CommonDataKeys.PROJECT);
         var targetFile = e.getData(CommonDataKeys.VIRTUAL_FILE);
         if (targetFile == null || project == null) return;
         processRun(cmd, input, targetFile);
     }
+
 
     public static void processRun(String cmd, String workdir, VirtualFile targetFile) {
         ProcessBuilder builder;
@@ -64,6 +70,21 @@ public class ActionUtils {
             LibSLToolOutputWindowFactory.toolOutput.lslPrint(ex.getClass() + ": " + ex.getMessage());
         }
         LibSLToolOutputWindowFactory.toolOutput.show();
+    }
+
+
+    public static LslToolAction createAction(String name, String cmd, String input) {
+        return new LslToolAction(name, cmd, input) {
+            @Override
+            public String getActionId() {
+                return name;
+            }
+        };
+    }
+
+    public static LslToolAction findLslAction(String name) {
+        ActionManager actionManager = ActionManager.getInstance();
+        return (LslToolAction) actionManager.getAction(name);
     }
 
 }
