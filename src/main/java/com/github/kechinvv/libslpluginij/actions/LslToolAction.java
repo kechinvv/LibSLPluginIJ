@@ -1,22 +1,23 @@
 package com.github.kechinvv.libslpluginij.actions;
 
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.ActionUpdateThread;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.github.kechinvv.libslpluginij.language.LibSLIcon;
+import com.intellij.openapi.actionSystem.*;
 import org.jetbrains.annotations.NotNull;
 
 import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.runLslTool;
 
 public abstract class LslToolAction extends AnAction {
 
-    public String toolName;
-    String cmd;
-    String input;
+    public String name;
+    public String cmd;
+    public String input;
 
-    public LslToolAction(String cmd, String input) {
+    public LslToolAction(String name, String cmd, String input) {
+        this.name = name;
         this.cmd = cmd;
         this.input = input;
+        this.getTemplatePresentation().setIcon(LibSLIcon.FILE);
+        this.getTemplatePresentation().setText(this.name);
     }
 
     abstract public String getActionId();
@@ -36,7 +37,15 @@ public abstract class LslToolAction extends AnAction {
         return ActionUpdateThread.BGT;
     }
 
+    public boolean wasRegistered() {
+        ActionManager actionManager = ActionManager.getInstance();
+        return actionManager.getAction(getActionId()) != null;
+    }
+
     public void register() {
+        DefaultActionGroup mainMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("ProjectViewPopupMenu");
+        mainMenu.add(this, new Constraints(Anchor.BEFORE, "com.intellij.tools.ExternalToolsGroup"));
+
         ActionManager actionManager = ActionManager.getInstance();
         String actionId = getActionId();
         if (actionManager.getAction(actionId) == null) {
@@ -46,12 +55,19 @@ public abstract class LslToolAction extends AnAction {
     }
 
     public void unregister() {
+        DefaultActionGroup mainMenu = (DefaultActionGroup) ActionManager.getInstance().getAction("ProjectViewPopupMenu");
+        mainMenu.remove(this);
+
         ActionManager actionManager = ActionManager.getInstance();
         String actionId = getActionId();
         if (actionManager.getAction(actionId) != null) {
             System.out.println("UNREGISTER ACTION " + actionId);
             actionManager.unregisterAction(actionId);
         }
+    }
+
+    public String getName() {
+        return getActionId();
     }
 
 }

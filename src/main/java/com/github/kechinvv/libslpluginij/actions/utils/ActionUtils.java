@@ -44,12 +44,14 @@ public class ActionUtils {
         var project = e.getData(CommonDataKeys.PROJECT);
         var targetFile = e.getData(CommonDataKeys.VIRTUAL_FILE);
         if (targetFile == null || project == null) return;
-        if (!targetFile.isDirectory()) return;
         processRun(cmd, input, targetFile);
     }
 
     public static void processRun(String cmd, String workdir, VirtualFile targetFile) {
-        ProcessBuilder builder = new ProcessBuilder(cmd, workdir + "=" + targetFile.getPath());
+        ProcessBuilder builder;
+        if (workdir.isEmpty()) builder = new ProcessBuilder(cmd);
+        else builder = new ProcessBuilder(cmd, workdir + "=" + targetFile.getPath());
+
         try {
             var process = builder.start();
             var r = new BufferedReader(new InputStreamReader(process.getInputStream()));

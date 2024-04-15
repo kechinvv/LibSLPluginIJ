@@ -7,5 +7,9 @@ import com.intellij.openapi.startup.ProjectPostStartupActivity
 
 class ActionLoader : ProjectPostStartupActivity {
     override suspend fun execute(project: Project) {
+        val actions = LibSLToolsStore.getActions(project)
+        actions.forEach { (_: String?, action: LslToolAction) ->
+            if (!action.wasRegistered()) action.register()
+        }
     }
 }

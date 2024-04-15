@@ -49,7 +49,7 @@ class LibSLToolOutputWindowFactory : ToolWindowFactory {
 
         fun lslPrint(message: String) {
             val timeStamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
-            console.print("$timeStamp: $message", ConsoleViewContentType.SYSTEM_OUTPUT)
+            console.print("$timeStamp: $message\n", ConsoleViewContentType.SYSTEM_OUTPUT)
         }
 
         fun show() {
