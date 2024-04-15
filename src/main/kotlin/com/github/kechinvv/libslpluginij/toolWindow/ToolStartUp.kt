@@ -13,6 +13,10 @@ class ToolStartUp : StartupActivity {
             if (!it.isActive) it.activate(null, false)
             it.hide()
         }
+        val actions = LibSLToolsStore.getActions(project)
+        actions.forEach { (_: String?, action: LslToolAction) ->
+            if (!action.wasRegistered()) action.register()
+        }
     }
 
 }

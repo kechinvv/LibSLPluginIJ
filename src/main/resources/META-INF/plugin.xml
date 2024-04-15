@@ -26,7 +26,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow factoryClass="com.github.kechinvv.libslpluginij.toolWindow.LibSLToolOutputWindowFactory"
-                    id="LibSL Output" secondary="true" anchor="bottom"/>
+                    id="LibSL Output" secondary="true" anchor="bottom" icon="/icons/ToolOutput.svg"/>
         <postStartupActivity implementation="com.github.kechinvv.libslpluginij.toolWindow.ToolStartUp"/>
 
         <fileType
@@ -74,7 +74,7 @@
 
         <directoryProjectGenerator implementation="com.github.kechinvv.libslpluginij.project.LibSLProjectGenerator"/>
         <projectService serviceImplementation="com.github.kechinvv.libslpluginij.dialogs.LibSLToolsComponent"/>
-        <postStartupActivity implementation="com.github.kechinvv.libslpluginij.activities.ActionLoader"/>
+<!--        <postStartupActivity implementation="com.github.kechinvv.libslpluginij.activities.ActionLoader"/>-->
     </extensions>
 
     <actions>
