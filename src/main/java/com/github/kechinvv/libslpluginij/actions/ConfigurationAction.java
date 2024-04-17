@@ -4,6 +4,7 @@ import com.github.kechinvv.libslpluginij.dialogs.DynamicToolsPanel;
 import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.ui.DialogWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.visibleForDir;
@@ -23,6 +24,10 @@ public class ConfigurationAction extends AnAction {
         }
         var toolsPanel = new DynamicToolsPanel(e.getProject());
         toolsPanel.show();
+
+        if (toolsPanel.getExitCode() == DialogWrapper.OK_EXIT_CODE) {
+            toolsPanel.saveInputsState(e.getProject());
+        }
     }
 
 

@@ -29,7 +29,7 @@ public abstract class LslToolAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        runLslTool(e, cmd, input);
+        runLslTool(e, name, cmd, input);
     }
 
     @Override

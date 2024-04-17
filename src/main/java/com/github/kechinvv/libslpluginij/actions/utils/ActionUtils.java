@@ -45,31 +45,43 @@ public class ActionUtils {
     }
 
 
-    public static void runLslTool(@NotNull AnActionEvent e, String cmd, String input) {
+    public static void runLslTool(@NotNull AnActionEvent e, String name, String cmd, String input) {
         var project = e.getData(CommonDataKeys.PROJECT);
         var targetFile = e.getData(CommonDataKeys.VIRTUAL_FILE);
         if (targetFile == null || project == null) return;
-        processRun(cmd, input, targetFile);
+        processRun(name, cmd, input, targetFile);
     }
 
 
-    public static void processRun(String cmd, String workdir, VirtualFile targetFile) {
-        ProcessBuilder builder;
-        if (workdir.isEmpty()) builder = new ProcessBuilder(cmd);
-        else builder = new ProcessBuilder(cmd, workdir + "=" + targetFile.getPath());
+    public static void processRun(String name, String cmd, String workdir, VirtualFile targetFile) {
+        var buildedCmd = cmd;
+        if (!workdir.isEmpty()) buildedCmd += " " + workdir + "=" + targetFile.getPath();
 
         try {
-            var process = builder.start();
+            var process = Runtime.getRuntime().exec(buildedCmd);
+            LibSLToolOutputWindowFactory.toolOutput.lslPrint("Run tool " + name + " " + buildedCmd);
+            LibSLToolOutputWindowFactory.toolOutput.show();
             var r = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line = r.readLine();
-            while (line != null) {
-                LibSLToolOutputWindowFactory.toolOutput.lslPrint(line);
-                line = r.readLine();
-            }
+            var errors = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            new Thread(() -> {
+                try {
+                    printer(r);
+                    printer(errors);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }).start();
         } catch (IOException ex) {
             LibSLToolOutputWindowFactory.toolOutput.lslPrint(ex.getClass() + ": " + ex.getMessage());
         }
-        LibSLToolOutputWindowFactory.toolOutput.show();
+    }
+
+    private static void printer(BufferedReader reader) throws IOException {
+        var line = reader.readLine();
+        while (line != null) {
+            LibSLToolOutputWindowFactory.toolOutput.lslPrint(line);
+            line = reader.readLine();
+        }
     }
 
 

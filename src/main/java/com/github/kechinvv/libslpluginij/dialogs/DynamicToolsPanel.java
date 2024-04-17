@@ -16,14 +16,15 @@ import javax.swing.*;
 import java.awt.*;
 
 import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.createAction;
-import static com.github.kechinvv.libslpluginij.dialogs.LibSLToolsStore.getActions;
 import static com.github.kechinvv.libslpluginij.LslNames.message;
+import static com.github.kechinvv.libslpluginij.dialogs.LibSLToolsStore.*;
 
 public class DynamicToolsPanel extends DialogWrapper {
 
-    private JTextField toolName;
-    private JTextField cmd;
-    private JTextField inputFlag;
+    private final JTextField toolName = new JTextField();
+    private final JTextField cmd = new JTextField();
+    private final JTextField inputFlag = new JTextField();
+
     private final int defaultMainHeight = 500;
     private final int defaultMainWidth = 300;
     private final Project project;
@@ -36,6 +37,7 @@ public class DynamicToolsPanel extends DialogWrapper {
         setTitle(message("lsl.configuration.title"));
         setSize(defaultMainWidth, defaultMainHeight);
         loadActions();
+        loadFields();
         init();
     }
 
@@ -63,10 +65,6 @@ public class DynamicToolsPanel extends DialogWrapper {
         var nameLabel = new JLabel("Tool name:");
         var cmdLabel = new JLabel("Command");
         var inputLabel = new JLabel("Workdir flag (empty if input in cmd line)");
-
-        toolName = new JTextField();
-        cmd = new JTextField();
-        inputFlag = new JTextField();
 
         cmd.setToolTipText("ex: java -jar .../.../Tool.jar -m ...");
         inputFlag.setToolTipText("ex: -i");
@@ -109,6 +107,10 @@ public class DynamicToolsPanel extends DialogWrapper {
         actions.put(action.name, new ActionData(action.name, action.cmd, action.input));
     }
 
+    public void saveInputsState(Project project) {
+        saveAddedFields(project, toolName.getText(), cmd.getText(), inputFlag.getText());
+    }
+
     private void deleteAction(Project project, LslToolAction action) {
         if (action == null) return;
         var actions = getActions(project);
@@ -124,6 +126,12 @@ public class DynamicToolsPanel extends DialogWrapper {
         });
         rowHolderPanel.repaint();
         rowHolderPanel.revalidate();
+    }
+
+    private void loadFields() {
+        toolName.setText(getAddedName(project));
+        cmd.setText(getAddedCmd(project));
+        inputFlag.setText(getAddedInput(project));
     }
 
 
