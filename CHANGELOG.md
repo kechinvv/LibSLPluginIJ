@@ -6,6 +6,8 @@
 
 - LibSL project generation and detection
 - LibSL Tools dynamic actions 
+- File templates
+- Folding
 
 ### Changed
 

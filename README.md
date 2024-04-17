@@ -24,6 +24,9 @@
 - [ ] Helper
     - [ ] Name scope resolving
     - [ ] Tips about constructions
+- [x] Project generator
+- [x] File templates
+- [x] Custom tools support
 
 ### Unique features
 
@@ -49,6 +52,7 @@ for [LibSL](https://www.researchgate.net/publication/325074393_LibSL_Language_fo
 supporting. It is very easy to use:
 
 - Install the plugin
+- Add your custom tools for project via "Configure LibSL tools..."
 - Enjoy LibSL support: highlighting, findUsages and other features
 
 More features in future releases.
