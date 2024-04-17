@@ -10,10 +10,12 @@ import com.intellij.ui.JBColor;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.util.ui.InlineIconButton;
 import com.intellij.util.ui.JBUI;
+import kotlinx.html.B;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 
 import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.createAction;
 import static com.github.kechinvv.libslpluginij.LslNames.message;
@@ -138,25 +140,44 @@ public class DynamicToolsPanel extends DialogWrapper {
     private void addActionToPanel(LslToolAction action) {
         var newTool = new JPanel(new BorderLayout());
 
+        var firstLine = new JPanel(new BorderLayout());
+        var secondLine = new JPanel(new BorderLayout());
+
         var labelName = new JLabel(action.name);
         labelName.setBorder(JBUI.Borders.empty(4));
-        newTool.add(labelName, BorderLayout.LINE_START);
+        firstLine.add(labelName, BorderLayout.LINE_START);
 
         var deleteActionButton = new InlineIconButton(LibSLIcon.DELETE, LibSLIcon.DELETE_HOVERED);
         deleteActionButton.setBorder(JBUI.Borders.empty(4));
         deleteActionButton.setActionListener(e -> {
-            rowHolderPanel.remove(newTool);
-            action.unregister();
-            deleteAction(project, action);
-            rowHolderPanel.repaint();
-            rowHolderPanel.revalidate();
+            var deleteApprove = new DeleteApprovePanel(project, labelName.getText());
+            deleteApprove.show();
+            if (deleteApprove.getExitCode() == OK_EXIT_CODE) {
+                rowHolderPanel.remove(newTool);
+                action.unregister();
+                deleteAction(project, action);
+                rowHolderPanel.repaint();
+                rowHolderPanel.revalidate();
+            }
         });
-        newTool.add(deleteActionButton, BorderLayout.LINE_END);
+        firstLine.add(deleteActionButton, BorderLayout.LINE_END);
 
         var labelCmd = new JLabel(action.cmd + " " + action.input);
         labelCmd.setBorder(JBUI.Borders.empty(4));
-        newTool.add(labelCmd, BorderLayout.AFTER_LAST_LINE);
+        secondLine.add(labelCmd);
 
+        var copyButton = new InlineIconButton(LibSLIcon.COPY);
+        copyButton.setBorder(JBUI.Borders.empty(4));
+        copyButton.setToolTipText("Copy cmd value");
+        copyButton.setActionListener(e -> {
+            var stringSelection = new StringSelection(labelCmd.getText());
+            var clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+            clpbrd.setContents(stringSelection, null);
+        });
+        secondLine.add(copyButton, BorderLayout.LINE_END);
+
+        newTool.add(firstLine, BorderLayout.BEFORE_FIRST_LINE);
+        newTool.add(secondLine, BorderLayout.AFTER_LAST_LINE);
         newTool.setBorder(BorderFactory.createLineBorder(JBColor.BLACK, 3));
         rowHolderPanel.add(newTool);
     }
