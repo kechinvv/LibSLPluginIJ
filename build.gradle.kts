@@ -13,6 +13,7 @@ plugins {
     alias(libs.plugins.qodana) // Gradle Qodana Plugin
     alias(libs.plugins.kover) // Gradle Kover Plugin
     antlr
+    kotlin("plugin.serialization") version "1.9.23"
 }
 
 group = properties("pluginGroup").get()
@@ -28,6 +29,7 @@ dependencies {
 //    implementation(libs.annotations)
     antlr("org.antlr:antlr4:4.13.1")
     implementation("org.antlr:antlr4-intellij-adaptor:0.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
 }

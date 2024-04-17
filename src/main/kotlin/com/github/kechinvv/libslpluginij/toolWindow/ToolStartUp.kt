@@ -15,9 +15,8 @@ class ToolStartUp : StartupActivity {
         }
 
         val actions = LibSLToolsStore.getActions(project)
-        actions.forEach { (name, actionDataStr) ->
-            val actionData = actionDataStr.split("@tempkostil")
-            val action = createAction(name, actionData[0], actionData[1])
+        actions.forEach { (name, actionData) ->
+            val action = createAction(name, actionData.cmd, actionData.inp)
             if (!action.wasRegistered()) action.register()
         }
     }

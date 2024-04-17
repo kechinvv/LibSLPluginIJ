@@ -3,6 +3,7 @@ package com.github.kechinvv.libslpluginij.dialogs;
 import com.github.kechinvv.libslpluginij.actions.LslToolAction;
 import com.github.kechinvv.libslpluginij.actions.utils.ActionUtils;
 import com.github.kechinvv.libslpluginij.language.LibSLIcon;
+import com.github.kechinvv.libslpluginij.storage.ActionData;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.JBColor;
@@ -105,8 +106,7 @@ public class DynamicToolsPanel extends DialogWrapper {
     public void saveAction(Project project, LslToolAction action) {
         if (action == null) return;
         var actions = getActions(project);
-        //TODO: impl structure for serialization
-        actions.put(action.name, action.cmd + "@tempkostil " + action.input);
+        actions.put(action.name, new ActionData(action.name, action.cmd, action.input));
     }
 
     private void deleteAction(Project project, LslToolAction action) {
@@ -118,11 +118,8 @@ public class DynamicToolsPanel extends DialogWrapper {
 
     private void loadActions() {
         var actions = getActions(project);
-        actions.forEach((name, actionDataStr) -> {
+        actions.forEach((name, actionData) -> {
             var action = ActionUtils.findLslAction(name);
-            var actionData = actionDataStr.split("@tempkostil");
-            if (action == null) action = createAction(name, actionData[0], actionData[1].trim());
-            if (!action.wasRegistered()) action.register();
             addActionToPanel(action);
         });
         rowHolderPanel.repaint();
