@@ -52,6 +52,10 @@ class LibSLToolOutputWindowFactory : ToolWindowFactory {
             console.print("$timeStamp: $message\n", ConsoleViewContentType.SYSTEM_OUTPUT)
         }
 
+        fun clear() {
+            console.clear()
+        }
+
         fun show() {
             toolWindow.show()
         }

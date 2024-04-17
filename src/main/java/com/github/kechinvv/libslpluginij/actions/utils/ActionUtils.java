@@ -58,6 +58,7 @@ public class ActionUtils {
         if (!workdir.isEmpty()) buildedCmd += " " + workdir + "=" + targetFile.getPath();
 
         try {
+            LibSLToolOutputWindowFactory.toolOutput.clear();
             var process = Runtime.getRuntime().exec(buildedCmd);
             LibSLToolOutputWindowFactory.toolOutput.lslPrint("Run tool " + name + " " + buildedCmd);
             LibSLToolOutputWindowFactory.toolOutput.show();
