@@ -4,13 +4,15 @@
 
 ### Added
 
-- Simple intents formatter
-- Quote handler
+- LibSL project generation and detection
+- LibSL Tools dynamic actions 
+- File templates
+- Folding
 
 ### Changed
 
 ### Fixed
 
-- Characters highlighting
+- Intents for params
 
 [Unreleased]: https://github.com/kechinvv/LibSLPluginIJ/commits

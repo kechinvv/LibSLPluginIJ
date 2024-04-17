@@ -1,7 +1,9 @@
 package com.github.kechinvv.libslpluginij.language.psi;
 
 import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import org.antlr.intellij.adaptor.lexer.TokenIElementType;
 
 import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.tokens;
 
@@ -107,6 +109,22 @@ public class LibSLTokenSets {
             tokens.get(LibSLLexer.NULL)
     );
 
+    public TokenSet STRING = TokenSet.create(
+            tokens.get(LibSLLexer.DoubleQuotedString),
+            tokens.get(LibSLLexer.CHARACTER)
+    );
+
     private LibSLTokenSets() {
+    }
+
+    public TokensHighlightGroup getHighlightGroupOf(IElementType tokenType) {
+        if (!(tokenType instanceof TokenIElementType myType)) return TokensHighlightGroup.EmptyKeysGroup;
+        if (myType.getANTLRTokenType() == LibSLLexer.Identifier) return TokensHighlightGroup.IdGroup;
+        if (myType.getANTLRTokenType() == LibSLLexer.COMMENT) return TokensHighlightGroup.MlCommentsGroup;
+        if (myType.getANTLRTokenType() == LibSLLexer.LINE_COMMENT) return TokensHighlightGroup.CommentsGroup;
+        if (myType.getANTLRTokenType() == LibSLLexer.BAD_CHARACTER) return TokensHighlightGroup.BadGroup;
+        if (LibSLTokenSets.INSTANCE.KEYWORDS.contains(myType)) return TokensHighlightGroup.KeywordGroup;
+        if (LibSLTokenSets.INSTANCE.STRING.contains(myType)) return TokensHighlightGroup.StringGroup;
+        return TokensHighlightGroup.EmptyKeysGroup;
     }
 }

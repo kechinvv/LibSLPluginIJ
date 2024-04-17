@@ -1,9 +1,10 @@
 package com.github.kechinvv.libslpluginij.language.psi.rules;
 
-import com.github.kechinvv.libslpluginij.language.utils.LslUtils;
+import com.github.kechinvv.libslpluginij.language.psi.PsiElementFactory;
+import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslStatement;
+import com.github.kechinvv.libslpluginij.language.psi.rules.references.LslIdentifierReference;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;
@@ -27,10 +28,15 @@ public class LslIdentifier extends ASTWrapperPsiElement implements PsiNameIdenti
         return getText();
     }
 
+//    @Override
+//    public @NotNull SearchScope getUseScope(){
+//
+//    }
+
     @Override
     public PsiElement setName(@NotNull String s) throws IncorrectOperationException {
         var idLeaf = getNameIdentifier();
-        var newIdLeaf = LslUtils.createIdentifierTokenFromText(getProject(), s);
+        var newIdLeaf = PsiElementFactory.createIdentifierTokenFromText(getProject(), s);
         assert idLeaf != null;
         assert newIdLeaf != null;
         return idLeaf.replace(newIdLeaf);
@@ -39,7 +45,6 @@ public class LslIdentifier extends ASTWrapperPsiElement implements PsiNameIdenti
     @Override
     public PsiReference getReference() {
         var rangeInElement = new TextRange(0, this.getNode().getTextLength());
-        if (this.getTextLength() > 1) return new LslIdentifierReference(this, rangeInElement);
-        else return null;
+        return new LslIdentifierReference(this, rangeInElement);
     }
 }

@@ -3,7 +3,7 @@ package com.github.kechinvv.libslpluginij.language.highlight;
 import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
 import com.github.kechinvv.libslpluginij.language.psi.rules.LslAnnotationArgs;
 import com.github.kechinvv.libslpluginij.language.psi.rules.LslAnnotationUsage;
-import com.github.kechinvv.libslpluginij.language.utils.LslUtils;
+import com.github.kechinvv.libslpluginij.language.utils.LslPsiUtils;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.HighlightSeverity;
@@ -24,7 +24,7 @@ final class LibSLAnnotator implements Annotator {
     @Override
     public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
         if (element instanceof LslAnnotationUsage)
-            LslUtils.getFilteredSiblings(element.getFirstChild(), it -> !(it instanceof LslAnnotationArgs))
+            LslPsiUtils.getFilteredSiblings(element.getFirstChild(), it -> !(it instanceof LslAnnotationArgs))
                     .forEach(it -> highlightRule(it, holder));
         else if (element.getNode().getElementType() instanceof TokenIElementType tokenIElementType)
             switch (tokenIElementType.getANTLRTokenType()) {

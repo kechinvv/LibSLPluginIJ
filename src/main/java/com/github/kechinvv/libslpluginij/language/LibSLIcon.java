@@ -5,5 +5,11 @@ import com.intellij.openapi.util.IconLoader;
 import javax.swing.*;
 
 public class LibSLIcon {
-    public static final Icon FILE = IconLoader.getIcon("/icons/libsl3.svg", LibSLIcon.class);
+    public static final Icon FILE = IconLoader.getIcon("/icons/libsl.svg", LibSLIcon.class);
+    public static final Icon PROJECT = IconLoader.getIcon("/icons/libsl_prj.svg", LibSLIcon.class);
+
+    public static final Icon COPY = IconLoader.getIcon("/icons/copy.svg", LibSLIcon.class);
+    public static final Icon DELETE = IconLoader.getIcon("/icons/delete.svg", LibSLIcon.class);
+    public static final Icon DELETE_HOVERED = IconLoader.getIcon("/icons/deleteHovered.svg", LibSLIcon.class);
+
 }

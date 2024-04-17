@@ -1,5 +1,4 @@
 import org.jetbrains.changelog.Changelog
-import org.jetbrains.changelog.ChangelogSectionUrlBuilder
 import org.jetbrains.changelog.date
 import org.jetbrains.changelog.markdownToHTML
 
@@ -14,6 +13,7 @@ plugins {
     alias(libs.plugins.qodana) // Gradle Qodana Plugin
     alias(libs.plugins.kover) // Gradle Kover Plugin
     antlr
+    kotlin("plugin.serialization") version "1.9.23"
 }
 
 group = properties("pluginGroup").get()
@@ -29,6 +29,9 @@ dependencies {
 //    implementation(libs.annotations)
     antlr("org.antlr:antlr4:4.13.1")
     implementation("org.antlr:antlr4-intellij-adaptor:0.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
 }
 
 
@@ -60,11 +63,8 @@ changelog {
     headerParserRegex.set("""(\d+\.\d+\.\d+)""".toRegex())
     itemPrefix.set("-")
     keepUnreleasedSection.set(false)
-//    unreleasedTerm.set("[Unreleased]")
     groups.set(listOf("Added", "Changed", "Fixed"))
     lineSeparator.set("\n")
-//    combinePreReleases.set(true)
-//    sectionUrlBuilder.set(ChangelogSectionUrlBuilder { repositoryUrl, _, _, _ -> repositoryUrl })
 }
 
 
@@ -95,14 +95,17 @@ val printVersionName: Task = tasks.create("printVersionName") {
 }
 
 tasks {
+    test {
+        useJUnitPlatform()
+    }
 
-//    withType<JavaCompile> {
-//        options.compilerArgs.add("--enable-preview")
-//    }
-//
-//    withType<JavaExec> {
-//        jvmArgs("--enable-preview")
-//    }
+    withType<JavaCompile> {
+        options.compilerArgs.add("--enable-preview")
+    }
+
+    withType<JavaExec> {
+        jvmArgs("--enable-preview")
+    }
 
     wrapper {
         gradleVersion = properties("gradleVersion").get()

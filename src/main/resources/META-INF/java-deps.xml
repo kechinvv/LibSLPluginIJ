@@ -1,0 +1,9 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <moduleType id="LIBSL_MODULE" implementationClass="com.github.kechinvv.libslpluginij.project.LibSLModuleType"/>
+        <moduleBuilder builderClass="com.github.kechinvv.libslpluginij.project.LibSLModuleBuilder"/>
+        <projectStructureDetector
+                implementation="com.github.kechinvv.libslpluginij.project.LibSLProjectStructureDetector"/>
+
+    </extensions>
+</idea-plugin>

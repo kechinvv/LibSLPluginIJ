@@ -3,6 +3,7 @@ package com.github.kechinvv.libslpluginij.language.highlight;
 import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
 import com.github.kechinvv.libslpluginij.antlr.LibSLParser;
 import com.github.kechinvv.libslpluginij.language.LibSL;
+import com.github.kechinvv.libslpluginij.language.psi.LibSLTokenSets;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
@@ -25,6 +26,7 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("LIBSL_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
     public static final TextAttributesKey STRING =
             createTextAttributesKey("LIBSL_STRING", DefaultLanguageHighlighterColors.STRING);
+
     public static final TextAttributesKey LINE_COMMENT =
             createTextAttributesKey("LIBSL_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
     public static final TextAttributesKey BLOCK_COMMENT =
@@ -33,11 +35,6 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
     public static final TextAttributesKey BAD_CHARACTER =
             createTextAttributesKey("LSL_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
 
-    static {
-        PSIElementTypeFactory.defineLanguageIElementTypes(LibSL.INSTANCE,
-                LibSLParser.tokenNames,
-                LibSLParser.ruleNames);
-    }
 
     @NotNull
     @Override
@@ -49,68 +46,16 @@ public class LibSLSyntaxHighlighter extends SyntaxHighlighterBase {
     @NotNull
     @Override
     public TextAttributesKey @NotNull [] getTokenHighlights(IElementType tokenType) {
-        if (!(tokenType instanceof TokenIElementType myType)) return EMPTY_KEYS;
-        int ttype = myType.getANTLRTokenType();
-        TextAttributesKey attrKey;
-        switch (ttype) {
-            case LibSLLexer.Identifier:
-                attrKey = ID;
-                break;
-            case LibSLLexer.LIBSL:
-            case LibSLLexer.LIBRARY:
-            case LibSLLexer.VERSION:
-            case LibSLLexer.LANGUAGE:
-            case LibSLLexer.URL:
-            case LibSLLexer.TYPEALIAS:
-            case LibSLLexer.TYPE:
-            case LibSLLexer.TYPES:
-            case LibSLLexer.ENUM:
-            case LibSLLexer.ANNOTATION:
-            case LibSLLexer.AUTOMATON:
-            case LibSLLexer.CONCEPT:
-            case LibSLLexer.VAR:
-            case LibSLLexer.VAL:
-            case LibSLLexer.INITSTATE:
-            case LibSLLexer.STATE:
-            case LibSLLexer.FINISHSTATE:
-            case LibSLLexer.SHIFT:
-            case LibSLLexer.NEW:
-            case LibSLLexer.FUN:
-            case LibSLLexer.CONSTRUCTOR:
-            case LibSLLexer.DESTRUCTOR:
-            case LibSLLexer.PROC:
-            case LibSLLexer.ACTION:
-            case LibSLLexer.REQUIRES:
-            case LibSLLexer.ENSURES:
-            case LibSLLexer.ASSIGNS:
-            case LibSLLexer.TRUE:
-            case LibSLLexer.FALSE:
-            case LibSLLexer.DEFINE:
-            case LibSLLexer.IF:
-            case LibSLLexer.ELSE:
-            case LibSLLexer.BY:
-            case LibSLLexer.IS:
-            case LibSLLexer.AS:
-            case LibSLLexer.NULL:
-                attrKey = KEYWORD;
-                break;
-            case LibSLLexer.DoubleQuotedString:
-            case LibSLLexer.CHARACTER:
-                attrKey = STRING;
-                break;
-            case LibSLLexer.COMMENT:
-                attrKey = BLOCK_COMMENT;
-                break;
-            case LibSLLexer.LINE_COMMENT:
-                attrKey = LINE_COMMENT;
-                break;
-            case LibSLLexer.BAD_CHARACTER:
-                attrKey = BAD_CHARACTER;
-                break;
-            default:
-                return EMPTY_KEYS;
-        }
-        return new TextAttributesKey[]{attrKey};
+        var group = LibSLTokenSets.INSTANCE.getHighlightGroupOf(tokenType);
+        return switch (group) {
+            case BadGroup -> new TextAttributesKey[]{BAD_CHARACTER};
+            case EmptyKeysGroup -> EMPTY_KEYS;
+            case KeywordGroup -> new TextAttributesKey[]{KEYWORD};
+            case StringGroup -> new TextAttributesKey[]{STRING};
+            case IdGroup -> new TextAttributesKey[]{ID};
+            case MlCommentsGroup -> new TextAttributesKey[]{BLOCK_COMMENT};
+            case CommentsGroup -> new TextAttributesKey[]{LINE_COMMENT};
+        };
     }
 
 }

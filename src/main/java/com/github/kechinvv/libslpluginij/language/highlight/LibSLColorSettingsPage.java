@@ -11,7 +11,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 import java.util.Map;
+
+import static com.github.kechinvv.libslpluginij.LslNames.message;
 
 final class LibSLColorSettingsPage implements ColorSettingsPage {
 
@@ -40,18 +47,12 @@ final class LibSLColorSettingsPage implements ColorSettingsPage {
     @NotNull
     @Override
     public String getDemoText() {
-        return "# You are reading the \".properties\" entry.\n" +
-                "! The exclamation mark can also mark text as comments.\n" +
-                "website = https://en.wikipedia.org/\n" +
-                "language = English\n" +
-                "# The backslash below tells the application to continue reading\n" +
-                "# the value onto the next line.\n" +
-                "message = Welcome to \\\n" +
-                "          Wikipedia!\n" +
-                "# Add spaces to the key\n" +
-                "key\\ with\\ spaces = This is the value that could be looked up with the key \"key with spaces\".\n" +
-                "# Unicode\n" +
-                "tab : \\u0009";
+        try {
+            var resource = this.getClass().getResourceAsStream("/examples/CRC32.automaton.lsl").readAllBytes();
+            return new String(resource, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Nullable
@@ -73,7 +74,7 @@ final class LibSLColorSettingsPage implements ColorSettingsPage {
     @NotNull
     @Override
     public String getDisplayName() {
-        return "LibSL";
+        return message("lsl.main.name");
     }
 
 }

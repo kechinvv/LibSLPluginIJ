@@ -4,13 +4,11 @@ import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
 import com.github.kechinvv.libslpluginij.language.LibSL;
 import com.github.kechinvv.libslpluginij.language.LibSLFileType;
 import com.github.kechinvv.libslpluginij.language.psi.rules.*;
-import com.github.kechinvv.libslpluginij.language.utils.LslUtils;
+import com.github.kechinvv.libslpluginij.language.utils.LslPsiUtils;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.TokenType;
-import com.intellij.psi.util.PsiTreeUtil;
 import org.antlr.intellij.adaptor.lexer.TokenIElementType;
 import org.jetbrains.annotations.*;
 
@@ -19,9 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.tokens;
 import static com.intellij.psi.util.PsiTreeUtil.*;
-
+import static com.github.kechinvv.libslpluginij.LslNames.message;
 public class LibSLPSIFileRoot extends PsiFileBase implements PsiElement {
 
     public LibSLPSIFileRoot(@NotNull FileViewProvider viewProvider) {
@@ -36,10 +33,9 @@ public class LibSLPSIFileRoot extends PsiFileBase implements PsiElement {
 
     @Override
     public String toString() {
-        return "LibSL File";
+        return message("lsl.file.decl");
     }
 
-    //TODO: refactoring!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public Collection<LslIdentifier> getTypeDefBlockNames() {
         return findChildrenOfType(this, LslTypeDefBlock.class).stream()
@@ -61,7 +57,17 @@ public class LibSLPSIFileRoot extends PsiFileBase implements PsiElement {
     public Collection<LslIdentifier> getActionsDeclarationsNames() {
         return findChildrenOfType(this, LslActionDecl.class).stream()
                 .map(lslActionDecl -> {
-                    var listIds = LslUtils.getFilteredSiblings(lslActionDecl.getFirstChild(),
+                    var listIds = LslPsiUtils.getFilteredSiblings(lslActionDecl.getFirstChild(),
+                            it -> it instanceof LslIdentifier);
+                    if (!listIds.isEmpty()) return (LslIdentifier) listIds.get(0);
+                    else return null;
+                }).filter(Objects::nonNull).toList();
+    }
+
+    public Collection<LslIdentifier> getAnnotationsDeclarationsNames() {
+        return findChildrenOfType(this, LslAnnotationDecl.class).stream()
+                .map(lslAnnotationDecl -> {
+                    var listIds = LslPsiUtils.getFilteredSiblings(lslAnnotationDecl.getFirstChild(),
                             it -> it instanceof LslIdentifier);
                     if (!listIds.isEmpty()) return (LslIdentifier) listIds.get(0);
                     else return null;

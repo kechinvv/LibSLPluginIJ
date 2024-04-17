@@ -15,9 +15,18 @@
     - [x] automaton scope variables
     - [x] actions
     - [ ] local and global variables
-    - [ ] annotations
+    - [x] annotations
 - [ ] Completion
 - [ ] Formatter
+    - [x] tabs
+    - [x] lines between statements in automaton
+    - [ ] spaces around tokens
+- [ ] Helper
+    - [ ] Name scope resolving
+    - [ ] Tips about constructions
+- [x] Project generator
+- [x] File templates
+- [x] Custom tools support
 
 ### Unique features
 
@@ -31,6 +40,10 @@
 - [ ] Refactoring
 - [ ] Null safety
 - [ ] Optimization of search algorithms for find usages
+- [ ] Tests
+  - [x] [Test cases description (note for unit tests)](https://docs.google.com/document/d/1lOTSDMsUHc6SwaIhIhQRKjiW5FJ6AfxI3b3VRvDrc6Y/edit?usp=sharing)
+  - [x] [Test cases for UI manual tests](https://docs.google.com/document/d/1kTs9C1gYA5PSXz7a1tbcuGEE8CMNjGvvdltq6LA8SX8/edit?usp=sharing)
+  - [ ] Unit tests
 
 # Description
 <!-- Plugin description -->
@@ -39,6 +52,7 @@ for [LibSL](https://www.researchgate.net/publication/325074393_LibSL_Language_fo
 supporting. It is very easy to use:
 
 - Install the plugin
+- Add your custom tools for project via "Configure LibSL tools..."
 - Enjoy LibSL support: highlighting, findUsages and other features
 
 More features in future releases.

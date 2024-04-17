@@ -40,8 +40,10 @@ public class LibSLParserDefinition implements ParserDefinition {
 
 
     static {
-        PSIElementTypeFactory.defineLanguageIElementTypes(LibSL.INSTANCE,
-                LibSLParser.tokenNames, LibSLParser.ruleNames);
+        PSIElementTypeFactory.defineLanguageIElementTypes(
+                LibSL.INSTANCE,
+                LibSLParser.tokenNames,
+                LibSLParser.ruleNames);
         tokens = PSIElementTypeFactory.getTokenIElementTypes(LibSL.INSTANCE);
         rules = PSIElementTypeFactory.getRuleIElementTypes(LibSL.INSTANCE);
     }
@@ -75,12 +77,9 @@ public class LibSLParserDefinition implements ParserDefinition {
         return new ANTLRParserAdaptor(LibSL.INSTANCE, parser) {
             @Override
             protected ParseTree parse(Parser parser, IElementType root) {
-                // start rule depends on root passed in; sometimes we want to create an ID node etc...
                 if (root instanceof IFileElementType) {
                     return ((LibSLParser) parser).file();
-                }
-                // let's hope it's an ID as needed by "rename function"
-                return ((LibSLParser) parser).functionsList();
+                } else throw new UnsupportedOperationException("Wrong Lsl file structure");
             }
         };
     }
