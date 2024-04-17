@@ -26,7 +26,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow factoryClass="com.github.kechinvv.libslpluginij.toolWindow.LibSLToolOutputWindowFactory"
-                    id="LibSL Output" secondary="true" anchor="bottom" icon="/icons/ToolOutput.svg"/>
+                    id="LibSL Output" secondary="true" anchor="bottom" icon="/icons/ToolOutput3.svg"/>
         <postStartupActivity implementation="com.github.kechinvv.libslpluginij.toolWindow.ToolStartUp"/>
 
         <fileType
