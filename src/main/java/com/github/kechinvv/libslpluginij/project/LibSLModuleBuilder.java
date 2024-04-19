@@ -8,7 +8,6 @@ import com.intellij.ide.projectWizard.ProjectSettingsStep;
 import com.intellij.ide.util.projectWizard.*;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.GitRepositoryInitializer;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.module.Module;
@@ -17,9 +16,7 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
-import com.intellij.openapi.startup.StartupManager;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
@@ -32,7 +29,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -102,13 +98,11 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
         if (moduleContentRoot == null) throw new IllegalStateException("Module root not found");
 
 
-        WriteAction.runAndWait(() -> {
-            new File(getSourcePaths().get(0).first +
-                    File.separator +
-                    lslGeneratorContext.group.replace(".", File.separator))
-                    .mkdirs();
-        });
-        ModalityUiUtil.invokeLaterIfNeeded(ModalityState.NON_MODAL, module.getDisposed(), () -> {
+        WriteAction.runAndWait(() -> new File(getSourcePaths().get(0).first +
+                File.separator +
+                lslGeneratorContext.group.replace(".", File.separator))
+                .mkdirs());
+        ModalityUiUtil.invokeLaterIfNeeded(ModalityState.nonModal(), module.getDisposed(), () -> {
             if (module.isDisposed()) return;
 
             (new ReformatCodeProcessor(module.getProject(), module, false)).run();
@@ -147,7 +141,7 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
     }
 
     @Override
-    public ModuleWizardStep[] createWizardSteps(WizardContext wizardContext, ModulesProvider modulesProvider) {
+    public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
         return new ModuleWizardStep[]{};
     }
 

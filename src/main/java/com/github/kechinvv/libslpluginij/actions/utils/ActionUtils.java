@@ -9,17 +9,13 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Objects;
 
-import static com.github.kechinvv.libslpluginij.LslNames.message;
 
 public class ActionUtils {
 
@@ -58,7 +54,6 @@ public class ActionUtils {
     public static void processRun(String name, String cmd, String workdir, VirtualFile targetFile) {
         var buildedCmd = cmd;
         if (!workdir.isEmpty()) buildedCmd += " " + workdir + "=" + targetFile.getPath();
-
         try {
             LibSLToolOutputWindowFactory.toolOutput.clear();
             LibSLToolOutputWindowFactory.toolOutput.show();
