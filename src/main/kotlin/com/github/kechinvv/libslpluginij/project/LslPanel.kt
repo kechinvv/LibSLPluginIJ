@@ -40,7 +40,7 @@ class LslPanel(val context: LslContext) : ModuleWizardStep() {
     private val canonicalPathProperty = locationProperty.joinCanonicalPath(entityNameProperty)
     private val groupIdProperty: GraphProperty<String> = propertyGraph.lazyProperty { context.generatorContext.group }
     private val gitProperty: GraphProperty<Boolean> = propertyGraph.property(false)
-        .bindBooleanStorage("NewProjectWizard.gitState")
+        .bindBooleanStorage("LslProjectWizard.gitState")
 
     private var entityName: String by entityNameProperty.trim()
     private var location: String by locationProperty
