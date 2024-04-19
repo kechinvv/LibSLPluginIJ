@@ -5,18 +5,35 @@ import com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.createAction
 import com.github.kechinvv.libslpluginij.dialogs.LibSLToolsStore
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
+import com.intellij.openapi.startup.StartupActivity
 import com.intellij.openapi.wm.ToolWindowManager
 import javax.swing.SwingUtilities
 
-class ToolStartUp : ProjectActivity {
+class ToolStartUp : StartupActivity {
 
-    override suspend fun execute(project: Project) {
-        SwingUtilities.invokeLater {
+//    override suspend fun execute(project: Project) {
+//        SwingUtilities.invokeLater {
+//            ToolWindowManager.getInstance(project).getToolWindow(message("lsl.tool.output.name"))?.let {
+//                if (!it.isActive) it.activate(null, false)
+//                it.hide()
+//            }
+//        }
+//
+//
+//        val actions = LibSLToolsStore.getActions(project)
+//        actions.forEach { (name, actionData) ->
+//            val action = createAction(name, actionData.cmd, actionData.inp)
+//            if (!action.wasRegistered()) action.register()
+//        }
+//    }
+
+    override fun runActivity(project: Project) {
+      //  SwingUtilities.invokeLater {
             ToolWindowManager.getInstance(project).getToolWindow(message("lsl.tool.output.name"))?.let {
                 if (!it.isActive) it.activate(null, false)
                 it.hide()
             }
-        }
+      //  }
 
 
         val actions = LibSLToolsStore.getActions(project)
