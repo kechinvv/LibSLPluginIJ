@@ -14,7 +14,8 @@ public class ConfigurationAction extends AnAction {
 
     @Override
     public void update(AnActionEvent e) {
-        e.getPresentation().setEnabledAndVisible(visibleForDir(e) || visibleForFile(e));
+        e.getPresentation().setEnabledAndVisible(true);  // possible use libls in not libsl projects
+//        e.getPresentation().setEnabledAndVisible(visibleForDir(e) || visibleForFile(e));
     }
 
     @Override
