@@ -26,16 +26,18 @@ class LibSLToolOutputWindowFactory : ToolWindowFactory {
         toolWindow.contentManager.addContent(toolOutput.getContent())
     }
 
-    override fun isApplicable(project: Project) = runReadAction { isLibSLModule(project, project.projectFile) }
+    override suspend fun isApplicableAsync(project: Project) = true
+//        runReadAction { isLibSLModule(project, project.projectFile) || project.projectFile == null }
 
-    override fun shouldBeAvailable(project: Project) = runReadAction { isLibSLModule(project, project.projectFile) }
+    override fun shouldBeAvailable(project: Project) = true
+//        runReadAction { isLibSLModule(project, project.projectFile) || project.projectFile == null }
 
     class LibSLToolOutput(val toolWindow: ToolWindow) {
 
         private val project = toolWindow.project
         private lateinit var console: ConsoleView
 
-        fun getContent() : Content {
+        fun getContent(): Content {
             val contentFactory = ContentFactory.getInstance()
             val factory = TextConsoleBuilderFactory.getInstance()
             val consoleBuilder = factory.createBuilder(project)

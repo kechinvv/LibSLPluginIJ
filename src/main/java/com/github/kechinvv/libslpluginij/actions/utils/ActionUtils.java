@@ -2,21 +2,20 @@ package com.github.kechinvv.libslpluginij.actions.utils;
 
 import com.github.kechinvv.libslpluginij.actions.LslToolAction;
 import com.github.kechinvv.libslpluginij.language.LibSLFileType;
+import com.github.kechinvv.libslpluginij.project.LibSLModuleType;
 import com.github.kechinvv.libslpluginij.toolWindow.LibSLToolOutputWindowFactory;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Objects;
 
-import static com.github.kechinvv.libslpluginij.LslNames.message;
 
 public class ActionUtils {
 
@@ -39,9 +38,8 @@ public class ActionUtils {
 
     public static boolean isLibSLModule(Project project, VirtualFile virtualFile) {
         if (virtualFile == null || project == null) return false;
-        var module = ProjectFileIndex.getInstance(project).getModuleForFile(virtualFile);
-        if (module == null) return false;
-        return Objects.equals(module.getModuleTypeName(), message("lsl.module"));
+        var modules = ModuleUtil.getModulesOfType(project, LibSLModuleType.getInstance());
+        return !modules.isEmpty();
     }
 
 
@@ -56,12 +54,11 @@ public class ActionUtils {
     public static void processRun(String name, String cmd, String workdir, VirtualFile targetFile) {
         var buildedCmd = cmd;
         if (!workdir.isEmpty()) buildedCmd += " " + workdir + "=" + targetFile.getPath();
-
         try {
             LibSLToolOutputWindowFactory.toolOutput.clear();
+            LibSLToolOutputWindowFactory.toolOutput.show();
             var process = Runtime.getRuntime().exec(buildedCmd);
             LibSLToolOutputWindowFactory.toolOutput.lslPrint("Run tool " + name + " " + buildedCmd);
-            LibSLToolOutputWindowFactory.toolOutput.show();
             var r = new BufferedReader(new InputStreamReader(process.getInputStream()));
             var errors = new BufferedReader(new InputStreamReader(process.getErrorStream()));
             new Thread(() -> {

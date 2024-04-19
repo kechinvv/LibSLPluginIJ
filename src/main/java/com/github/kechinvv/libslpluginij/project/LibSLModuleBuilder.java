@@ -8,7 +8,6 @@ import com.intellij.ide.projectWizard.ProjectSettingsStep;
 import com.intellij.ide.util.projectWizard.*;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.GitRepositoryInitializer;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.module.Module;
@@ -17,9 +16,7 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
-import com.intellij.openapi.startup.StartupManager;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
@@ -32,7 +29,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -95,52 +91,37 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
     }
 
     private void startGenerator(Module module) {
-        VirtualFile moduleContentRoot;
-        if (!ApplicationManager.getApplication().isUnitTestMode()) {
-            moduleContentRoot = LocalFileSystem.getInstance()
-                    .refreshAndFindFileByPath(Objects.requireNonNull(super.getContentEntryPath()).replace("\\", "/"));
-        } else {
-            var contentEntries = ModuleRootManager.getInstance(module).getContentEntries();
-            moduleContentRoot = Arrays.stream(contentEntries)
-                    .filter(f -> f.getSourceFolders().length != 0)
-                    .findFirst().orElseThrow().getFile();
-        }
+        var moduleContentRoot = LocalFileSystem.getInstance()
+                .refreshAndFindFileByPath(Objects.requireNonNull(super.getContentEntryPath()).replace("\\", "/"));
+
+
         if (moduleContentRoot == null) throw new IllegalStateException("Module root not found");
 
 
-        if (!ApplicationManager.getApplication().isUnitTestMode()) {
-            WriteAction.runAndWait(() -> {
-                new File(getSourcePaths().get(0).first +
-                        File.separator +
-                        lslGeneratorContext.group.replace(".", File.separator))
-                        .mkdirs();
-            });
-            StartupManager.getInstance(module.getProject()).runAfterOpened(() -> {
-                ModalityUiUtil.invokeLaterIfNeeded(ModalityState.NON_MODAL, module.getDisposed(), () -> {
-                    if (module.isDisposed()) return;
+        WriteAction.runAndWait(() -> new File(getSourcePaths().get(0).first +
+                File.separator +
+                lslGeneratorContext.group.replace(".", File.separator))
+                .mkdirs());
+        ModalityUiUtil.invokeLaterIfNeeded(ModalityState.nonModal(), module.getDisposed(), () -> {
+            if (module.isDisposed()) return;
 
-                    (new ReformatCodeProcessor(module.getProject(), module, false)).run();
+            (new ReformatCodeProcessor(module.getProject(), module, false)).run();
 
-                    if (lslGeneratorContext.gitIntegration) {
-                        runBackgroundableTask(IdeBundle.message("progress.title.creating.git.repository"),
-                                module.getProject(),
-                                true,
-                                (it) -> {
-                                    Objects.requireNonNull(GitRepositoryInitializer.getInstance())
-                                            .initRepository(module.getProject(), moduleContentRoot, true);
-                                    return Unit.INSTANCE;
-                                });
-                    }
-                });
-            });
-        } else {
-            new ReformatCodeProcessor(module.getProject(), module, false).run();
-        }
+            if (lslGeneratorContext.gitIntegration) {
+                runBackgroundableTask(IdeBundle.message("progress.title.creating.git.repository"),
+                        module.getProject(),
+                        true,
+                        (it) -> {
+                            Objects.requireNonNull(GitRepositoryInitializer.getInstance())
+                                    .initRepository(module.getProject(), moduleContentRoot, true);
+                            return Unit.INSTANCE;
+                        });
+            }
+        });
     }
 
     @Override
     public void setupRootModel(@NotNull ModifiableRootModel rootModel) {
-
         ContentEntry contentEntry = doAddContentEntry(rootModel);
         if (contentEntry != null) {
             final List<Pair<String, String>> sourcePaths = getSourcePaths();
@@ -160,7 +141,7 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
     }
 
     @Override
-    public ModuleWizardStep[] createWizardSteps(WizardContext wizardContext, ModulesProvider modulesProvider) {
+    public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
         return new ModuleWizardStep[]{};
     }
 
