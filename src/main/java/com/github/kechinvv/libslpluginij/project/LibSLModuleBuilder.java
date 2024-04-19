@@ -102,7 +102,7 @@ public class LibSLModuleBuilder extends ModuleBuilder implements SourcePathsBuil
                 File.separator +
                 lslGeneratorContext.group.replace(".", File.separator))
                 .mkdirs());
-        ModalityUiUtil.invokeLaterIfNeeded(ModalityState.nonModal(), module.getDisposed(), () -> {
+        ModalityUiUtil.invokeLaterIfNeeded(ModalityState.NON_MODAL, module.getDisposed(), () -> {
             if (module.isDisposed()) return;
 
             (new ReformatCodeProcessor(module.getProject(), module, false)).run();
