@@ -15,11 +15,6 @@ import com.intellij.psi.util.PsiTreeUtil;
 import org.antlr.intellij.adaptor.lexer.RuleIElementType;
 import org.antlr.intellij.adaptor.lexer.TokenIElementType;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.function.Predicate;
-
 import static com.github.kechinvv.libslpluginij.language.LibSLParserDefinition.tokens;
 
 public class PsiElementFactory {

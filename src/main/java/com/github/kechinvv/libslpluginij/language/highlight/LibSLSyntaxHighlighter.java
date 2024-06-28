@@ -1,7 +1,6 @@
 package com.github.kechinvv.libslpluginij.language.highlight;
 
 import com.github.kechinvv.libslpluginij.antlr.LibSLLexer;
-import com.github.kechinvv.libslpluginij.antlr.LibSLParser;
 import com.github.kechinvv.libslpluginij.language.LibSL;
 import com.github.kechinvv.libslpluginij.language.psi.LibSLTokenSets;
 import com.intellij.lexer.Lexer;
@@ -11,8 +10,6 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import org.antlr.intellij.adaptor.lexer.ANTLRLexerAdaptor;
-import org.antlr.intellij.adaptor.lexer.PSIElementTypeFactory;
-import org.antlr.intellij.adaptor.lexer.TokenIElementType;
 import org.jetbrains.annotations.NotNull;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
