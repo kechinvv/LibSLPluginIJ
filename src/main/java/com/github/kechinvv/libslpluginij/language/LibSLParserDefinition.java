@@ -74,14 +74,7 @@ public class LibSLParserDefinition implements ParserDefinition {
     @NotNull
     public PsiParser createParser(final Project project) {
         final LibSLParser parser = new LibSLParser(null);
-        return new ANTLRParserAdaptor(LibSL.INSTANCE, parser) {
-            @Override
-            protected ParseTree parse(Parser parser, IElementType root) {
-                if (root instanceof IFileElementType) {
-                    return ((LibSLParser) parser).file();
-                } else throw new UnsupportedOperationException("Wrong Lsl file structure");
-            }
-        };
+        return new LslParserAdaptor(LibSL.INSTANCE, parser);
     }
 
     /**
