@@ -1,9 +1,8 @@
 package com.github.kechinvv.libslpluginij.storage
 
 import com.intellij.util.xmlb.Converter
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.encodeToString
-import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
 class ActionHolderConverter : Converter<Map<String, ActionData>>() {
     override fun toString(actions: Map<String, ActionData>): String {

@@ -11,6 +11,7 @@ import com.intellij.ide.util.projectWizard.ModuleWizardStep
 import com.intellij.ide.util.projectWizard.WizardContext
 import com.intellij.ide.wizard.withVisualPadding
 import com.intellij.openapi.Disposable
+import com.intellij.openapi.fileChooser.FileChooserDescriptor
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
 import com.intellij.openapi.observable.properties.GraphProperty
 import com.intellij.openapi.observable.properties.PropertyGraph
@@ -164,13 +165,15 @@ class LslPanel(val context: LslContext) : ModuleWizardStep() {
         locationProperty: GraphProperty<String>,
         wizardContext: WizardContext
     ): Cell<TextFieldWithBrowseButton> {
-        val fileChooserDescriptor =
-            FileChooserDescriptorFactory.createSingleLocalFileDescriptor().withFileFilter { it.isDirectory }
+        //TODO: what happened with file choose descriptor?
+//        val fileChooserDescriptor =
+//            FileChooserDescriptorFactory.createSingleLocalFileDescriptor().withFileFilter { it.isDirectory }
         val fileChosen = { file: VirtualFile -> getPresentablePath(file.path) }
         val title = IdeBundle.message("title.select.project.file.directory", wizardContext.presentationName)
         val property = locationProperty.transform(::getPresentablePath, ::getCanonicalPath)
-        return this.textFieldWithBrowseButton(title, wizardContext.project, fileChooserDescriptor, fileChosen)
+        return this.textFieldWithBrowseButton(title, wizardContext.project, fileChosen)
             .bindText(property)
+
     }
 
     private fun getLocationComment(): @Nls String {

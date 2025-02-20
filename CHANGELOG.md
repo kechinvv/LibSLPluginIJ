@@ -4,15 +4,11 @@
 
 ### Added
 
-- LibSL project generation and detection
-- LibSL Tools dynamic actions 
-- File templates
-- Folding
+- LibSL grammar upd
+- support new versions of IJ
 
 ### Changed
 
 ### Fixed
-
-- Intents for params
 
 [Unreleased]: https://github.com/kechinvv/LibSLPluginIJ/commits
