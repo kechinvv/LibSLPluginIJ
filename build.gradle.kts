@@ -31,8 +31,8 @@ dependencies {
     antlr("org.antlr:antlr4:4.13.1")
     implementation("org.antlr:antlr4-intellij-adaptor:0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.4")
 }
 
 
