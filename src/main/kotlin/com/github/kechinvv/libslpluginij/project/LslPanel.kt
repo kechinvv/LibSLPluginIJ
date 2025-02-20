@@ -166,14 +166,13 @@ class LslPanel(val context: LslContext) : ModuleWizardStep() {
         wizardContext: WizardContext
     ): Cell<TextFieldWithBrowseButton> {
         //TODO: what happened with file choose descriptor?
-//        val fileChooserDescriptor =
-//            FileChooserDescriptorFactory.createSingleLocalFileDescriptor().withFileFilter { it.isDirectory }
-        val fileChosen = { file: VirtualFile -> getPresentablePath(file.path) }
         val title = IdeBundle.message("title.select.project.file.directory", wizardContext.presentationName)
+        val fileChooserDescriptor =
+            FileChooserDescriptorFactory.createSingleLocalFileDescriptor().withFileFilter { it.isDirectory }
+        val fileChosen = { file: VirtualFile -> getPresentablePath(file.path) }
         val property = locationProperty.transform(::getPresentablePath, ::getCanonicalPath)
-        return this.textFieldWithBrowseButton(title, wizardContext.project, fileChosen)
+        return textFieldWithBrowseButton(title, wizardContext.project, fileChooserDescriptor,  fileChosen)
             .bindText(property)
-
     }
 
     private fun getLocationComment(): @Nls String {
