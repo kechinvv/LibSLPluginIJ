@@ -7,8 +7,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogWrapper;
 import org.jetbrains.annotations.NotNull;
 
-import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.visibleForDir;
-import static com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.visibleForFile;
 
 public class ConfigurationAction extends AnAction {
 

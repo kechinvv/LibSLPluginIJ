@@ -6,9 +6,9 @@ import com.intellij.openapi.components.State;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
-@Service
+@Service(Service.Level.PROJECT)
 @State(name = "LibSLGenSettings")
-public class LibSLToolsComponent implements PersistentStateComponent<LibSLToolsStore> {
+public final class LibSLToolsComponent implements PersistentStateComponent<LibSLToolsStore> {
 
     private LibSLToolsStore mySettings = new LibSLToolsStore();
 

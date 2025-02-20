@@ -4,7 +4,9 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+
 import static com.github.kechinvv.libslpluginij.LslNames.message;
+
 public final class LibSLFileType extends LanguageFileType {
 
     public static final LibSLFileType INSTANCE = new LibSLFileType();

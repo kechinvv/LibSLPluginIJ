@@ -1,6 +1,7 @@
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.date
 import org.jetbrains.changelog.markdownToHTML
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun properties(key: String) = providers.gradleProperty(key)
 fun environment(key: String) = providers.environmentVariable(key)
@@ -30,8 +31,8 @@ dependencies {
     antlr("org.antlr:antlr4:4.13.1")
     implementation("org.antlr:antlr4-intellij-adaptor:0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.4")
 }
 
 
@@ -95,12 +96,39 @@ val printVersionName: Task = tasks.create("printVersionName") {
 }
 
 tasks {
+
+    generateGrammarSource {
+        val packageName = "${project.group}.antlr"
+        println(packageName)
+        outputDirectory = File(outputDirectory, packageName.replace('.', '/'))
+        println(outputDirectory)
+        arguments = arguments + listOf("-package", packageName)
+    }
+
     test {
         useJUnitPlatform()
     }
 
+    runIde {
+        dependsOn(withType<AntlrTask>())
+    }
+
+    buildPlugin {
+        dependsOn(withType<AntlrTask>())
+    }
+
+    withType<Jar>().configureEach {
+        dependsOn(withType<AntlrTask>())
+    }
+
+    withType<KotlinCompile>().configureEach {
+        dependsOn(withType<AntlrTask>())
+    }
+
+
     withType<JavaCompile> {
         options.compilerArgs.add("--enable-preview")
+        dependsOn(withType<AntlrTask>())
     }
 
     withType<JavaExec> {
@@ -134,10 +162,10 @@ tasks {
         changeNotes = properties("pluginVersion").map { pluginVersion ->
             with(changelog) {
                 renderItem(
-                        (getOrNull(pluginVersion) ?: getUnreleased())
-                                .withHeader(false)
-                                .withEmptySections(false),
-                        Changelog.OutputType.HTML,
+                    (getOrNull(pluginVersion) ?: getUnreleased())
+                        .withHeader(false)
+                        .withEmptySections(false),
+                    Changelog.OutputType.HTML,
                 )
             }
         }
@@ -164,6 +192,7 @@ tasks {
         // The pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
         // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
-        channels = properties("pluginVersion").map { listOf(it.split('-').getOrElse(1) { "default" }.split('.').first()) }
+        channels =
+            properties("pluginVersion").map { listOf(it.split('-').getOrElse(1) { "default" }.split('.').first()) }
     }
 }

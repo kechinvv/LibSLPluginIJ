@@ -1,10 +1,8 @@
 package com.github.kechinvv.libslpluginij.toolWindow
 
-import com.github.kechinvv.libslpluginij.actions.utils.ActionUtils.isLibSLModule
 import com.intellij.execution.filters.TextConsoleBuilderFactory
 import com.intellij.execution.ui.ConsoleView
 import com.intellij.execution.ui.ConsoleViewContentType
-import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory

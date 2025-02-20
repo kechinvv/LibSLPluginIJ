@@ -67,7 +67,10 @@ public class LibSLTokenSets {
             tokens.get(LibSLLexer.BY),
             tokens.get(LibSLLexer.IS),
             tokens.get(LibSLLexer.AS),
-            tokens.get(LibSLLexer.NULL)
+            tokens.get(LibSLLexer.NULL),
+            tokens.get(LibSLLexer.IN),
+            tokens.get(LibSLLexer.OUT),
+            tokens.get(LibSLLexer.WHERE)
     );
 
     public TokenSet OPERATIONS = TokenSet.create(

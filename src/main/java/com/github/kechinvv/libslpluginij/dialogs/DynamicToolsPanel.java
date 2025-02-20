@@ -8,9 +8,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.JBColor;
 import com.intellij.ui.components.JBScrollPane;
-import com.intellij.util.ui.InlineIconButton;
 import com.intellij.util.ui.JBUI;
-import kotlinx.html.B;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -147,9 +145,18 @@ public class DynamicToolsPanel extends DialogWrapper {
         labelName.setBorder(JBUI.Borders.empty(4));
         firstLine.add(labelName, BorderLayout.LINE_START);
 
-        var deleteActionButton = new InlineIconButton(LibSLIcon.DELETE, LibSLIcon.DELETE_HOVERED);
+        var deleteActionButton = new JButton(LibSLIcon.DELETE);
+        deleteActionButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                deleteActionButton.setIcon(LibSLIcon.DELETE_HOVERED);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                deleteActionButton.setIcon(LibSLIcon.DELETE);
+            }
+        });
         deleteActionButton.setBorder(JBUI.Borders.empty(4));
-        deleteActionButton.setActionListener(e -> {
+        deleteActionButton.addActionListener(e -> {
             var deleteApprove = new DeleteApprovePanel(project, labelName.getText());
             deleteApprove.show();
             if (deleteApprove.getExitCode() == OK_EXIT_CODE) {
@@ -166,10 +173,10 @@ public class DynamicToolsPanel extends DialogWrapper {
         labelCmd.setBorder(JBUI.Borders.empty(4));
         secondLine.add(labelCmd);
 
-        var copyButton = new InlineIconButton(LibSLIcon.COPY);
+        var copyButton = new JButton(LibSLIcon.COPY);
         copyButton.setBorder(JBUI.Borders.empty(4));
         copyButton.setToolTipText("Copy cmd value");
-        copyButton.setActionListener(e -> {
+        copyButton.addActionListener(e -> {
             var stringSelection = new StringSelection(labelCmd.getText());
             var clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
             clpbrd.setContents(stringSelection, null);

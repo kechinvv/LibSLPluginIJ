@@ -1,6 +1,5 @@
 parser grammar LibSLParser;
 
-@header {package org.jetbrains.research.libsl;}
 
 options { tokenVocab = LibSLLexer; }
 
@@ -57,9 +56,8 @@ typealiasStatement
  * syntax: type full.name { field1: Type; field2: Type; ... }
  */
 typeDefBlock
-   :   annotationUsage* TYPE name=periodSeparatedFullName generic? targetType? typeDefBlockBody?
+   :   annotationUsage* TYPE type=typeIdentifier targetType? whereConstraints? typeDefBlockBody?
    ;
-
 
 targetType
    :   (IS typeIdentifier)? for=identifier typeList
@@ -141,7 +139,7 @@ annotationDeclParamsPart
 
 actionDecl
    :   annotationUsage*
-   DEFINE ACTION actionName=identifier L_BRACKET actionDeclParamList? R_BRACKET (COLON actionType=typeIdentifier)? SEMICOLON
+   DEFINE ACTION generic? actionName=identifier L_BRACKET actionDeclParamList? R_BRACKET (COLON actionType=typeIdentifier)? whereConstraints? SEMICOLON
    ;
 
 actionDeclParamList
@@ -159,7 +157,7 @@ actionParameter
  */
 automatonDecl
    :   annotationUsage* AUTOMATON CONCEPT? name=periodSeparatedFullName (L_BRACKET constructorVariables* R_BRACKET)?
-   COLON type=typeIdentifier implementedConcepts* automatonBody
+   COLON type=typeExpression implementedConcepts* automatonBody
    ;
 
 automatonBody
@@ -232,19 +230,35 @@ variableDecl
    ;
 
 nameWithType
-   :  name=identifier COLON type=typeIdentifier
+   :  name=identifier COLON type=typeExpression
    ;
 
 /*
  * syntax: one.two.three<T>
  */
+
+typeExpression
+   :   typeIdentifier
+   |   typeExpression AMPERSAND  typeExpression
+   |   typeExpression BIT_OR typeExpression
+   ;
+
 typeIdentifier
-   :   (asterisk=ASTERISK)? name=periodSeparatedFullName generic?
+   :   (asterisk=ASTERISK)? name=typeIdentifierName generic?
    ;
 
 generic
-   :   (L_ARROW typeIdentifier (COMMA typeIdentifier)* R_ARROW)
+   :   (L_ARROW typeArgument (COMMA typeArgument)* R_ARROW)
    ;
+
+typeArgument
+    : typeIdentifier
+    | typeIdentifierBounded
+    ;
+
+typeIdentifierBounded
+    : genericBound typeIdentifier
+    ;
 
 variableAssignment
    :   qualifiedAccess op=ASSIGN_OP assignmentRight SEMICOLON
@@ -255,11 +269,10 @@ variableAssignment
 
 assignmentRight
    :   expression
-   |   callAutomatonConstructorWithNamedArgs
    ;
 
 callAutomatonConstructorWithNamedArgs
-   :   NEW name=periodSeparatedFullName L_BRACKET (namedArgs)? R_BRACKET
+   :   NEW name=periodSeparatedFullName generic? L_BRACKET (namedArgs)? R_BRACKET
    ;
 
 namedArgs
@@ -298,8 +311,8 @@ procDecl
    ;
 
 procHeader
-   :   annotationUsage* PROC headerWithAsterisk? functionName=identifier L_BRACKET functionDeclArgList? R_BRACKET
-   (COLON functionType=typeIdentifier)?
+   :   annotationUsage* PROC headerWithAsterisk? functionName=identifier generic? L_BRACKET functionDeclArgList? R_BRACKET
+   (COLON functionType=typeExpression)? whereConstraints?
    ;
 /*
  * syntax: @Annotation
@@ -311,8 +324,8 @@ functionDecl
    ;
 
 functionHeader
-   :   annotationUsage* modifier=identifier? FUN (automatonName=periodSeparatedFullName DOT)? headerWithAsterisk? functionName=identifier
-   L_BRACKET functionDeclArgList? R_BRACKET (COLON functionType=typeIdentifier)?
+   :   annotationUsage* modifier=identifier? FUN (automatonName=periodSeparatedFullName DOT)? headerWithAsterisk? functionName=identifier generic?
+   L_BRACKET functionDeclArgList? R_BRACKET (COLON functionType=typeExpression)? whereConstraints?
    ;
 
 functionDeclArgList
@@ -320,7 +333,7 @@ functionDeclArgList
    ;
 
 parameter
-   :   annotationUsage* name=identifier COLON type=typeIdentifier
+   :   annotationUsage* name=identifier COLON type=typeExpression
    ;
 
 /* annotation
@@ -365,11 +378,11 @@ elseStatement
  * syntax: action ActionName(args)
  */
 actionUsage
-   :   ACTION identifier L_BRACKET expressionsList? R_BRACKET
+   :   ACTION identifier generic? L_BRACKET expressionsList? R_BRACKET
    ;
 
 procUsage
-   :   qualifiedAccess L_BRACKET expressionsList? R_BRACKET
+   :   qualifiedAccess generic? L_BRACKET expressionsList? R_BRACKET
    ;
 
 expressionsList
@@ -504,7 +517,7 @@ qualifiedAccess
    ;
 
 simpleCall
-   :   identifier L_BRACKET qualifiedAccess R_BRACKET
+   :   identifier generic? L_BRACKET qualifiedAccess R_BRACKET
    ;
 
 identifierList
@@ -519,15 +532,36 @@ periodSeparatedFullName
    :   identifier
    |   identifier (DOT identifier)*
    |   BACK_QOUTE identifier (DOT identifier)* BACK_QOUTE
+   |   UNBOUNDED
    ;
 
 integerNumber
-   :   MINUS? Digit+ Identifier?
-   |   Digit Identifier?
+   :   (MINUS | PLUS)? IntegerLiteral
    ;
 
 floatNumber
-   :   MINUS? Digit+ DOT Digit+ Identifier?
+   :   (MINUS | PLUS)? FloatingPointLiteral
+   ;
+
+suffix
+   :   identifier
+   ;
+
+typeConstraint
+    : paramName=identifier COLON paramConstraint=typeArgument
+    ;
+
+whereConstraints
+    : WHERE typeConstraint (COMMA typeConstraint)*
+    ;
+
+genericBound
+   :   bound=(IN | OUT)
+   ;
+
+typeIdentifierName
+   :   periodSeparatedFullName
+   |   primitiveLiteral
    ;
 
 identifier
