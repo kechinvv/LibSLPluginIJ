@@ -63,14 +63,21 @@ public class PsiElementFactory {
             case LibSLParser.RULE_concept -> new LslConcept(node);
             case LibSLParser.RULE_automatonStateDecl -> new LslAutomatonStateDecl(node);
             case LibSLParser.RULE_automatonShiftDecl -> new LslAutomatonShiftDecl(node);
-            case LibSLParser.RULE_functionsList -> new LslFunctionsList(node);
             case LibSLParser.RULE_shiftByList -> new LslShiftByList(node);
             case LibSLParser.RULE_shiftFromList -> new LslShiftFromList(node);
+            case LibSLParser.RULE_functionsList -> new LslFunctionsList(node);
             case LibSLParser.RULE_functionsListPart -> new LslFunctionsListPart(node);
             case LibSLParser.RULE_variableDecl -> new LslVariableDecl(node);
             case LibSLParser.RULE_nameWithType -> new LslNameWithType(node);
+
+            case LibSLParser.RULE_typeExpression -> new LslTypeExpression(node);
+
             case LibSLParser.RULE_typeIdentifier -> new LslTypeIdentifier(node);
             case LibSLParser.RULE_generic -> new LslGeneric(node);
+
+            case LibSLParser.RULE_typeArgument -> new LslTypeArgument(node);
+            case LibSLParser.RULE_typeIdentifierBounded -> new LslTypeIdentifierBounded(node);
+
             case LibSLParser.RULE_variableAssignment -> new VariableAssignment(node);
             case LibSLParser.RULE_assignmentRight -> new LslAssignmentRight(node);
             case LibSLParser.RULE_callAutomatonConstructorWithNamedArgs ->
@@ -119,6 +126,13 @@ public class PsiElementFactory {
             case LibSLParser.RULE_periodSeparatedFullName -> new LslPeriodSeparatedFullName(node);
             case LibSLParser.RULE_integerNumber -> new LslIntegerNumber(node);
             case LibSLParser.RULE_floatNumber -> new LslFloatNumber(node);
+
+            case LibSLParser.RULE_suffix -> new LslSuffix(node);
+            case LibSLParser.RULE_typeConstraint -> new LslTypeConstraint(node);
+            case LibSLParser.RULE_whereConstraints -> new LslWhereConstraint(node);
+            case LibSLParser.RULE_genericBound -> new LslGenericBound(node);
+            case LibSLParser.RULE_typeIdentifierName -> new LslTypeIdentifierName(node);
+
             case LibSLParser.RULE_identifier -> new LslIdentifier(node);
             default -> new ASTWrapperPsiElement(node);
         };

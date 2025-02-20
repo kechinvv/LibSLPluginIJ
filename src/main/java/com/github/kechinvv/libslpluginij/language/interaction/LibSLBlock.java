@@ -5,6 +5,7 @@ import com.github.kechinvv.libslpluginij.language.psi.LibSLTokenSets;
 import com.github.kechinvv.libslpluginij.language.psi.rules.LslElseStatement;
 import com.github.kechinvv.libslpluginij.language.psi.rules.LslTargetType;
 import com.github.kechinvv.libslpluginij.language.psi.rules.LslTopLevelDecl;
+import com.github.kechinvv.libslpluginij.language.psi.rules.LslWhereConstraint;
 import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslParametersOwner;
 import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslStatement;
 import com.github.kechinvv.libslpluginij.language.psi.rules.interfaces.LslStatementsOwner;
@@ -87,7 +88,7 @@ public class LibSLBlock extends AbstractBlock {
 
         //Tabulation for libsl version declaration, links e.t.c.
         if (LibSLTokenSets.INSTANCE.TAB_HEADER.contains(elementType) ||
-                element instanceof LslTargetType)
+                element instanceof LslTargetType || element instanceof LslWhereConstraint)
             return Indent.getNormalIndent();
 
         return Indent.getNoneIndent();
