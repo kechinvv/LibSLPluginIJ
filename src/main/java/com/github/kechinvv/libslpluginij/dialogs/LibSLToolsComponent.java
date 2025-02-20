@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 @Service
 @State(name = "LibSLGenSettings")
-public class LibSLToolsComponent implements PersistentStateComponent<LibSLToolsStore> {
+public final class LibSLToolsComponent implements PersistentStateComponent<LibSLToolsStore> {
 
     private LibSLToolsStore mySettings = new LibSLToolsStore();
 
